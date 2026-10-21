@@ -645,6 +645,7 @@ window.REMOTE_READY = (async () => {
       <div class="sub" id="dmPreset" style="margin:0 0 8px"></div>
       <button id="dmToggleAll" class="mini gray" type="button" style="margin-top:0">전체 해제</button>
       <button id="dmPresetBtn" class="mini gray" type="button" style="margin-top:0">직전 발송 고객만</button>
+      <button id="dmNoAddrBtn" class="mini gray" type="button" style="margin-top:0">주소없음해제</button>
       <div id="dmUnsent"></div>
 
       <div class="sub" id="dmSummary2" style="margin-top:16px"></div>
@@ -1808,7 +1809,7 @@ function renderCal(){
   const ttl = mk("button", "ttl", title);
   ttl.type = "button"; ttl.setAttribute("aria-label", "년월 선택");
   ttl.onclick = () => { calPick = !calPick; pickY = calY; renderCal(); };
-  head.append(mode, prev, ttl, today, next);   // 주간/한달 버튼은 오늘 버튼 반대편(왼쪽)
+  head.append(prev, mode, ttl, today, next);   // ‹ 가 맨 왼쪽, 그 오른쪽에 주간/한달 버튼
   box.append(head);
 
   if (calPick) { // 년월 선택 화면: 연도 ‹ › + 1~12월 버튼
@@ -2392,6 +2393,14 @@ const openDm = async () => {
   await loadList(); dmDefaults(); dmGradeSel = new Set(); renderDmGrades(); renderDm(true);
 };
 $("dmPresetBtn").onclick = () => { const sh = new Set(dmShown().map(c => c.id)); dmSel = new Set(presetIds().filter(id => sh.has(id))); renderDm(false); };
+$("dmNoAddrBtn").onclick = () => {   // 주소1(도로명·지번)이 없는 고객의 체크를 해제
+  const a1Of = c => splitAddrParts(c.addr)[0], bad = dmShown().filter(c => dmSel.has(c.id) && !a1Of(c));
+  const msg = $("dmMsg"); msg.style.whiteSpace = $("dmMsg2").style.whiteSpace = "pre-line";
+  if (!bad.length) { msg.className = "msg"; msg.textContent = "체크된 고객 중 주소1이 없는 고객이 없습니다."; return; }
+  const badIds = new Set(bad.map(c => c.id)); dmSel = new Set([...dmSel].filter(id => !badIds.has(id))); renderDm(false);
+  const show = bad.slice(0, 12).map(c => "· " + (c.name || "(이름 없음)") + (splitAddrParts(c.addr)[1] ? " (주소2만 있음)" : " (주소 없음)")).join("\n") + (bad.length > 12 ? `\n· 외 ${bad.length - 12}명` : "");
+  msg.className = "msg"; msg.textContent = `주소1이 없는 ${bad.length}명의 체크를 해제했습니다.\n${show}`;
+};
 $("dmToggleAll").onclick = () => { dmSel = dmSel.size ? new Set() : new Set(dmShown().map(c => c.id)); renderDm(false); };
 function connLost(e, msgEl, what){   // 파이어베이스 연결이 끊긴 경우(아이폰이 앱을 잠시 멈췄다 켜면 발생): 새로고침하면 복구됨
   if (!/terminated/i.test((e && e.message) || "")) return false;
