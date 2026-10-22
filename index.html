@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- 2026-10-22 KST | 수정: 앱 버전 v12.218, 상단 메뉴를 달력·목록·신규등록·새로고침·설정 5칸으로 변경하고 새로고침 버튼 추가(누르면 보던 화면은 그대로 두고 고객 목록·달력 상담 기록 색인·일정을 다시 읽어 바로 반영, 고객 상세 화면이면 그 고객의 기록도 다시 읽음, 에이닷으로 저장한 기록도 달력에 바로 표시) -->
+<!-- 2026-10-22 KST | 수정: 앱 버전 v12.219, 달력 상담 기록 색인(새로고침 포함)을 고객 300명을 한 명씩 읽던 방식에서 모든 고객의 기록을 서버에서 한 번에 읽는 방식(collectionGroup)으로 변경해 속도 개선 - 파이어베이스 색인·규칙이 막혀 있으면 자동으로 예전 방식(고객별 읽기)으로 진행하고 새로고침 버튼에 '완료·느림' 표시, 새로고침 때 일정 읽기를 고객 목록 읽기와 동시에 시작 (이전 수정: 2026-10-22 KST | 수정: 앱 버전 v12.218, 상단 메뉴를 달력·목록·신규등록·새로고침·설정 5칸으로 변경하고 새로고침 버튼 추가(누르면 보던 화면은 그대로 두고 고객 목록·달력 상담 기록 색인·일정을 다시 읽어 바로 반영, 고객 상세 화면이면 그 고객의 기록도 다시 읽음, 에이닷으로 저장한 기록도 달력에 바로 표시)) -->
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
@@ -61,7 +61,7 @@ window.REMOTE_READY = (async () => {
     const within = (p, ms) => Promise.race([p, new Promise((_, rej) => setTimeout(() => rej(Object.assign(new Error("timeout"), { code: "timeout" })), ms))]);
     const offlineErr = e => e && (e.code === "timeout" || e.code === "unavailable");
     api = {
-      collection: F.collection, query: F.query, where: F.where, doc: F.doc, arrayUnion: F.arrayUnion,
+      collection: F.collection, collectionGroup: F.collectionGroup, query: F.query, where: F.where, doc: F.doc, arrayUnion: F.arrayUnion,
       serverTimestamp: F.serverTimestamp, orderBy: F.orderBy, limit: F.limit,
       setDoc: (...a) => later(F.setDoc(...a)),
       updateDoc: (...a) => later(F.updateDoc(...a)),
@@ -1353,7 +1353,7 @@ if (!REMOTE) document.querySelectorAll("[data-remote-only]").forEach(el => { el.
 // ▲▲▲▲▲▲▲▲▲▲ [로컬 구간 끝] ▲▲▲▲▲▲▲▲▲▲
 
 // 저장소 도구 연결: 원격이 있으면 원격 것, 없으면 로컬 것 (이름은 파이어스토어와 같음)
-const { collection, addDoc, getDocs, query, where, doc, updateDoc, deleteDoc, getDoc, setDoc, writeBatch, arrayUnion, serverTimestamp, orderBy, limit, onAuthStateChanged, signOut, auth, db } = REMOTE ? REMOTE.api : await createLocalApi();
+const { collection, collectionGroup, addDoc, getDocs, query, where, doc, updateDoc, deleteDoc, getDoc, setDoc, writeBatch, arrayUnion, serverTimestamp, orderBy, limit, onAuthStateChanged, signOut, auth, db } = REMOTE ? REMOTE.api : await createLocalApi();
 const HOOK = { ...LOCAL_HOOKS, ...(REMOTE ? REMOTE.hooks : {}) };
 const $ = id => document.getElementById(id);
 const FIELDS = ["name","phone","phoneLabel","phone2","phone2Label","fax","zip","regDate"];   // 주소(addr)는 주소1·주소2로 따로 처리
@@ -1538,7 +1538,7 @@ $("tabRefresh").onclick = async () => {
   refreshBusy = true;
   const b = $("tabRefresh"), old = b.textContent; b.disabled = true; b.textContent = "읽는 중";
   try {
-    schedList = null; schedErr = "";                                   // 일정도 다시 읽음
+    schedList = null; schedErr = ""; schedLoad();                      // 일정도 다시 읽음 (고객 목록 읽기와 동시에 시작)
     await loadList();                                                  // 고객 목록 다시 읽기 (달력 색인은 비우고 뒤에서 다시 만듦)
     const calOn = !$("calBox").classList.contains("hide");
     if (calOn) { try { await Promise.all([calBuild(), schedLoad()]); } catch {} renderCal(); renderDaySched(); }
@@ -1546,9 +1546,9 @@ $("tabRefresh").onclick = async () => {
       const nc = customers.find(x => x.id === cur.id); if (nc) cur = nc;
       await loadLogs();
     }
-    b.textContent = "완료";
+    b.textContent = calCgFail ? "완료·느림" : "완료";   // 느림 = 기록 한 번에 읽기가 막혀 고객별로 읽음 (콘솔에 이유 표시)
   } catch (e) { b.textContent = "실패"; }
-  setTimeout(() => { b.textContent = old; b.disabled = false; refreshBusy = false; }, 900);
+  setTimeout(() => { b.textContent = old; b.disabled = false; refreshBusy = false; }, calCgFail ? 2500 : 900);
 };
 
 // 목록 불러오기 (내 고객만, 정렬은 브라우저에서)
@@ -1710,11 +1710,25 @@ const keyDate = k => { const [y, m, d] = k.split("-").map(Number); return new Da
 let calWeek = sundayOf(calNow);   // 주간보기에서 보이는 주의 일요일
 const pad2 = n => String(n).padStart(2, "0");
 const dkey = d => d.getFullYear() + "-" + pad2(d.getMonth() + 1) + "-" + pad2(d.getDate());
+let calCgFail = "";   // 한 번에 읽기가 막혔을 때 이유 (이 접속 동안은 다시 시도하지 않고 고객별 읽기로 진행)
+async function calFetchAll(){   // 모든 고객의 기록(logs)을 요청 1번으로 읽음. 파이어베이스 색인·규칙이 허용하지 않으면 null (→ 고객별로 읽는 기존 방식)
+  if (typeof collectionGroup !== "function" || calCgFail) return null;
+  try {
+    const sn = await getDocs(query(collectionGroup(db, "logs"), where("ownerUid", "==", auth.currentUser.uid)));
+    return sn.docs.filter(d => d.ref.parent.parent && d.ref.parent.parent.parent && d.ref.parent.parent.parent.id === "customers")
+      .map(d => ({ cid: d.ref.parent.parent.id, x: d.data() }));
+  } catch (e) { calCgFail = (e && (e.code || e.message)) || "error"; console.warn("기록 한 번에 읽기 불가 → 고객별로 읽습니다:", e); return null; }
+}
 async function calBuild(){   // 모든 고객의 "상담" 기록을 읽어 날짜별로 고객 이름을 모음 (고객 10명씩 동시에)
   if (calIdx) return calIdx;
   if (calBusy) return calBusy;
   calBusy = (async () => {
     const map = {}, list = customers.slice();
+    const all = await calFetchAll();   // 모든 고객의 기록을 서버에서 한 번에 읽기 (안 되면 null → 아래 고객별 읽기)
+    if (all) {
+      const byId = new Map(list.map(c => [c.id, c]));
+      all.forEach(({ cid, x }) => { const c = byId.get(cid); if (!c || x.type !== "상담" || !x.date) return; calAdd(map, x.date, c, x.pid); });
+    } else
     for (let s = 0; s < list.length; s += 10) {
       await Promise.all(list.slice(s, s + 10).map(async c => {
         const sn = await getDocs(query(collection(db, "customers", c.id, "logs"), where("ownerUid", "==", auth.currentUser.uid)));
@@ -3528,7 +3542,7 @@ $("custForm").onsubmit = async e => {
 };
 
 // ===== 설정 확장: 로그인 · 프린터 · 라벨 리스트 · 백업 · 버전 · 초기화 =====
-const APP_VERSION = "v12.218";   // ← 파일을 수정할 때마다 이 숫자를 올립니다 (자동 업데이트가 이 값을 비교)
+const APP_VERSION = "v12.219";   // ← 파일을 수정할 때마다 이 숫자를 올립니다 (자동 업데이트가 이 값을 비교)
 function lsGet(k, d){ try { return JSON.parse(localStorage.getItem(k)) ?? d; } catch { return d; } }
 function lsSet(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch {} }
 // 원격 전송 상태 · 기기 복사 · 외부 알림 · 로그인 화면 동작은 파일 맨 위 [원격 구간]에 있습니다 (로컬일 때는 [로컬 구간]의 기본 동작)
