@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- 2026-10-22 KST | 수정: 앱 버전 v12.224, 에이닷 통화 요약으로 저장하는 상담 기록에서 첫 줄 "통화 요약 (에이닷) · 시각 · 통화시간" 표시를 없애고 정리 내용만 기록 (이전 수정: 2026-10-22 KST | 수정: 앱 버전 v12.223, 통화에서 추가하는 일정 내용에서 [통화일정] 표시를 없애고 "회사 이름 - 내용" 형태로 표시 (이전 수정: 2026-10-22 KST | 수정: 앱 버전 v12.222, 에이닷 통화 기록을 앱에서 삭제한 뒤 같은 통화를 다시 가져오면 언제나 새 기록으로 저장하고 일정 확인 창도 다시 띄움 - 이전에 추가한 같은 날짜 일정이 달력에 남아 있으면 체크 해제 + 안내 문구로 표시해 중복을 막음 (이전 수정: 2026-10-22 KST | 수정: 앱 버전 v12.221, 에이닷 통화 요약의 일정 추가 확인 창을 이미 저장된 통화(기록은 건너뛰는 경우)에서도 띄우도록 변경 - 이전 버전에서 가져온 통화 파일을 다시 가져와도 날짜 일정을 추가할 수 있음 (이전 수정: 2026-10-22 KST | 수정: 앱 버전 v12.220, 에이닷 통화 요약 속 날짜 표현(내일·모레·다음 주 월요일·10월 30일·3일 후 등)을 통화 날짜 기준으로 계산해 달력 일정으로 추가 - 저장 전에 찾은 일정을 보여 주고 체크·날짜·시간·내용을 고쳐서 추가하며, 같은 통화의 같은 일정은 다시 묻지 않음 (이전 수정: 2026-10-22 KST | 수정: 앱 버전 v12.219, 달력 상담 기록 색인(새로고침 포함)을 고객 300명을 한 명씩 읽던 방식에서 모든 고객의 기록을 서버에서 한 번에 읽는 방식(collectionGroup)으로 변경해 속도 개선 - 파이어베이스 색인·규칙이 막혀 있으면 자동으로 예전 방식(고객별 읽기)으로 진행하고 새로고침 버튼에 '완료·느림' 표시, 새로고침 때 일정 읽기를 고객 목록 읽기와 동시에 시작 (이전 수정: 2026-10-22 KST | 수정: 앱 버전 v12.218, 상단 메뉴를 달력·목록·신규등록·새로고침·설정 5칸으로 변경하고 새로고침 버튼 추가(누르면 보던 화면은 그대로 두고 고객 목록·달력 상담 기록 색인·일정을 다시 읽어 바로 반영, 고객 상세 화면이면 그 고객의 기록도 다시 읽음, 에이닷으로 저장한 기록도 달력에 바로 표시))))))) -->
+<!-- 2026-10-22 KST | 수정: 앱 버전 v12.225, 명함전송을 이미지전송으로 바꾸고 설정>내 정보에 명함·사업자등록증·통장 이미지를 저장(한 문서에 같이 저장하므로 한 장 약 300KB 이하로 자동 압축), 보내기 창에서 3개를 복수 선택해 공유 창으로 한 번에 보냄(문자 바로 보내기는 한 장일 때만), 엑셀 가져오기가 설정을 저장할 때 이미지가 지워지던 부분 보완 (이전 수정: 2026-10-22 KST | 수정: 앱 버전 v12.224, 에이닷 통화 요약으로 저장하는 상담 기록에서 첫 줄 "통화 요약 (에이닷) · 시각 · 통화시간" 표시를 없애고 정리 내용만 기록 (이전 수정: 2026-10-22 KST | 수정: 앱 버전 v12.223, 통화에서 추가하는 일정 내용에서 [통화일정] 표시를 없애고 "회사 이름 - 내용" 형태로 표시 (이전 수정: 2026-10-22 KST | 수정: 앱 버전 v12.222, 에이닷 통화 기록을 앱에서 삭제한 뒤 같은 통화를 다시 가져오면 언제나 새 기록으로 저장하고 일정 확인 창도 다시 띄움 - 이전에 추가한 같은 날짜 일정이 달력에 남아 있으면 체크 해제 + 안내 문구로 표시해 중복을 막음 (이전 수정: 2026-10-22 KST | 수정: 앱 버전 v12.221, 에이닷 통화 요약의 일정 추가 확인 창을 이미 저장된 통화(기록은 건너뛰는 경우)에서도 띄우도록 변경 - 이전 버전에서 가져온 통화 파일을 다시 가져와도 날짜 일정을 추가할 수 있음 (이전 수정: 2026-10-22 KST | 수정: 앱 버전 v12.220, 에이닷 통화 요약 속 날짜 표현(내일·모레·다음 주 월요일·10월 30일·3일 후 등)을 통화 날짜 기준으로 계산해 달력 일정으로 추가 - 저장 전에 찾은 일정을 보여 주고 체크·날짜·시간·내용을 고쳐서 추가하며, 같은 통화의 같은 일정은 다시 묻지 않음 (이전 수정: 2026-10-22 KST | 수정: 앱 버전 v12.219, 달력 상담 기록 색인(새로고침 포함)을 고객 300명을 한 명씩 읽던 방식에서 모든 고객의 기록을 서버에서 한 번에 읽는 방식(collectionGroup)으로 변경해 속도 개선 - 파이어베이스 색인·규칙이 막혀 있으면 자동으로 예전 방식(고객별 읽기)으로 진행하고 새로고침 버튼에 '완료·느림' 표시, 새로고침 때 일정 읽기를 고객 목록 읽기와 동시에 시작 (이전 수정: 2026-10-22 KST | 수정: 앱 버전 v12.218, 상단 메뉴를 달력·목록·신규등록·새로고침·설정 5칸으로 변경하고 새로고침 버튼 추가(누르면 보던 화면은 그대로 두고 고객 목록·달력 상담 기록 색인·일정을 다시 읽어 바로 반영, 고객 상세 화면이면 그 고객의 기록도 다시 읽음, 에이닷으로 저장한 기록도 달력에 바로 표시)))))))) -->
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
@@ -258,7 +258,7 @@ window.REMOTE_READY = (async () => {
   .srow .r{font-size:14px;color:var(--sub);white-space:nowrap;max-width:60%;overflow:hidden;text-overflow:ellipsis}.srow.red .t{color:#d92d20}
   #pInfo input[readonly],#pLabelSet input[readonly],#pLabelSet select:disabled{opacity:.7}
   .btnrow{display:flex;gap:8px}.btnrow button{flex:1;width:auto}
-  #actRow{margin-top:12px}#actRow button{margin:0;padding:10px 4px;white-space:nowrap;min-width:0}   /* 상세 화면 버튼 3개(명함전송·정보수정·복사등록)를 한 줄로 */
+  #actRow{margin-top:12px}#actRow button{margin:0;padding:10px 4px;white-space:nowrap;min-width:0}   /* 상세 화면 버튼 3개(이미지전송·정보수정·복사등록)를 한 줄로 */
   .spanel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-top:6px}
   #toTopBtn{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:50;width:auto;margin:0;padding:10px 16px;border-radius:999px;font-size:14px;background:var(--sub);box-shadow:0 2px 8px rgba(0,0,0,.3);opacity:0;pointer-events:none;transition:opacity .2s}
   #toTopBtn.show{opacity:.92;pointer-events:auto}
@@ -434,13 +434,15 @@ window.REMOTE_READY = (async () => {
   .stp .sb button:active:not(:disabled){background:var(--line)}
   .stp .sb button:disabled{opacity:.35}
   #pinLock .plink{background:transparent;color:var(--sub);font-size:13px;margin-top:16px;text-decoration:underline;padding:8px;width:auto}
-  .cardprev{margin:6px 0 8px}.cardprev img{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:8px}   /* 내 명함 미리보기 */
-  #cardSheet{position:fixed;inset:0;z-index:90;background:rgba(0,0,0,.5);display:flex;align-items:flex-end;justify-content:center}   /* 명함 보내기 창(아래에서 올라오는 판) */
+  .cardprev{margin:6px 0 8px}.cardprev img{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:8px}   /* 내 이미지(명함·사업자등록증·통장) 미리보기 */
+  #cardSheet{position:fixed;inset:0;z-index:90;background:rgba(0,0,0,.5);display:flex;align-items:flex-end;justify-content:center}   /* 이미지 보내기 창(아래에서 올라오는 판) */
   #cardSheet.hide{display:none}
   #cardSheet .csbox{width:100%;max-width:560px;max-height:92vh;overflow:auto;box-sizing:border-box;background:var(--card);color:var(--text);border-radius:16px 16px 0 0;padding:16px}
   #cardSheet .cshead{display:flex;justify-content:space-between;align-items:center;gap:8px}
   #cardSheet .csx{width:auto;margin:0;padding:4px 12px;background:var(--cell);color:var(--text);font-size:18px}
-  #cardSheet #csImg{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:8px;margin:10px 0}
+  #csImgs{border:1px solid var(--line);border-radius:8px;margin:6px 0 10px}   /* 보낼 이미지 고르기(명함·사업자등록증·통장) */
+  .cspick .cth{flex:none;width:56px;height:40px;object-fit:cover;border:1px solid var(--line);border-radius:4px;background:#fff}
+  .imgslot>label{margin:12px 0 2px}   /* 내 정보의 이미지 칸(명함·사업자등록증·통장) */
   #cardSheet textarea{box-sizing:border-box;font:inherit}
   /* 상단 메뉴 5칸(달력·목록·신규등록·새로고침·설정)을 같은 폭으로: 두 글자 칸도 신규등록과 같은 크기(좌우 여백) */
   .tabs{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:4px}.tabs button{width:100%;min-width:0;padding:10px 2px;font-size:14px;white-space:nowrap}
@@ -665,11 +667,24 @@ window.REMOTE_READY = (async () => {
         <div class="row"><div style="flex:0 0 110px"><label>우편번호</label><input id="setZip" inputmode="numeric"></div>
           <div><label>주소1 (도로명·지번)</label><input id="setAddr1"></div></div>
         <label>주소2 (건물명·동·호수)</label><input id="setAddr2">
-        <div class="cardprev"><span class="sub" id="cardEmpty">등록된 명함이 없습니다. 수정을 누른 뒤 명함 이미지를 선택하세요.</span><img id="cardImg" class="hide" alt="내 명함"></div>
+        <div class="imgslot"><label>명함</label>
+        <div class="cardprev"><span class="sub" id="cardEmpty">등록된 명함이 없습니다. 수정을 누른 뒤 이미지를 선택하세요.</span><img id="cardImg" class="hide" alt="내 명함"></div>
         <div class="btnrow">
           <button id="cardPickBtn" type="button" class="gray slim" style="margin-top:0" disabled>명함 이미지 선택</button>
           <button id="cardDelBtn" type="button" class="gray slim" style="margin-top:0" disabled>명함 삭제</button>
-        </div>
+        </div></div>
+        <div class="imgslot"><label>사업자등록증</label>
+        <div class="cardprev"><span class="sub" id="bizEmpty">등록된 사업자등록증이 없습니다. 수정을 누른 뒤 이미지를 선택하세요.</span><img id="bizImg" class="hide" alt="사업자등록증"></div>
+        <div class="btnrow">
+          <button id="bizPickBtn" type="button" class="gray slim" style="margin-top:0" disabled>사업자등록증 이미지 선택</button>
+          <button id="bizDelBtn" type="button" class="gray slim" style="margin-top:0" disabled>사업자등록증 삭제</button>
+        </div></div>
+        <div class="imgslot"><label>통장</label>
+        <div class="cardprev"><span class="sub" id="bankEmpty">등록된 통장 이미지가 없습니다. 수정을 누른 뒤 이미지를 선택하세요.</span><img id="bankImg" class="hide" alt="통장"></div>
+        <div class="btnrow">
+          <button id="bankPickBtn" type="button" class="gray slim" style="margin-top:0" disabled>통장 이미지 선택</button>
+          <button id="bankDelBtn" type="button" class="gray slim" style="margin-top:0" disabled>통장 삭제</button>
+        </div></div>
         <input id="cardFile" type="file" accept="image/*" class="hide">
         <div class="btnrow">
           <button id="infoEditBtn" type="button">수정</button>
@@ -839,7 +854,7 @@ window.REMOTE_READY = (async () => {
       </div>
 
       <div class="sec">데이터</div>
-      <div class="srow" id="bkDownBtn"><div class="tx"><div class="t">전체 백업 받기</div><div class="d">고객·기록·일정·내 정보·명함·설정 전체를 JSON 파일로 백업</div></div><div class="r">⤓</div></div>
+      <div class="srow" id="bkDownBtn"><div class="tx"><div class="t">전체 백업 받기</div><div class="d">고객·기록·일정·내 정보·이미지(명함·사업자등록증·통장)·설정 전체를 JSON 파일로 백업</div></div><div class="r">⤓</div></div>
       <div class="srow" id="bkLoadRow"><div class="tx"><div class="t">백업 불러오기</div><div class="d">백업 JSON 파일에서 고객·기록·일정·설정 전체 복원</div></div><div class="r">⤒</div></div>
       <input id="bkFile" type="file" accept=".json,application/json" style="display:none">
       <div class="msg" id="bkMsg" style="white-space:pre-wrap"></div>
@@ -862,7 +877,7 @@ window.REMOTE_READY = (async () => {
       <div class="srow" id="acctRow" data-remote-only style="cursor:default"><div class="tx"><div class="t">로그인 계정</div><div class="d" id="acctInfo"></div></div><div class="r"><button id="logoutBtn" type="button" class="gray slim" style="margin:0;width:auto">로그아웃</button></div></div>
       <div class="srow" id="updateRow"><div class="tx"><div class="t">앱 업데이트</div></div><div class="r" style="color:var(--main)">새로고침으로 최신버전 로드</div></div>
       <div class="srow" style="cursor:default"><div class="tx"><div class="t">개발</div><div class="d">JS Kang</div><div class="d"><a href="mailto:drimsw@gmail.com" style="color:var(--main);text-decoration:none">✉ drimsw@gmail.com</a></div></div></div>
-      <div class="srow red" id="wipeBtn"><div class="tx"><div class="t">모든 데이터 초기화</div><div class="d">고객·기록·일정·내 정보·명함·라벨 설정·분류 이름 등 앱의 모든 것을 초기화 (되돌릴 수 없음)</div></div><div class="r"></div></div>
+      <div class="srow red" id="wipeBtn"><div class="tx"><div class="t">모든 데이터 초기화</div><div class="d">고객·기록·일정·내 정보·이미지(명함·사업자등록증·통장)·라벨 설정·분류 이름 등 앱의 모든 것을 초기화 (되돌릴 수 없음)</div></div><div class="r"></div></div>
       <div class="msg" id="rstMsg"></div>
     </div>
 
@@ -905,23 +920,24 @@ window.REMOTE_READY = (async () => {
       <div id="prPreview"></div>
     </div>
 
-    <!-- 명함 보내기 창 -->
-    <div id="cardSheet" class="hide" role="dialog" aria-modal="true" aria-label="명함 보내기">
+    <!-- 이미지 보내기 창 (명함·사업자등록증·통장 중 여러 개 선택) -->
+    <div id="cardSheet" class="hide" role="dialog" aria-modal="true" aria-label="이미지 보내기">
       <div class="csbox">
-        <div class="cshead"><b id="csTitle">명함 보내기</b><button id="csClose" type="button" class="csx" aria-label="닫기">✕</button></div>
+        <div class="cshead"><b id="csTitle">이미지 보내기</b><button id="csClose" type="button" class="csx" aria-label="닫기">✕</button></div>
         <div id="csNone" class="hide">
-          <div class="sub" style="margin:12px 0">등록된 명함이 없습니다. 설정 &gt; 내 정보에서 명함 이미지를 먼저 등록하세요.</div>
+          <div class="sub" style="margin:12px 0">등록된 이미지가 없습니다. 설정 &gt; 내 정보에서 명함·사업자등록증·통장 이미지를 먼저 등록하세요.</div>
           <button id="csGoSet" type="button">설정 &gt; 내 정보로 이동</button>
         </div>
         <div id="csBody">
-          <img id="csImg" alt="내 명함">
+          <label style="margin:12px 0 4px">보낼 이미지 (여러 개 선택 가능)</label>
+          <div id="csImgs"></div>
           <div style="display:flex;justify-content:space-between;align-items:center;gap:8px"><label style="margin:12px 0 4px">보낼 사람 (여러 명 선택 가능)</label>
             <button id="csAll" type="button" class="gray slim" style="width:auto;padding:4px 12px;margin:8px 0 0">전체 선택</button></div>
           <div id="csPeople"></div>
           <label>보낼 문구 ({고객}은 받는 사람 이름으로 바뀝니다)</label>
           <textarea id="csMsg" rows="4"></textarea>
           <button id="csSms" type="button">📨 문자로 바로 보내기</button>
-          <div class="sub" id="csHint" style="margin:6px 0 2px;font-size:13px;color:#d92d20">누르면 문자 앱이 받는 사람·문구가 입력된 채로 열리고, 명함 이미지는 복사됩니다. 문자 입력칸을 길게 눌러 '붙여넣기' → 전송</div>
+          <div class="sub" id="csHint" style="margin:6px 0 2px;font-size:13px;color:#d92d20">누르면 문자 앱이 받는 사람·문구가 입력된 채로 열리고, 이미지는 복사됩니다. 문자 입력칸을 길게 눌러 '붙여넣기' → 전송</div>
           <button id="csShare" type="button" class="gray">📤 공유 창으로 보내기 (카카오톡 등)</button>
         </div>
         <div class="msg" id="csStatus" style="white-space:pre-wrap"></div>
@@ -943,7 +959,7 @@ window.REMOTE_READY = (async () => {
       <h2 id="peopleTitle" style="margin:16px 0 6px">소속 개인</h2>
       <div id="dPeople"></div>
       <div class="btnrow" id="actRow">
-        <button id="cardSendBtn" type="button" class="slim">🪪 명함전송</button>
+        <button id="cardSendBtn" type="button" class="slim">🖼️ 이미지전송</button>
         <button id="editInfoBtn" type="button" class="gray slim">✏️ 정보수정</button>
         <button id="copyCardBtn" type="button" class="gray slim">📋 복사등록</button>
       </div>
@@ -1497,9 +1513,17 @@ $("addr1").addEventListener("input", showAddrPrev); $("addr2").addEventListener(
 let customers = [], editingId = null, cur = null, logs = [], editingLogId = null, settings = null;
 let listMode = "comp", curPid = "", editPid = "";   // 목록 종류(comp=회사목록, per=개인목록) / 지금 상세에서 보는 소속 개인 id(회사 화면이면 빈 값)
 const compDocs = () => customers.filter(c => !isPersonDoc(c));
+// 내 이미지 3종: 명함(card.img)·사업자등록증(card.biz)·통장(card.bank). 한 문서(users/{uid})에 같이 저장하므로 한 장당 크기를 줄여 문서 한도(1MB) 안에 맞춤
+const IMG_KINDS = [
+  { k: "img", pre: "card", name: "명함", msg: "명함" },
+  { k: "biz", pre: "biz", name: "사업자등록증", msg: "사업자등록증" },
+  { k: "bank", pre: "bank", name: "통장", msg: "통장 사본" }
+];
+const IMG_LIMIT = 300000, IMG_TOTAL = 930000;   // 한 장 최대 글자 수 / 세 장 합계 최대
+var _imgDraft = {};   // 종류별: undefined = 바꾸지 않음, null = 삭제, 문자열 = 새로 고른 이미지(저장 전)
 const DEFAULT_SETTINGS = {
   sender: { company: "", name: "", zip: "", addr: "" },
-  card: { img: "", msg: "{고객}님, 안녕하세요. {내이름}입니다. 제 명함을 보내드립니다. 궁금하신 점은 언제든 편하게 연락 주세요." },   // 내 명함(압축한 이미지 data URL)과 함께 보낼 기본 문구
+  card: { img: "", biz: "", bank: "", msg: "{고객}님, 안녕하세요. {내이름}입니다. 제 {이미지}을 보내드립니다. 궁금하신 점은 언제든 편하게 연락 주세요." },   // img=명함·biz=사업자등록증·bank=통장 (압축한 이미지 data URL)과 함께 보낼 기본 문구({이미지}는 고른 이미지 이름으로 바뀜)
   grades: { B: "", L: "", R: "", P: "", S: "", G: "", Y: "", N: "미분류" },   // 고객 분류 이름 8개 (마지막 N 기본값은 '미분류', 나머지는 비어 있음, 비우면 그 색은 선택 불가)
   // 라벨 문자 배치: padT·padB·padL·padR = 적색 점선(글자 영역) 여백, zipX/Y·a1X/Y·a2X/Y·nameX/nameTop = 우편번호·주소1·주소2·이름 상자의 왼쪽·위 위치(라벨 왼쪽 위 모서리에서, mm)
   // 기본 라벨 규격(mm): 가로 2줄(1:1 짝)·세로 8줄, 라벨 100.5×33.7, 위 여백 14·왼쪽 시작 3·가로 간격 2.5(둘째 열 106)·세로 간격 0(둘째 단 47.7), 글자 영역 여백 위·아래 1/왼쪽·오른쪽 2, 글자 우편번호 18pt·주소1·2 10pt·이름 14pt, 글자 상자 위치(왼쪽/위) 우편번호 2/1·주소1 2.5/10.7·주소2 2.5/16.8·이름 2.5/27.2, 프린터 맞춤 가로 0·세로 0
@@ -2488,7 +2512,8 @@ const mergeSettings = d => {
   return { sender: { ...DEFAULT_SETTINGS.sender, ...(d.sender || {}) }, label, grades: mergeGrades(d.grades), card: mergeCard(d.card), gcol: mergeGcol(d.gcol) };
 };
 const mergeGcol = g => { const o = {}; GRADE_SLOTS.forEach(k => { const v = g && typeof g[k] === "string" && /^#[0-9a-fA-F]{6}$/.test(g[k]) ? g[k].toLowerCase() : ""; if (v && v !== GCOL_DEFAULT[k]) o[k] = v; }); return o; };   // 기본과 다른 색만 보관
-const mergeCard = c => ({ img: c && typeof c.img === "string" && c.img.startsWith("data:image/") ? c.img : "", msg: c && typeof c.msg === "string" ? c.msg.slice(0, 500) : DEFAULT_SETTINGS.card.msg });
+const imgOk = v => typeof v === "string" && v.startsWith("data:image/") ? v : "";
+const mergeCard = c => ({ img: imgOk(c && c.img), biz: imgOk(c && c.biz), bank: imgOk(c && c.bank), msg: c && typeof c.msg === "string" ? c.msg.slice(0, 500) : DEFAULT_SETTINGS.card.msg });
 const mergeGrades = g => { const o = {}; GRADE_SLOTS.forEach(k => { o[k] = g && typeof g[k] === "string" ? g[k].trim().slice(0, 10) : DEFAULT_SETTINGS.grades[k]; }); return o; };
 function labelCols(v){ return Math.min(Math.max(Math.round(Number(v)) || 2, 1), 3); }
 function labelValOk(k, v){ return Number.isFinite(v); }   // 숫자인지만 확인 (범위 조건 없음)
@@ -2786,7 +2811,7 @@ $("gradeSaveBtn").onclick = async () => {   // 분류 바 이름 저장: 이미 
 };
 function setInfoEdit(on){
   ["setCompany", "setName", "setZip", "setAddr1", "setAddr2"].forEach(id => $(id).readOnly = !on);
-  $("cardPickBtn").disabled = !on; $("cardDelBtn").disabled = !on;   // 명함 선택·삭제도 수정 중에만
+  IMG_KINDS.forEach(x => { $(x.pre + "PickBtn").disabled = !on; $(x.pre + "DelBtn").disabled = !on; });   // 이미지(명함·사업자등록증·통장) 선택·삭제도 수정 중에만
   $("setSaveBtn").disabled = !on;
   $("infoEditBtn").textContent = on ? "수정 취소" : "수정";
 }
@@ -2830,9 +2855,9 @@ $("setSaveBtn").onclick = async ev => {
     const bad = labelProblems(label, { ...sender, grade: "" });
     if (bad.length) { m.style.whiteSpace = "pre-wrap"; m.textContent = "저장하지 않았습니다. 글자가 라벨 밖으로 벗어납니다.\n" + bad.map(problemText).join("\n") + "\n설정 > 라벨 문자 배치에서 위치·크기를 고친 뒤 다시 저장하세요."; return; }
   }
-  const card = isInfo ? { img: _cardDraft !== undefined ? (_cardDraft || "") : curSettings().card.img, msg: curSettings().card.msg } : curSettings().card;   // 명함은 내 정보 저장 때만 바뀜
+  let card; try { card = isInfo ? await imgCollect() : curSettings().card; } catch (e) { m.textContent = e.message; return; }   // 이미지(명함·사업자등록증·통장)는 내 정보 저장 때만 바뀜
   settings = { sender, label, grades: curSettings().grades, card, gcol: curSettings().gcol };
-  try { await setDoc(doc(db, "users", auth.currentUser.uid), settings); m.className = "msg ok"; m.textContent = "저장되었습니다."; if (isInfo) { _cardDraft = undefined; renderCardPrev(); setInfoEdit(false); } else setLabelEdit(false); }
+  try { await setDoc(doc(db, "users", auth.currentUser.uid), settings); m.className = "msg ok"; m.textContent = "저장되었습니다."; if (isInfo) { _imgDraft = {}; renderCardPrev(); setInfoEdit(false); } else setLabelEdit(false); }
   catch (e) { m.textContent = "저장 실패: " + e.message + " (보안 규칙에 users 항목을 추가해 게시했는지 확인하세요.)"; }
 };
 
@@ -2845,45 +2870,60 @@ function applyGradeColors(gc){
     return `.gk${k}{--gc:${h};--gb:rgba(${n >> 16 & 255},${n >> 8 & 255},${n & 255},.5)}.gchip.on.gk${k}{color:${gcolText(h)}}`; }).join("");
 }
 
-// ---- 명함: 내 정보에 등록하고, 고객 화면에서 문자·카카오톡으로 보내기 ----
-var _cardDraft;   // undefined = 바꾸지 않음, null = 삭제, 문자열 = 새로 고른 명함(저장 전)
+// ---- 이미지(명함·사업자등록증·통장): 내 정보에 등록하고, 고객 화면에서 여러 개를 골라 문자·카카오톡으로 보내기 ----
+const imgNow = k => _imgDraft[k] !== undefined ? _imgDraft[k] : (curSettings().card[k] || "");
 function renderCardPrev(){
-  const src = _cardDraft !== undefined ? _cardDraft : curSettings().card.img;
-  $("cardImg").classList.toggle("hide", !src); $("cardEmpty").classList.toggle("hide", !!src);
-  if (src) $("cardImg").src = src;
+  IMG_KINDS.forEach(x => {
+    const src = imgNow(x.k);
+    $(x.pre + "Img").classList.toggle("hide", !src); $(x.pre + "Empty").classList.toggle("hide", !!src);
+    if (src) $(x.pre + "Img").src = src;
+  });
 }
-function fillCardInputs(){ _cardDraft = undefined; renderCardPrev(); }
-function cardToDataURL(file){   // 고른 이미지를 긴 쪽 1400px·JPEG로 줄여 저장 크기를 작게(문서 한도 1MB 안)
+function fillCardInputs(){ _imgDraft = {}; renderCardPrev(); }
+function imgToDataURL(src, limit){   // 파일 또는 data URL → 긴 쪽 1400px·JPEG, limit(글자 수) 이하가 되도록 화질·크기를 줄임
   return new Promise((res, rej) => {
-    if (!/^image\//.test(file.type)) return rej(new Error("이미지 파일을 고르세요."));
-    const url = URL.createObjectURL(file), im = new Image();
+    const isFile = typeof src !== "string";
+    if (isFile && !/^image\//.test(src.type)) return rej(new Error("이미지 파일을 고르세요."));
+    const url = isFile ? URL.createObjectURL(src) : src, im = new Image();
     im.onload = () => {
-      URL.revokeObjectURL(url);
-      const k = Math.min(1, 1400 / Math.max(im.naturalWidth, im.naturalHeight)), w = Math.max(Math.round(im.naturalWidth * k), 1), h = Math.max(Math.round(im.naturalHeight * k), 1);
-      const cv = document.createElement("canvas"); cv.width = w; cv.height = h;
-      const cx = cv.getContext("2d"); cx.fillStyle = "#fff"; cx.fillRect(0, 0, w, h); cx.drawImage(im, 0, 0, w, h);
-      let q = 0.9, out = cv.toDataURL("image/jpeg", q);
-      while (out.length > 600000 && q > 0.5) { q -= 0.1; out = cv.toDataURL("image/jpeg", q); }
-      out.length > 800000 ? rej(new Error("이미지가 너무 큽니다. 더 작은 이미지를 고르세요.")) : res(out);
+      if (isFile) URL.revokeObjectURL(url);
+      let k = Math.min(1, 1400 / Math.max(im.naturalWidth, im.naturalHeight));
+      for (let round = 0; round < 6; round++) {
+        const w = Math.max(Math.round(im.naturalWidth * k), 1), h = Math.max(Math.round(im.naturalHeight * k), 1);
+        const cv = document.createElement("canvas"); cv.width = w; cv.height = h;
+        const cx = cv.getContext("2d"); cx.fillStyle = "#fff"; cx.fillRect(0, 0, w, h); cx.drawImage(im, 0, 0, w, h);
+        for (let q = 90; q >= 50; q -= 10) { const out = cv.toDataURL("image/jpeg", q / 100); if (out.length <= limit) return res(out); }
+        k *= 0.8;   // 화질을 낮춰도 크면 크기를 줄여 다시
+      }
+      rej(new Error("이미지가 너무 큽니다. 더 작은 이미지를 고르세요."));
     };
-    im.onerror = () => { URL.revokeObjectURL(url); rej(new Error("이미지를 읽지 못했습니다.")); };
+    im.onerror = () => { if (isFile) URL.revokeObjectURL(url); rej(new Error("이미지를 읽지 못했습니다.")); };
     im.src = url;
   });
 }
-$("cardPickBtn").onclick = () => $("cardFile").click();
+var _imgPickKind = "img";
+IMG_KINDS.forEach(x => {
+  $(x.pre + "PickBtn").onclick = () => { _imgPickKind = x.k; $("cardFile").click(); };
+  $(x.pre + "DelBtn").onclick = () => { _imgDraft[x.k] = null; renderCardPrev(); const m = $("setMsg"); m.className = "msg"; m.textContent = x.name + " 이미지를 지웁니다. 저장을 눌러 적용하세요."; };
+});
 $("cardFile").onchange = async () => {
-  const f = $("cardFile").files[0], m = $("setMsg"); $("cardFile").value = ""; if (!f) return;
-  try { _cardDraft = await cardToDataURL(f); renderCardPrev(); m.className = "msg"; m.textContent = "명함을 골랐습니다. 저장을 눌러 적용하세요."; }
+  const f = $("cardFile").files[0], m = $("setMsg"), x = IMG_KINDS.find(y => y.k === _imgPickKind) || IMG_KINDS[0]; $("cardFile").value = ""; if (!f) return;
+  try { _imgDraft[x.k] = await imgToDataURL(f, IMG_LIMIT); renderCardPrev(); m.className = "msg"; m.textContent = x.name + " 이미지를 골랐습니다. 저장을 눌러 적용하세요."; }
   catch (e) { m.className = "msg err"; m.textContent = e.message; }
 };
-$("cardDelBtn").onclick = () => { _cardDraft = null; renderCardPrev(); const m = $("setMsg"); m.className = "msg"; m.textContent = "명함을 지웁니다. 저장을 눌러 적용하세요."; };
+async function imgCollect(){   // 저장할 이미지 3종(고른 것·지운 것 반영) → { img, biz, bank, msg }. 예전에 크게 저장된 이미지는 저장하면서 줄이고, 합계가 한도를 넘으면 오류
+  const out = { msg: curSettings().card.msg };
+  for (const x of IMG_KINDS) { let v = imgNow(x.k) || ""; if (v.length > IMG_LIMIT) v = await imgToDataURL(v, IMG_LIMIT); out[x.k] = v; }
+  if (IMG_KINDS.reduce((n, x) => n + out[x.k].length, 0) > IMG_TOTAL) throw new Error("이미지 용량이 너무 큽니다. 더 작은 이미지로 바꿔 등록하세요.");
+  return out;
+}
 
-function cardFileOf(img){   // data URL → 파일 (공유 창에 바로 넘길 수 있도록 동기로 만듦)
+function cardFileOf(img, label){   // data URL → 파일 (공유 창에 바로 넘길 수 있도록 동기로 만듦)
   const [head, b64] = img.split(","), mime = (head.match(/data:([^;]+)/) || [])[1] || "image/jpeg", bin = atob(b64), u = new Uint8Array(bin.length);
   for (let i = 0; i < bin.length; i++) u[i] = bin.charCodeAt(i);
-  return new File([u], `${curSettings().sender.name || "내"} 명함.${mime.includes("png") ? "png" : "jpg"}`, { type: mime });
+  return new File([u], `${curSettings().sender.name || "내"} ${label || "명함"}.${mime.includes("png") ? "png" : "jpg"}`, { type: mime });
 }
-const cardPngOf = img => new Promise((res, rej) => {   // 명함 이미지 → PNG (클립보드 복사용)
+const cardPngOf = img => new Promise((res, rej) => {   // 이미지 → PNG (클립보드 복사용)
   const im = new Image(); im.onload = () => { const c = document.createElement("canvas"); c.width = im.naturalWidth; c.height = im.naturalHeight; c.getContext("2d").drawImage(im, 0, 0); c.toBlob(b => b ? res(b) : rej(new Error("png")), "image/png"); };
   im.onerror = () => rej(new Error("img")); im.src = img;
 });
@@ -2894,19 +2934,35 @@ const csCtx = i => {   // 명함을 보내는 사람 → 기록을 남길 곳 (�
 };
 const csLogNote = lp => lp.then(() => { const e = $("csStatus"); if (e) e.textContent += "\n✔ 고객 기록에 남겼습니다. (상담 · 명함 전송)"; })
   .catch(() => { const e = $("csStatus"); if (e) e.textContent += "\n⚠ 기록 저장에 실패했습니다. 내용은 이 기기에 임시 보관했으니 앱을 새로고침하면 자동으로 저장됩니다."; });
-const csTpl = () => DEFAULT_SETTINGS.card.msg.replace(/\{내이름\}/g, [curSettings().sender.company, curSettings().sender.name].filter(Boolean).join(" "));   // 문구의 보내는 사람 = 회사명 + 이름;   // {고객}은 보낼 때 받는 사람 이름으로 바꿈
+const csTpl = () => DEFAULT_SETTINGS.card.msg.replace(/\{내이름\}/g, [curSettings().sender.company, curSettings().sender.name].filter(Boolean).join(" ")).replace(/\{이미지\}/g, IMG_KINDS.filter(x => _cs && _cs.imgSel.has(x.k)).map(x => x.msg).join(", ") || "명함");   // 문구의 보내는 사람 = 회사명 + 이름, {이미지} = 고른 이미지 이름들. {고객}은 보낼 때 받는 사람 이름으로 바꿈
+function csMsgSync(){ if (_cs && !_cs.msgEdited) $("csMsg").value = csTpl(); }   // 이미지를 고르거나 풀면 문구도 맞춤 (직접 고친 문구는 그대로 둠)
+$("csMsg").addEventListener("input", () => { if (_cs) _cs.msgEdited = true; });
 const csWho = (p, c) => p.name ? p.name + (p.rank ? " " + p.rank : "") : (p.rank || p.dept || (c && c.name) || "고객");
-let _cs = null;   // 열려 있는 명함 보내기 창: { c: 고객(회사), file: 명함 파일, list: 받을 수 있는 사람들, sel: 선택한 번호, sent: 보낸 번호 }
+let _cs = null;   // 열려 있는 이미지 보내기 창: { c: 고객(회사), files: 종류별 이미지 파일, pngs: 종류별 PNG, imgSel: 고른 이미지 종류, list: 받을 수 있는 사람들, sel: 선택한 번호, sent: 보낸 번호 }
 function csStat(text, ok){ const e = $("csStatus"); e.className = "msg " + (ok ? "ok" : "err"); e.textContent = text; }
 const csNext = () => [..._cs.sel].sort((x, y) => x - y).find(i => !_cs.sent.has(i));
 function csBtn(){
-  const rem = [..._cs.sel].filter(i => !_cs.sent.has(i)).length, nx = csNext(), b = $("csShare"), s = $("csSms");
-  b.disabled = s.disabled = nx === undefined;
+  const rem = [..._cs.sel].filter(i => !_cs.sent.has(i)).length, nx = csNext(), b = $("csShare"), s = $("csSms"), ni = _cs.imgSel.size;
+  b.disabled = nx === undefined || !ni; s.disabled = nx === undefined || ni !== 1;   // 문자 앱에는 이미지를 한 장씩만 붙여넣을 수 있어 한 장 고른 때만, 여러 장은 공유 창으로
   const nm = nx === undefined ? "" : csWho(_cs.list[nx], _cs.c) + "님께", more = rem > 1 ? ` (남은 ${rem}명)` : "";
-  s.textContent = nx === undefined ? (_cs.sent.size ? "✔ 선택한 사람에게 모두 보냈습니다" : "보낼 사람을 선택하세요") : `📨 ${nm} 문자로 바로 보내기` + more;
-  b.textContent = nx === undefined ? "📤 공유 창으로 보내기 (카카오톡 등)" : `📤 ${nm} 공유 창으로 (카카오톡 등)`;
+  s.textContent = nx === undefined ? (_cs.sent.size ? "✔ 선택한 사람에게 모두 보냈습니다" : "보낼 사람을 선택하세요") : !ni ? "보낼 이미지를 선택하세요" : ni > 1 ? "📨 문자로 바로 보내기 (이미지 1장일 때만)" : `📨 ${nm} 문자로 바로 보내기` + more;
+  b.textContent = nx === undefined ? "📤 공유 창으로 보내기 (카카오톡 등)" : !ni ? "보낼 이미지를 선택하세요" : `📤 ${nm} 공유 창으로 (카카오톡 등)` + (ni > 1 ? ` · 이미지 ${ni}장` : "");
+  $("csHint").textContent = ni > 1 ? "이미지를 여러 장 보낼 때는 아래 '공유 창으로 보내기'(카카오톡 등)를 쓰세요. 문자 앱에는 이미지를 한 장씩만 붙여넣을 수 있어 '문자로 바로 보내기'는 한 장만 고른 때 쓸 수 있습니다." : "누르면 문자 앱이 받는 사람·문구가 입력된 채로 열리고, 이미지는 복사됩니다. 문자 입력칸을 길게 눌러 '붙여넣기' → 전송";
   const un = _cs.list.map((p, i) => i).filter(i => !_cs.sent.has(i));
   $("csAll").textContent = un.length && un.every(i => _cs.sel.has(i)) ? "선택 해제" : "전체 선택";
+}
+function csImgRefresh(){   // 보낼 이미지 고르기: 등록된 명함·사업자등록증·통장을 여러 개 체크 (등록 안 된 것은 선택 불가)
+  const box = $("csImgs"); box.textContent = "";
+  IMG_KINDS.forEach(x => {
+    const src = curSettings().card[x.k], row = document.createElement("label"); row.className = "cspick";
+    const cb = document.createElement("input"); cb.type = "checkbox"; cb.checked = !!src && _cs.imgSel.has(x.k); cb.disabled = !src;
+    cb.onchange = () => { if (cb.checked) _cs.imgSel.add(x.k); else _cs.imgSel.delete(x.k); csMsgSync(); csBtn(); };
+    row.append(cb);
+    if (src) { const im = document.createElement("img"); im.className = "cth"; im.src = src; im.alt = x.name; row.append(im); }
+    const nm = document.createElement("span"); nm.className = "cn"; nm.textContent = x.name;
+    if (!src) { const ph = document.createElement("span"); ph.className = "cp"; ph.textContent = "등록 안 됨 (설정 > 내 정보에서 등록)"; nm.append(ph); }
+    row.append(nm); box.append(row);
+  });
 }
 function csRefresh(){
   const box = $("csPeople"); box.textContent = "";
@@ -2924,15 +2980,15 @@ function csRefresh(){
 }
 function openCardSheet(c, pid){
   if (!c) return;
-  const img = curSettings().card.img;
+  const st = curSettings().card, have = IMG_KINDS.filter(x => st[x.k]);
   const ppl = (Array.isArray(c.people) ? c.people : []).filter(p => p.name || p.rank || p.dept || p.phone);
   const list0 = ppl.length ? ppl : (Array.isArray(c.people) ? [{}] : (peopleOf(c).length ? peopleOf(c) : [{}]));   // 소속 개인이 없으면 회사 이름으로 한 명
   const one = pid && Array.isArray(c.people) ? c.people.find((p, n) => pidOf(p, n) === pid) : null, list = one ? [one] : list0;   // 개인 화면에서 열면 그 개인에게만
-  _cs = { c, file: img ? cardFileOf(img) : null, list, sel: new Set(list.length === 1 ? [0] : []), sent: new Set(), png: null };
-  if (img) { _cs.png = cardPngOf(img); _cs.png.catch(() => {}); }
-  $("csTitle").textContent = `${c.name || "고객"} 명함 보내기`;
-  $("csNone").classList.toggle("hide", !!img); $("csBody").classList.toggle("hide", !img);
-  if (img) { $("csImg").src = img; $("csMsg").value = csTpl(); csRefresh(); }
+  _cs = { c, files: {}, pngs: {}, imgSel: new Set(have.slice(0, 1).map(x => x.k)), msgEdited: false, list, sel: new Set(list.length === 1 ? [0] : []), sent: new Set() };   // 처음에는 등록된 이미지 중 첫 번째(명함 우선)만 체크
+  have.forEach(x => { _cs.files[x.k] = cardFileOf(st[x.k], x.name); _cs.pngs[x.k] = cardPngOf(st[x.k]); _cs.pngs[x.k].catch(() => {}); });
+  $("csTitle").textContent = `${c.name || "고객"} 이미지 보내기`;
+  $("csNone").classList.toggle("hide", !!have.length); $("csBody").classList.toggle("hide", !have.length);
+  if (have.length) { csImgRefresh(); $("csMsg").value = csTpl(); csRefresh(); }
   $("csStatus").textContent = ""; $("cardSheet").classList.remove("hide");
 }
 const closeCardSheet = () => { $("cardSheet").classList.add("hide"); _cs = null; };
@@ -2945,34 +3001,34 @@ $("csAll").onclick = () => {
   const un = _cs.list.map((p, i) => i).filter(i => !_cs.sent.has(i)), all = un.every(i => _cs.sel.has(i));
   un.forEach(i => { if (all) _cs.sel.delete(i); else _cs.sel.add(i); }); csRefresh();
 };
-$("csSms").onclick = async () => {   // 선택한 사람을 한 명씩: 명함 이미지를 클립보드에 복사하고, 받는 사람·문구가 입력된 문자 앱을 바로 엶 (웹앱은 문자에 이미지를 직접 붙일 수 없어 붙여넣기 1번이 남음)
-  if (!_cs || !_cs.file) return;
+$("csSms").onclick = async () => {   // 선택한 사람을 한 명씩: 이미지(한 장일 때만)를 클립보드에 복사하고, 받는 사람·문구가 입력된 문자 앱을 바로 엶 (웹앱은 문자에 이미지를 직접 붙일 수 없어 붙여넣기 1번이 남음)
+  if (!_cs || _cs.imgSel.size !== 1) return;
   const i = csNext(); if (i === undefined) return;
-  const p = _cs.list[i], who = csWho(p, _cs.c), num = String(p.phone || "").replace(/[^\d+]/g, "");
+  const k = [..._cs.imgSel][0], kd = IMG_KINDS.find(x => x.k === k), p = _cs.list[i], who = csWho(p, _cs.c), num = String(p.phone || "").replace(/[^\d+]/g, "");
   if (!num) { csStat(`${who}님은 전화번호가 없어 문자로 바로 보낼 수 없습니다. 아래 '공유 창으로 보내기'를 쓰거나 전화번호를 먼저 등록하세요.`, false); return; }
   const text = $("csMsg").value.trim().replace(/\{고객\}/g, who), cs = _cs, ctx = csCtx(i);
-  const lp = smsLogSave(ctx, "[명함 전송] " + text, "문자전달", true);   // 기록 저장을 먼저 시작(문자 앱으로 넘어가도 이어서 저장됨)
+  const lp = smsLogSave(ctx, "[이미지 전송 · " + kd.name + "] " + text, "문자전달", true);   // 기록 저장을 먼저 시작(문자 앱으로 넘어가도 이어서 저장됨)
   let copied = false;
   try {
-    if (navigator.clipboard && window.ClipboardItem && cs.png) {
-      const w = navigator.clipboard.write([new ClipboardItem({ "image/png": cs.png })]);
+    if (navigator.clipboard && window.ClipboardItem && cs.pngs[k]) {
+      const w = navigator.clipboard.write([new ClipboardItem({ "image/png": cs.pngs[k] })]);
       copied = await Promise.race([w.then(() => true), new Promise(r => setTimeout(() => r(false), 800))]);
     }
   } catch { copied = false; }
   const a = document.createElement("a"); a.href = smsHref(num, text); document.body.append(a); a.click(); a.remove();   // 문자 앱 열기(받는 사람·문구 입력됨)
   cs.sent.add(i); if (_cs === cs) csRefresh();
-  csStat(`${who}님께 문자 앱을 열었습니다. 받는 사람과 문구는 입력되어 있습니다.` + (copied ? " 명함 이미지는 복사해 두었으니 문자 입력칸을 길게 눌러 '붙여넣기'(또는 키보드 위 붙여넣기)한 뒤 전송하세요." : " ⚠ 명함 이미지를 자동으로 복사하지 못했습니다. '공유 창으로 보내기'를 이용하세요.") + (_cs === cs && csNext() !== undefined ? "\n다음 사람은 이 화면으로 돌아와 버튼을 다시 누르세요." : ""), copied);
+  csStat(`${who}님께 문자 앱을 열었습니다. 받는 사람과 문구는 입력되어 있습니다.` + (copied ? " " + kd.name + " 이미지는 복사해 두었으니 문자 입력칸을 길게 눌러 '붙여넣기'(또는 키보드 위 붙여넣기)한 뒤 전송하세요." : " ⚠ " + kd.name + " 이미지를 자동으로 복사하지 못했습니다. '공유 창으로 보내기'를 이용하세요.") + (_cs === cs && csNext() !== undefined ? "\n다음 사람은 이 화면으로 돌아와 버튼을 다시 누르세요." : ""), copied);
   csLogNote(lp);
 };
-$("csShare").onclick = async () => {   // 선택한 사람을 한 명씩: 공유 창(카카오톡·문자 등)에 명함 이미지와 그 사람 이름이 들어간 문구를 넘김
-  if (!_cs || !_cs.file) return;
+$("csShare").onclick = async () => {   // 선택한 사람을 한 명씩: 공유 창(카카오톡·문자 등)에 고른 이미지(여러 장 가능)와 그 사람 이름이 들어간 문구를 넘김
+  if (!_cs || !_cs.imgSel.size) return;
   const i = csNext(); if (i === undefined) return;
-  const who = csWho(_cs.list[i], _cs.c), text = $("csMsg").value.trim().replace(/\{고객\}/g, who), data = { files: [_cs.file], text }, ctx = csCtx(i);
+  const sel = IMG_KINDS.filter(x => _cs.imgSel.has(x.k)), tag = sel.map(x => x.name).join(", "), who = csWho(_cs.list[i], _cs.c), text = $("csMsg").value.trim().replace(/\{고객\}/g, who), data = { files: sel.map(x => _cs.files[x.k]), text }, ctx = csCtx(i);
   if (navigator.canShare && navigator.canShare(data)) {
     try { navigator.clipboard && navigator.clipboard.writeText(text).catch(() => {}); } catch {}   // 앱에 따라 문구가 빠질 수 있어 복사해 둠
     try {
       await navigator.share(data);
-      const lp = smsLogSave(ctx, "[명함 공유] " + text, "기타", true);   // 공유 창을 끝까지 진행했을 때만 기록 (공유 창을 닫으면 기록 안 함)
+      const lp = smsLogSave(ctx, "[이미지 공유 · " + tag + "] " + text, "기타", true);   // 공유 창을 끝까지 진행했을 때만 기록 (공유 창을 닫으면 기록 안 함)
       if (!_cs) return;
       _cs.sent.add(i); csRefresh();
       const more = csNext() !== undefined;
@@ -3542,7 +3598,7 @@ $("custForm").onsubmit = async e => {
 };
 
 // ===== 설정 확장: 로그인 · 프린터 · 라벨 리스트 · 백업 · 버전 · 초기화 =====
-const APP_VERSION = "v12.224";   // ← 파일을 수정할 때마다 이 숫자를 올립니다 (자동 업데이트가 이 값을 비교)
+const APP_VERSION = "v12.225";   // ← 파일을 수정할 때마다 이 숫자를 올립니다 (자동 업데이트가 이 값을 비교)
 function lsGet(k, d){ try { return JSON.parse(localStorage.getItem(k)) ?? d; } catch { return d; } }
 function lsSet(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch {} }
 // 원격 전송 상태 · 기기 복사 · 외부 알림 · 로그인 화면 동작은 파일 맨 위 [원격 구간]에 있습니다 (로컬일 때는 [로컬 구간]의 기본 동작)
@@ -3617,7 +3673,7 @@ async function backup(){
   try {
     const f = await makeBackup(m);
     saveFile(f); m.className = "msg ok";
-    m.textContent = `${f.name} 저장 완료 (고객 ${customers.length}명, 일정 ${bkSchedN}건, 분류 이름 ${Object.keys(gradeMap()).length}개, 내 정보${curSettings().sender.name || curSettings().sender.addr ? " 포함" : "(비어 있음)"}, 명함 ${curSettings().card.img ? "포함" : "없음"}, 라벨 설정 포함)`;
+    m.textContent = `${f.name} 저장 완료 (고객 ${customers.length}명, 일정 ${bkSchedN}건, 분류 이름 ${Object.keys(gradeMap()).length}개, 내 정보${curSettings().sender.name || curSettings().sender.addr ? " 포함" : "(비어 있음)"}, 이미지 ${IMG_KINDS.filter(x => curSettings().card[x.k]).length}장, 라벨 설정 포함)`;
     if (bkSchedWarn) { m.className = "msg err"; m.textContent += "\n⚠ " + bkSchedWarn; }
   } catch (e) { if (e.name !== "AbortError") { m.className = "msg err"; m.textContent = "백업 실패: " + e.message; } }
 }
@@ -4106,7 +4162,7 @@ async function xlApply(P, m){
     ...P.sUpd.map(x => ({ t: "update", ref: schedDoc(x.id), d: { ...x.patch, updatedAt: serverTimestamp() } }))], 400, "일정 저장");
   await batches(P.rAdd.map(d => ({ t: "set", ref: doc(histCol()), d })), 20, "라벨 작성 기록 저장");
   if (P.grades || P.sender || P.label) {
-    const st0 = curSettings(), next = { sender: P.sender || st0.sender, label: P.label || st0.label, grades: P.grades ? mergeGrades(P.grades) : st0.grades, gcol: st0.gcol };
+    const st0 = curSettings(), next = { sender: P.sender || st0.sender, label: P.label || st0.label, grades: P.grades ? mergeGrades(P.grades) : st0.grades, gcol: st0.gcol, card: st0.card };
     m.textContent = "설정 저장 중..."; await setDoc(doc(db, "users", uid), next); settings = next; fillSettings();
   }
   m.textContent = "화면 새로고침 중..."; await loadList();
@@ -4544,7 +4600,7 @@ $("abTplBtn").onclick = () => abTemplate();
 // 초기화
 $("wipeBtn").onclick = async () => {
   const m = $("rstMsg"); m.className = "msg err";
-  if (!confirm(`고객 ${customers.length}명, 모든 기록, 일정, 라벨 작성 기록이 삭제되고 내 정보(이름·주소)·명함·라벨 설정·분류 이름도 모두 처음 상태로 돌아가며 되돌릴 수 없습니다.\n먼저 '전체 백업 받기'를 하세요(백업에는 내 정보도 들어 있습니다).\n\n초기화 하시겠습니까?`)) return;
+  if (!confirm(`고객 ${customers.length}명, 모든 기록, 일정, 라벨 작성 기록이 삭제되고 내 정보(이름·주소)·이미지(명함·사업자등록증·통장)·라벨 설정·분류 이름도 모두 처음 상태로 돌아가며 되돌릴 수 없습니다.\n먼저 '전체 백업 받기'를 하세요(백업에는 내 정보도 들어 있습니다).\n\n초기화 하시겠습니까?`)) return;
   let step = "고객 기록";
   try {
     for (let i = 0; i < customers.length; i++) {
@@ -4557,11 +4613,11 @@ $("wipeBtn").onclick = async () => {
     const hs = await getDocs(histCol()); for (let j = 0; j < hs.docs.length; j += 400) { const b = writeBatch(db); hs.docs.slice(j, j + 400).forEach(d => b.delete(d.ref)); await b.commit(); }
     step = "일정";
     const ss = await getDocs(schedCol()); for (let j = 0; j < ss.docs.length; j += 400) { const b = writeBatch(db); ss.docs.slice(j, j + 400).forEach(d => b.delete(d.ref)); await b.commit(); }
-    step = "내 정보·설정";   // 내 정보·명함·라벨 설정·분류 이름까지 모두 기본값으로
+    step = "내 정보·설정";   // 내 정보·이미지·라벨 설정·분류 이름까지 모두 기본값으로
     const nextSet = mergeSettings({});
     await setDoc(doc(db, "users", auth.currentUser.uid), nextSet); settings = nextSet; gradeFilter = ""; fillSettings();
     schedList = []; schedErr = ""; schEditId = null; calIdx = null; calOld = null; calClearSaved(); resetSchedForm();
-    m.className = "msg ok"; m.textContent = "고객·기록·일정과 내 정보·명함·라벨 설정·분류 이름까지 모두 초기화했습니다."; await loadList(); renderCal(); renderDaySched();
+    m.className = "msg ok"; m.textContent = "고객·기록·일정과 내 정보·이미지·라벨 설정·분류 이름까지 모두 초기화했습니다."; await loadList(); renderCal(); renderDaySched();
   } catch (e) {
     if (/terminated/i.test(e.message || "")) {   // 파이어베이스 연결이 끊긴 경우 (아이폰이 앱을 잠시 멈추면 발생): 새로고침하면 복구되고, 이미 삭제된 고객은 건너뛰며 이어서 진행됨
       m.textContent = `연결이 끊겨 초기화가 중단되었습니다 (${step} 단계). 화면을 새로고침한 뒤 '모든 데이터 초기화'를 다시 눌러 주세요. 이미 삭제된 고객은 건너뛰고 이어서 삭제합니다.`;
