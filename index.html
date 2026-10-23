@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- 2026-10-23 12:21 KST | 수정: 앱 버전 v12.227, 달력 일정에 "끝나는 날짜(선택)" 추가 - 기간 일정(예: 10/23~10/30)은 기간 안의 모든 날짜 칸·일정 목록에 표시(몇 일째인지 함께), 고객 연결 기록은 첫날에 기간을 적어 1건 + 끝나는 날에 1건을 남기고 수정·삭제·연결 해제 때 함께 처리, 수정은 중간 날짜에서 눌러도 시작일 유지, 백업·복원에 끝나는 날짜 포함 (이전 수정: 2026-10-23 10:08 KST | 수정: 앱 버전 v12.226, 달력 일정 추가의 고객 연결을 여러 명 선택 가능하게 변경(검색해서 고를 때마다 목록에 추가, 줄마다 연결 해제·전체 해제, 이미 고른 고객은 검색 결과에서 제외, 일정 수정 때 직접 고른 고객 전부 불러옴) (이전 수정: 2026-10-22 KST | 수정: 앱 버전 v12.225, 명함전송을 이미지전송으로 바꾸고 설정>내 정보에 명함·사업자등록증·통장 이미지를 저장(한 문서에 같이 저장하므로 한 장 약 300KB 이하로 자동 압축), 보내기 창에서 3개를 복수 선택해 공유 창으로 한 번에 보냄(문자 바로 보내기는 한 장일 때만), 엑셀 가져오기가 설정을 저장할 때 이미지가 지워지던 부분 보완 (이전 수정: 2026-10-22 KST | 수정: 앱 버전 v12.224, 에이닷 통화 요약으로 저장하는 상담 기록에서 첫 줄 "통화 요약 (에이닷) · 시각 · 통화시간" 표시를 없애고 정리 내용만 기록 (이전 수정: 2026-10-22 KST | 수정: 앱 버전 v12.223, 통화에서 추가하는 일정 내용에서 [통화일정] 표시를 없애고 "회사 이름 - 내용" 형태로 표시 (이전 수정: 2026-10-22 KST | 수정: 앱 버전 v12.222, 에이닷 통화 기록을 앱에서 삭제한 뒤 같은 통화를 다시 가져오면 언제나 새 기록으로 저장하고 일정 확인 창도 다시 띄움 - 이전에 추가한 같은 날짜 일정이 달력에 남아 있으면 체크 해제 + 안내 문구로 표시해 중복을 막음 (이전 수정: 2026-10-22 KST | 수정: 앱 버전 v12.221, 에이닷 통화 요약의 일정 추가 확인 창을 이미 저장된 통화(기록은 건너뛰는 경우)에서도 띄우도록 변경 - 이전 버전에서 가져온 통화 파일을 다시 가져와도 날짜 일정을 추가할 수 있음 (이전 수정: 2026-10-22 KST | 수정: 앱 버전 v12.220, 에이닷 통화 요약 속 날짜 표현(내일·모레·다음 주 월요일·10월 30일·3일 후 등)을 통화 날짜 기준으로 계산해 달력 일정으로 추가 - 저장 전에 찾은 일정을 보여 주고 체크·날짜·시간·내용을 고쳐서 추가하며, 같은 통화의 같은 일정은 다시 묻지 않음 (이전 수정: 2026-10-22 KST | 수정: 앱 버전 v12.219, 달력 상담 기록 색인(새로고침 포함)을 고객 300명을 한 명씩 읽던 방식에서 모든 고객의 기록을 서버에서 한 번에 읽는 방식(collectionGroup)으로 변경해 속도 개선 - 파이어베이스 색인·규칙이 막혀 있으면 자동으로 예전 방식(고객별 읽기)으로 진행하고 새로고침 버튼에 '완료·느림' 표시, 새로고침 때 일정 읽기를 고객 목록 읽기와 동시에 시작 (이전 수정: 2026-10-22 KST | 수정: 앱 버전 v12.218, 상단 메뉴를 달력·목록·신규등록·새로고침·설정 5칸으로 변경하고 새로고침 버튼 추가(누르면 보던 화면은 그대로 두고 고객 목록·달력 상담 기록 색인·일정을 다시 읽어 바로 반영, 고객 상세 화면이면 그 고객의 기록도 다시 읽음, 에이닷으로 저장한 기록도 달력에 바로 표시)))))))))) -->
+<!-- 2026-10-23 12:32 KST | 수정: 기간 일정은 달력 칸에 첫날과 끝나는 날에만 일정으로 표시하고(건수·날짜별 목록 포함) 그 사이 날짜는 칸 아래의 선으로 이어서 표시(첫날 가운데→끝나는 날 가운데, 겹치는 기간은 줄을 나눠 최대 4줄, 월간·주간 보기 모두), 앱 버전 v12.228 (이전 수정: 2026-10-23 12:21 KST | 수정: 앱 버전 v12.227, 달력 일정에 "끝나는 날짜(선택)" 추가 - 기간 일정(예: 10/23~10/30)은 기간 안의 모든 날짜 칸·일정 목록에 표시(몇 일째인지 함께), 고객 연결 기록은 첫날에 기간을 적어 1건 + 끝나는 날에 1건을 남기고 수정·삭제·연결 해제 때 함께 처리, 수정은 중간 날짜에서 눌러도 시작일 유지, 백업·복원에 끝나는 날짜 포함 (이전 수정: 2026-10-23 10:08 KST | 수정: 앱 버전 v12.226, 달력 일정 추가의 고객 연결을 여러 명 선택 가능하게 변경(검색해서 고를 때마다 목록에 추가, 줄마다 연결 해제·전체 해제, 이미 고른 고객은 검색 결과에서 제외, 일정 수정 때 직접 고른 고객 전부 불러옴) (이전 수정: 2026-10-22 KST | 수정: 앱 버전 v12.225, 명함전송을 이미지전송으로 바꾸고 설정>내 정보에 명함·사업자등록증·통장 이미지를 저장(한 문서에 같이 저장하므로 한 장 약 300KB 이하로 자동 압축), 보내기 창에서 3개를 복수 선택해 공유 창으로 한 번에 보냄(문자 바로 보내기는 한 장일 때만), 엑셀 가져오기가 설정을 저장할 때 이미지가 지워지던 부분 보완 (이전 수정: 2026-10-22 KST | 수정: 앱 버전 v12.224, 에이닷 통화 요약으로 저장하는 상담 기록에서 첫 줄 "통화 요약 (에이닷) · 시각 · 통화시간" 표시를 없애고 정리 내용만 기록 (이전 수정: 2026-10-22 KST | 수정: 앱 버전 v12.223, 통화에서 추가하는 일정 내용에서 [통화일정] 표시를 없애고 "회사 이름 - 내용" 형태로 표시 (이전 수정: 2026-10-22 KST | 수정: 앱 버전 v12.222, 에이닷 통화 기록을 앱에서 삭제한 뒤 같은 통화를 다시 가져오면 언제나 새 기록으로 저장하고 일정 확인 창도 다시 띄움 - 이전에 추가한 같은 날짜 일정이 달력에 남아 있으면 체크 해제 + 안내 문구로 표시해 중복을 막음 (이전 수정: 2026-10-22 KST | 수정: 앱 버전 v12.221, 에이닷 통화 요약의 일정 추가 확인 창을 이미 저장된 통화(기록은 건너뛰는 경우)에서도 띄우도록 변경 - 이전 버전에서 가져온 통화 파일을 다시 가져와도 날짜 일정을 추가할 수 있음 (이전 수정: 2026-10-22 KST | 수정: 앱 버전 v12.220, 에이닷 통화 요약 속 날짜 표현(내일·모레·다음 주 월요일·10월 30일·3일 후 등)을 통화 날짜 기준으로 계산해 달력 일정으로 추가 - 저장 전에 찾은 일정을 보여 주고 체크·날짜·시간·내용을 고쳐서 추가하며, 같은 통화의 같은 일정은 다시 묻지 않음 (이전 수정: 2026-10-22 KST | 수정: 앱 버전 v12.219, 달력 상담 기록 색인(새로고침 포함)을 고객 300명을 한 명씩 읽던 방식에서 모든 고객의 기록을 서버에서 한 번에 읽는 방식(collectionGroup)으로 변경해 속도 개선 - 파이어베이스 색인·규칙이 막혀 있으면 자동으로 예전 방식(고객별 읽기)으로 진행하고 새로고침 버튼에 '완료·느림' 표시, 새로고침 때 일정 읽기를 고객 목록 읽기와 동시에 시작 (이전 수정: 2026-10-22 KST | 수정: 앱 버전 v12.218, 상단 메뉴를 달력·목록·신규등록·새로고침·설정 5칸으로 변경하고 새로고침 버튼 추가(누르면 보던 화면은 그대로 두고 고객 목록·달력 상담 기록 색인·일정을 다시 읽어 바로 반영, 고객 상세 화면이면 그 고객의 기록도 다시 읽음, 에이닷으로 저장한 기록도 달력에 바로 표시))))))))))) -->
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
@@ -272,7 +272,7 @@ window.REMOTE_READY = (async () => {
   .cal .dw{font-size:12px;color:var(--sub);padding:4px 0}
   .cal .dw.su,.cal .d.su{color:#d92d20}.cal .dw.sa,.cal .d.sa{color:#1f5eff}
   .cal .d.hd{color:#d92d20}   /* 공휴일: 토요일이어도 빨간색 */
-  .cal .d{width:100%;margin:0;padding:4px 1px;min-height:58px;border-radius:8px;background:var(--cell);color:var(--text);font-size:14px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:1px;overflow:hidden}
+  .cal .d{width:100%;margin:0;padding:4px 1px;min-height:58px;border-radius:8px;background:var(--cell);color:var(--text);font-size:14px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:1px;overflow:visible;position:relative}
   .cal .d .nm{max-width:100%;font-size:11px;line-height:1.25;font-weight:600;color:var(--main);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .cal .d .more{font-size:10px;line-height:1.2;color:var(--sub)}
   .cal .d .sc{max-width:100%;font-size:10px;line-height:1.25;font-weight:700;color:#e8590c;white-space:nowrap}
@@ -1901,10 +1901,32 @@ function renderCal(){
   const grid = mk("div", "cg" + (wkMode ? " wk" : ""));
   const first = new Date(calY, calM, 1).getDay(), dim = new Date(calY, calM + 1, 0).getDate();
   const todayKey = dkey(calNow);
-  const scMap = {}; (schedList || []).forEach(x => { schEach(x, k => { scMap[k] = (scMap[k] || 0) + 1; }); });   // 날짜별 일정 개수
+  const scMap = {}; (schedList || []).forEach(x => { schEnds(x, k => { scMap[k] = (scMap[k] || 0) + 1; }); });   // 날짜별 일정 개수
+  const lineBy = {};   // 날짜키 → [{ lane(줄 번호), type: s(첫날)/m(중간)/e(끝나는 날), color }] : 기간 일정을 칸 아래쪽 선으로 이어서 그림
+  {
+    const vs = wkMode ? dkey(calWeek) : dkey(new Date(calY, calM, 1 - first)), ve = wkMode ? dkey(addD(calWeek, 6)) : dkey(new Date(calY, calM, 1 - first + Math.ceil((first + dim) / 7) * 7 - 1));
+    const LC = ["#e8590c", "#1c7ed6", "#2f9e44", "#ae3ec9"], laneEnd = [];
+    (schedList || []).filter(x => x.endDate && x.endDate > x.date && x.date <= ve && x.endDate >= vs)
+      .sort((p, q) => p.date.localeCompare(q.date) || q.endDate.localeCompare(p.endDate) || String(p.id).localeCompare(String(q.id)))
+      .forEach(x => {
+        let ln = laneEnd.findIndex(e => e < x.date); if (ln < 0) ln = laneEnd.length; laneEnd[ln] = x.endDate;
+        if (ln >= LC.length) return;   // 한 칸에 4줄까지만 그림
+        let d = keyDate(x.date < vs ? vs : x.date); const last = x.endDate > ve ? ve : x.endDate;
+        for (let n = 0; n < 45; n++) { const k = dkey(d); if (k > last) break; (lineBy[k] = lineBy[k] || []).push({ lane: ln, type: k === x.date ? "s" : k === x.endDate ? "e" : "m", color: LC[ln] }); d = new Date(d.getFullYear(), d.getMonth(), d.getDate() + 1); }
+      });
+  }
+  const drawLines = (b, key, extL, extR, gap) => {   // 칸 아래쪽에 선 그리기: 첫날은 칸 가운데→오른쪽, 중간은 칸 전체(옆 칸 사이 틈까지), 끝나는 날은 왼쪽→칸 가운데
+    const ls = lineBy[key]; if (!ls) return;
+    b.style.paddingBottom = (Math.max(...ls.map(l => l.lane)) * 7 + 12) + "px";   // 선이 글자를 가리지 않게 아래 여백을 둠
+    ls.forEach(l => {
+      const e = document.createElement("span");
+      e.style.cssText = "position:absolute;height:4px;pointer-events:none;background:" + l.color + ";bottom:" + (4 + l.lane * 7) + "px;left:" + (l.type === "s" ? "50%" : extL ? -gap + "px" : "0") + ";right:" + (l.type === "e" ? "50%" : extR ? -gap + "px" : "0") + ";border-radius:" + (l.type === "s" ? "2px 0 0 2px" : l.type === "e" ? "0 2px 2px 0" : "0");
+      b.append(e);
+    });
+  };
   let hl = [], wkN = 0, wkS = 0, wkH = 0;
   if (wkMode) {   // ----- 주간보기: 2줄×4단 8칸 = 일~토 7일 + 주간 합계 (한달 칸 35개 크기를 8칸에 넓게)
-    const schBy = {}; (schedList || []).forEach(x => { schEach(x, k => { (schBy[k] = schBy[k] || []).push(x); }); });
+    const schBy = {}; (schedList || []).forEach(x => { schEnds(x, k => { (schBy[k] = schBy[k] || []).push(x); }); });
     for (let i = 0; i < 7; i++) {
       const d = addD(calWeek, i), dow = d.getDay(), key = dkey(d);
       const names = (calView() && calView()[key]) || [], sch = (schBy[key] || []).slice().sort((x, y) => String(x.time || "99:99").localeCompare(String(y.time || "99:99")));
@@ -1925,6 +1947,7 @@ function renderCal(){
       if (schShow.length > 4) b.append(mk("span", "more", "일정 +" + (schShow.length - 4)));
       namesShow.slice(0, 4).forEach(p => b.append(mk("span", "nm", p.name)));
       if (namesShow.length > 4) b.append(mk("span", "more", "+" + (namesShow.length - 4)));
+      drawLines(b, key, i % 4 > 0, i % 4 < 3 && i < 6, 6);
       b.onclick = () => {
         calSel = key; if (schEditId) resetSchedForm();
         renderCal(); renderDaySched(); $("daySched").scrollIntoView({ behavior: "smooth", block: "nearest" });
@@ -1951,6 +1974,7 @@ function renderCal(){
       if (scMap[key]) b.append(mk("span", "sc", "일정 " + scMap[key]));
       names.slice(0, 2).forEach(p => b.append(mk("span", "nm", p.name)));
       if (names.length > 2) b.append(mk("span", "more", "+" + (names.length - 2)));
+      drawLines(b, key, i % 7 > 0, i % 7 < 6, 3);
       b.onclick = () => {   // 날짜를 누르면 그날 일정 칸이 열림 (그날 상담한 고객 목록은 일정 칸의 버튼으로 이동)
         calSel = key; if (schEditId) resetSchedForm();
         if (d.getMonth() !== calM) { calY = d.getFullYear(); calM = d.getMonth(); }
@@ -1979,12 +2003,8 @@ calSel = dkey(calNow);   // 앱을 열면 오늘 날짜가 선택되어 있음
 const schedCol = () => collection(db, "users", auth.currentUser.uid, "schedules");
 const schedDoc = id => doc(db, "users", auth.currentUser.uid, "schedules", id);
 const mdK = k => Number(k.slice(5, 7)) + "/" + Number(k.slice(8, 10));   // "2026-10-23" → "10/23"
-const schOn = (x, k) => x.date === k || (!!x.endDate && x.endDate > x.date && x.date < k && k <= x.endDate);   // 그 날짜가 일정 기간 안에 있는지 (기간 일정은 첫날~끝나는 날 모두 해당)
-function schEach(x, fn){   // 일정이 걸쳐 있는 날짜(첫날~끝나는 날)마다 fn(날짜키) 호출
-  fn(x.date); if (!x.endDate || x.endDate <= x.date) return;
-  let d = keyDate(x.date); const end = keyDate(x.endDate);
-  for (let n = 0; n < 400; n++) { d = new Date(d.getFullYear(), d.getMonth(), d.getDate() + 1); if (d > end) break; fn(dkey(d)); }
-}
+const schOn = (x, k) => x.date === k || (!!x.endDate && x.endDate > x.date && x.endDate === k);   // 그 날짜에 보일 일정인지 (기간 일정은 첫날과 끝나는 날만, 사이 날짜는 선으로만 표시)
+function schEnds(x, fn){ fn(x.date); if (x.endDate && x.endDate > x.date) fn(x.endDate); }   // 일정이 보일 날짜(하루 일정은 그날, 기간 일정은 첫날·끝나는 날)마다 fn(날짜키) 호출
 const schSort = () => schedList.sort((a, b) => (a.date || "").localeCompare(b.date || "") || (a.time || "").localeCompare(b.time || "") || (a.endTime || "").localeCompare(b.endTime || ""));
 async function schedLoad(){
   if (schedList) return schedList;
@@ -3642,7 +3662,7 @@ $("custForm").onsubmit = async e => {
 };
 
 // ===== 설정 확장: 로그인 · 프린터 · 라벨 리스트 · 백업 · 버전 · 초기화 =====
-const APP_VERSION = "v12.227";   // ← 파일을 수정할 때마다 이 숫자를 올립니다 (자동 업데이트가 이 값을 비교)
+const APP_VERSION = "v12.228";   // ← 파일을 수정할 때마다 이 숫자를 올립니다 (자동 업데이트가 이 값을 비교)
 function lsGet(k, d){ try { return JSON.parse(localStorage.getItem(k)) ?? d; } catch { return d; } }
 function lsSet(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch {} }
 // 원격 전송 상태 · 기기 복사 · 외부 알림 · 로그인 화면 동작은 파일 맨 위 [원격 구간]에 있습니다 (로컬일 때는 [로컬 구간]의 기본 동작)
