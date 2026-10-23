@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- 2026-10-23 16:26 KST | 수정: 앱 버전 v12.232, 일정과 상담 통합: ① 달력 날짜별 화면은 일정 카드 + 어느 일정에도 연결되지 않은 상담 기록을 기록 단위로 카드로 보여 줌(고객이 일정 카드에 붙어 있어도 따로 남긴 상담은 누락 없이 표시), ② 개인·회사 카드의 기록 목록에 그 고객과 관계있는(연결·이름 포함) 달력 일정 중 고객 파일에 기록이 없는 것을 '일정' 태그로 함께 표시(날짜 최신순, 달력에서 보기 버튼) (이전 수정: 2026-10-23 16:18 KST | 수정: 앱 버전 v12.231, 날짜별 화면: 윗줄의 상담 고객 칩을 없애고 그 고객을 해당 일정 카드 안(수정·삭제 줄 오른쪽)에 넣음(일정에 연결된 고객·상담 기록에서 만든 일정의 고객·일정 내용에 이름이 있는 고객), 어느 일정에도 없는 상담은 상담 내용을 카드로 표시(일정 없이 기록된 상담), 선택 줄은 전체(일정+일정 없는 상담) / 일정(실제 일정만) / 상담 고객(고객이 붙은 카드만) (이전 수정: 2026-10-23 16:01 KST | 수정: 앱 버전 v12.230, 날짜별 화면에 [전체 | 일정 N | 상담 고객 N] 선택 줄 추가(고른 보기는 기억함), 상담 고객은 이름 칩으로 보여 주고 누르면 그 고객 화면으로 이동, 기존 '고객 목록에서 모아 보기' 버튼은 상담 고객 영역 안으로 이동, 연결 고객 줄이 숨겨지지 않던 오류 수정 (이전 수정: 2026-10-23 12:57 KST | 수정: 앱 버전 v12.229, 기간 일정 선을 가늘게(4px→2px) 하고 흐리게(투명도 50%) 변경, 줄 간격도 좁힘 (이전 수정: 2026-10-23 12:32 KST | 수정: 기간 일정은 달력 칸에 첫날과 끝나는 날에만 일정으로 표시하고(건수·날짜별 목록 포함) 그 사이 날짜는 칸 아래의 선으로 이어서 표시(첫날 가운데→끝나는 날 가운데, 겹치는 기간은 줄을 나눠 최대 4줄, 월간·주간 보기 모두), 앱 버전 v12.228 (이전 수정: 2026-10-23 12:21 KST | 수정: 앱 버전 v12.227, 달력 일정에 "끝나는 날짜(선택)" 추가 - 기간 일정(예: 10/23~10/30)은 기간 안의 모든 날짜 칸·일정 목록에 표시(몇 일째인지 함께), 고객 연결 기록은 첫날에 기간을 적어 1건 + 끝나는 날에 1건을 남기고 수정·삭제·연결 해제 때 함께 처리, 수정은 중간 날짜에서 눌러도 시작일 유지, 백업·복원에 끝나는 날짜 포함 (이전 수정: 2026-10-23 10:08 KST | 수정: 앱 버전 v12.226, 달력 일정 추가의 고객 연결을 여러 명 선택 가능하게 변경(검색해서 고를 때마다 목록에 추가, 줄마다 연결 해제·전체 해제, 이미 고른 고객은 검색 결과에서 제외, 일정 수정 때 직접 고른 고객 전부 불러옴) (이전 수정: 2026-10-22 KST | 수정: 앱 버전 v12.225, 명함전송을 이미지전송으로 바꾸고 설정>내 정보에 명함·사업자등록증·통장 이미지를 저장(한 문서에 같이 저장하므로 한 장 약 300KB 이하로 자동 압축), 보내기 창에서 3개를 복수 선택해 공유 창으로 한 번에 보냄(문자 바로 보내기는 한 장일 때만), 엑셀 가져오기가 설정을 저장할 때 이미지가 지워지던 부분 보완 (이전 수정: 2026-10-22 KST | 수정: 앱 버전 v12.224, 에이닷 통화 요약으로 저장하는 상담 기록에서 첫 줄 "통화 요약 (에이닷) · 시각 · 통화시간" 표시를 없애고 정리 내용만 기록 (이전 수정: 2026-10-22 KST | 수정: 앱 버전 v12.223, 통화에서 추가하는 일정 내용에서 [통화일정] 표시를 없애고 "회사 이름 - 내용" 형태로 표시 (이전 수정: 2026-10-22 KST | 수정: 앱 버전 v12.222, 에이닷 통화 기록을 앱에서 삭제한 뒤 같은 통화를 다시 가져오면 언제나 새 기록으로 저장하고 일정 확인 창도 다시 띄움 - 이전에 추가한 같은 날짜 일정이 달력에 남아 있으면 체크 해제 + 안내 문구로 표시해 중복을 막음 (이전 수정: 2026-10-22 KST | 수정: 앱 버전 v12.221, 에이닷 통화 요약의 일정 추가 확인 창을 이미 저장된 통화(기록은 건너뛰는 경우)에서도 띄우도록 변경 - 이전 버전에서 가져온 통화 파일을 다시 가져와도 날짜 일정을 추가할 수 있음 (이전 수정: 2026-10-22 KST | 수정: 앱 버전 v12.220, 에이닷 통화 요약 속 날짜 표현(내일·모레·다음 주 월요일·10월 30일·3일 후 등)을 통화 날짜 기준으로 계산해 달력 일정으로 추가 - 저장 전에 찾은 일정을 보여 주고 체크·날짜·시간·내용을 고쳐서 추가하며, 같은 통화의 같은 일정은 다시 묻지 않음 (이전 수정: 2026-10-22 KST | 수정: 앱 버전 v12.219, 달력 상담 기록 색인(새로고침 포함)을 고객 300명을 한 명씩 읽던 방식에서 모든 고객의 기록을 서버에서 한 번에 읽는 방식(collectionGroup)으로 변경해 속도 개선 - 파이어베이스 색인·규칙이 막혀 있으면 자동으로 예전 방식(고객별 읽기)으로 진행하고 새로고침 버튼에 '완료·느림' 표시, 새로고침 때 일정 읽기를 고객 목록 읽기와 동시에 시작 (이전 수정: 2026-10-22 KST | 수정: 앱 버전 v12.218, 상단 메뉴를 달력·목록·신규등록·새로고침·설정 5칸으로 변경하고 새로고침 버튼 추가(누르면 보던 화면은 그대로 두고 고객 목록·달력 상담 기록 색인·일정을 다시 읽어 바로 반영, 고객 상세 화면이면 그 고객의 기록도 다시 읽음, 에이닷으로 저장한 기록도 달력에 바로 표시))))))))))))))) -->
+<!-- 2026-10-23 16:36 KST | 수정: 앱 버전 v12.233, 자동으로 기록된 기록·일정의 글자를 적색으로 표시(자동 = 달력 일정에서 만든 기록·문자/명함 전송 기록·에이닷 가져오기·DM 발송 기록, 상담 기록에서 만든 일정·에이닷 일정), 직접 기록한 것은 기존 색 유지, 목록 위에 색 설명 한 줄 (이전 수정: 2026-10-23 16:26 KST | 수정: 앱 버전 v12.232, 일정과 상담 통합: ① 달력 날짜별 화면은 일정 카드 + 어느 일정에도 연결되지 않은 상담 기록을 기록 단위로 카드로 보여 줌(고객이 일정 카드에 붙어 있어도 따로 남긴 상담은 누락 없이 표시), ② 개인·회사 카드의 기록 목록에 그 고객과 관계있는(연결·이름 포함) 달력 일정 중 고객 파일에 기록이 없는 것을 '일정' 태그로 함께 표시(날짜 최신순, 달력에서 보기 버튼) (이전 수정: 2026-10-23 16:18 KST | 수정: 앱 버전 v12.231, 날짜별 화면: 윗줄의 상담 고객 칩을 없애고 그 고객을 해당 일정 카드 안(수정·삭제 줄 오른쪽)에 넣음(일정에 연결된 고객·상담 기록에서 만든 일정의 고객·일정 내용에 이름이 있는 고객), 어느 일정에도 없는 상담은 상담 내용을 카드로 표시(일정 없이 기록된 상담), 선택 줄은 전체(일정+일정 없는 상담) / 일정(실제 일정만) / 상담 고객(고객이 붙은 카드만) (이전 수정: 2026-10-23 16:01 KST | 수정: 앱 버전 v12.230, 날짜별 화면에 [전체 | 일정 N | 상담 고객 N] 선택 줄 추가(고른 보기는 기억함), 상담 고객은 이름 칩으로 보여 주고 누르면 그 고객 화면으로 이동, 기존 '고객 목록에서 모아 보기' 버튼은 상담 고객 영역 안으로 이동, 연결 고객 줄이 숨겨지지 않던 오류 수정 (이전 수정: 2026-10-23 12:57 KST | 수정: 앱 버전 v12.229, 기간 일정 선을 가늘게(4px→2px) 하고 흐리게(투명도 50%) 변경, 줄 간격도 좁힘 (이전 수정: 2026-10-23 12:32 KST | 수정: 기간 일정은 달력 칸에 첫날과 끝나는 날에만 일정으로 표시하고(건수·날짜별 목록 포함) 그 사이 날짜는 칸 아래의 선으로 이어서 표시(첫날 가운데→끝나는 날 가운데, 겹치는 기간은 줄을 나눠 최대 4줄, 월간·주간 보기 모두), 앱 버전 v12.228 (이전 수정: 2026-10-23 12:21 KST | 수정: 앱 버전 v12.227, 달력 일정에 "끝나는 날짜(선택)" 추가 - 기간 일정(예: 10/23~10/30)은 기간 안의 모든 날짜 칸·일정 목록에 표시(몇 일째인지 함께), 고객 연결 기록은 첫날에 기간을 적어 1건 + 끝나는 날에 1건을 남기고 수정·삭제·연결 해제 때 함께 처리, 수정은 중간 날짜에서 눌러도 시작일 유지, 백업·복원에 끝나는 날짜 포함 (이전 수정: 2026-10-23 10:08 KST | 수정: 앱 버전 v12.226, 달력 일정 추가의 고객 연결을 여러 명 선택 가능하게 변경(검색해서 고를 때마다 목록에 추가, 줄마다 연결 해제·전체 해제, 이미 고른 고객은 검색 결과에서 제외, 일정 수정 때 직접 고른 고객 전부 불러옴) (이전 수정: 2026-10-22 KST | 수정: 앱 버전 v12.225, 명함전송을 이미지전송으로 바꾸고 설정>내 정보에 명함·사업자등록증·통장 이미지를 저장(한 문서에 같이 저장하므로 한 장 약 300KB 이하로 자동 압축), 보내기 창에서 3개를 복수 선택해 공유 창으로 한 번에 보냄(문자 바로 보내기는 한 장일 때만), 엑셀 가져오기가 설정을 저장할 때 이미지가 지워지던 부분 보완 (이전 수정: 2026-10-22 KST | 수정: 앱 버전 v12.224, 에이닷 통화 요약으로 저장하는 상담 기록에서 첫 줄 "통화 요약 (에이닷) · 시각 · 통화시간" 표시를 없애고 정리 내용만 기록 (이전 수정: 2026-10-22 KST | 수정: 앱 버전 v12.223, 통화에서 추가하는 일정 내용에서 [통화일정] 표시를 없애고 "회사 이름 - 내용" 형태로 표시 (이전 수정: 2026-10-22 KST | 수정: 앱 버전 v12.222, 에이닷 통화 기록을 앱에서 삭제한 뒤 같은 통화를 다시 가져오면 언제나 새 기록으로 저장하고 일정 확인 창도 다시 띄움 - 이전에 추가한 같은 날짜 일정이 달력에 남아 있으면 체크 해제 + 안내 문구로 표시해 중복을 막음 (이전 수정: 2026-10-22 KST | 수정: 앱 버전 v12.221, 에이닷 통화 요약의 일정 추가 확인 창을 이미 저장된 통화(기록은 건너뛰는 경우)에서도 띄우도록 변경 - 이전 버전에서 가져온 통화 파일을 다시 가져와도 날짜 일정을 추가할 수 있음 (이전 수정: 2026-10-22 KST | 수정: 앱 버전 v12.220, 에이닷 통화 요약 속 날짜 표현(내일·모레·다음 주 월요일·10월 30일·3일 후 등)을 통화 날짜 기준으로 계산해 달력 일정으로 추가 - 저장 전에 찾은 일정을 보여 주고 체크·날짜·시간·내용을 고쳐서 추가하며, 같은 통화의 같은 일정은 다시 묻지 않음 (이전 수정: 2026-10-22 KST | 수정: 앱 버전 v12.219, 달력 상담 기록 색인(새로고침 포함)을 고객 300명을 한 명씩 읽던 방식에서 모든 고객의 기록을 서버에서 한 번에 읽는 방식(collectionGroup)으로 변경해 속도 개선 - 파이어베이스 색인·규칙이 막혀 있으면 자동으로 예전 방식(고객별 읽기)으로 진행하고 새로고침 버튼에 '완료·느림' 표시, 새로고침 때 일정 읽기를 고객 목록 읽기와 동시에 시작 (이전 수정: 2026-10-22 KST | 수정: 앱 버전 v12.218, 상단 메뉴를 달력·목록·신규등록·새로고침·설정 5칸으로 변경하고 새로고침 버튼 추가(누르면 보던 화면은 그대로 두고 고객 목록·달력 상담 기록 색인·일정을 다시 읽어 바로 반영, 고객 상세 화면이면 그 고객의 기록도 다시 읽음, 에이닷으로 저장한 기록도 달력에 바로 표시)))))))))))))))) -->
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
@@ -302,6 +302,7 @@ window.REMOTE_READY = (async () => {
   .cal .cg.wk .d.wsum b{color:var(--text);font-size:14px}
   .cal .d.today{background:var(--main);color:#fff;font-weight:700}
   .hide{display:none}
+  .auto{color:#dc2626!important}@media (prefers-color-scheme:dark){.auto{color:#f87171!important}}   /* 자동으로 기록된 기록·일정의 글자 색(적색) */
   #dsSeg:not(.hide){display:flex}#dsLinkChip:not(.hide){display:flex;flex-direction:column;gap:6px}   /* 일정/상담 고객 선택 줄, 연결 고객 줄: 인라인 display를 쓰면 .hide가 안 먹으므로 규칙으로 지정 */
   mark{background:#ffd54a;color:#1d2330;border-radius:2px;padding:0 1px}
   /* 모바일 좌우 밀림 방지: 가로 스크롤을 막고, 띄어쓰기 없는 긴 글(이메일·주소·숫자)은 줄을 바꿔서 보여줌 */
@@ -2073,7 +2074,7 @@ function renderDaySched(){
       const nth = Math.round((keyDate(calSel) - keyDate(x.date)) / 86400000) + 1;
       rb.textContent = "📅 " + mdK(x.date) + " ~ " + mdK(x.endDate) + (calSel === x.date ? " (첫날)" : calSel === x.endDate ? " (마지막 날)" : " (" + nth + "일째)"); h.append(rb);
     }
-    const p = document.createElement("p"); p.textContent = x.content;   // textContent: 입력값이 코드로 실행되지 않게
+    const p = document.createElement("p"); p.textContent = x.content; if (isAutoSched(x)) p.classList.add("auto");   // textContent: 입력값이 코드로 실행되지 않게
     const eb = document.createElement("button"); eb.className = "mini gray"; eb.textContent = "수정";
     eb.onclick = () => {
       schEditId = x.id; schEditDate = x.date; $("dsEndDate").value = x.endDate || ""; $("dsTime").value = x.time || ""; $("dsEndTime").value = x.endTime || ""; $("dsContent").value = x.content; setSchLinks((x.links || []).filter(l => l.manual).map(m => ({ cid: m.cid, pid: m.pid || "", pname: m.pname || "", label: linkLabelOf(m) })));
@@ -2101,11 +2102,12 @@ function renderDaySched(){
       el.append(row); }
     list.append(el);
   });
+  addLegend(list);
   const sel = calSel;
   const mkLogCard = (e, lg) => {   // 일정에 없는 상담 기록: 상담 내용을 일정 카드처럼 보여 줌
     const el = document.createElement("div"); el.className = "log";
     const lb = document.createElement("div"); lb.style.cssText = "font-size:13px;color:var(--sub,#667);margin:0 0 4px"; lb.textContent = "일정 없이 기록된 " + (sel > today() ? "예정" : "상담");
-    const p = document.createElement("p"); p.textContent = String(lg.content || "").trim() || "(내용 없음)";
+    const p = document.createElement("p"); p.textContent = String(lg.content || "").trim() || "(내용 없음)"; if (isAutoLog(lg)) p.classList.add("auto");
     const w = document.createElement("div"); w.style.cssText = "display:flex;flex-wrap:wrap;justify-content:flex-end";
     w.append(mkChip(e, e.name + (lg.pname ? " · " + lg.pname : ""), lg.pid || (e.pids && e.pids.length === 1 ? e.pids[0] : ""))); el.append(lb, p, w); return el;
   };
@@ -2117,7 +2119,7 @@ function renderDaySched(){
     Promise.all(names.map(e => dsLoadLogs(e.id, sel).then(logs => ({ e, logs: logs.filter(lg => !repr(lg)) })))).then(rs => {
       if (!wait.isConnected || calSel !== sel) return;
       rs.forEach(({ e, logs }) => logs.forEach(lg => list.insertBefore(mkLogCard(e, lg), wait)));
-      wait.remove();
+      wait.remove(); addLegend(list);
       if (!list.children.length) note(dsView === "cust" ? "이 날 상담한 고객이 없습니다." : "이 날 등록된 일정이 없습니다.");
     });
   }
@@ -3521,6 +3523,18 @@ $("delCustBtn").onclick = async () => {   // 삭제: 확인 후 이 회사(또�
   finally { btn.disabled = false; btn.textContent = delLabel(c); }
 };
 
+function isAutoLog(l){   // 자동으로 남은 기록: 달력 일정에서 만들어진 기록(fromSched) · 앱에서 보낸 문자/명함 기록(문자전달, sms…) · 에이닷 통화 가져오기(aida…) · DM 발송 기록. 직접 적은 기록은 해당 없음
+  return !!(l && (l.fromSched || l.type === "DM 발송" || l.method === "문자전달" || /^(aida|sms)/.test(l.id || "")));
+}
+function isAutoSched(x){   // 자동으로 생긴 일정: 상담 기록·문자/명함 기록에서 만들어진 일정(custId·logId) · 에이닷 가져오기(aidaId). 달력에서 직접 적은 일정은 해당 없음
+  return !!(x && (x.custId || x.logId || x.aidaId));
+}
+function addLegend(box){   // 목록 맨 위에 색 설명 한 줄 (적색 글자가 하나라도 있을 때만)
+  const old = box.querySelector(":scope > .autoLegend"); if (old) old.remove();
+  if (!box.querySelector(".auto")) return;
+  const lg = document.createElement("div"); lg.className = "autoLegend"; lg.style.cssText = "font-size:12px;color:var(--sub,#667);margin:0 0 6px";
+  const r = document.createElement("span"); r.className = "auto"; r.textContent = "빨간 글자"; lg.append(r, " = 자동으로 기록된 것 · 그 외 = 직접 기록한 것"); box.prepend(lg);
+}
 const isPlanned = l => !!l.date && !l.dateApprox && l.date > today();   // 오늘보다 뒤 날짜의 기록 = 예정
 const CONSULT_KINDS = ["방문상담", "전화상담", "화상상담", "메일상담", "문자전달", "카카오톡전달", "우편발송", "기타"];   // 상담 기록의 구분 (기록의 method 칸에 저장)
 function syncType(){
@@ -3579,7 +3593,7 @@ function renderLogSummary(box){   // 고객 정보 아래 '상담 요약': 상�
     const k = document.createElement("span"); k.className = "k"; k.textContent = l.method || "";
     const pre = (!curPid && l.pname) ? `[${l.pname}] ` : "";   // 회사 화면에서는 어느 개인의 기록인지 표시
     const first = pre + (String(l.content || "").split(/\r?\n/).map(x => x.trim()).find(Boolean) || "");
-    const t = document.createElement("span"); t.className = "tx"; t.textContent = first;   // textContent: 입력값이 코드로 실행되지 않게
+    const t = document.createElement("span"); t.className = "tx"; t.textContent = first; if (isAutoLog(l)) t.classList.add("auto");   // textContent: 입력값이 코드로 실행되지 않게
     el.append(d); if (l.method) el.append(k); el.append(t);
     el.onclick = () => {   // 누르면 이 기록의 전체 내용을 펼치고, 다시 누르면 접음
       const open = el.classList.toggle("open"); t.textContent = open ? pre + String(l.content || "") : first;
@@ -3605,7 +3619,7 @@ function mkSchEntry(x){   // 일정을 상담 기록과 같은 목록에 보여 
   const d = document.createElement("b"); d.textContent = x.date + (x.endDate && x.endDate > x.date ? " ~ " + x.endDate : "");
   const tg = document.createElement("span"); tg.className = "tag"; tg.textContent = "일정" + (timeRange(x) ? " · " + timeRange(x) : "") + (x.date > today() ? " · 예정" : ""); tg.style.cssText = "background:#dbeafe;color:#1e40af";
   h.append(d, tg);
-  const p = document.createElement("p"); p.textContent = x.content;
+  const p = document.createElement("p"); p.textContent = x.content; if (isAutoSched(x)) p.classList.add("auto");
   const go = document.createElement("button"); go.className = "mini gray"; go.textContent = "달력에서 보기"; go.onclick = () => gotoCalDate(x.date);
   el.append(h, p, go); return el;
 }
@@ -3625,7 +3639,7 @@ function renderLogs(){
     if (isPlanned(l)) t.style.cssText = "background:#ffedd5;color:#9a3412";
     h.append(d, t);
     if (!curPid && l.pname) { const pt = document.createElement("span"); pt.className = "tag"; pt.textContent = "개인 · " + l.pname; h.append(pt); }
-    const p = document.createElement("p"); p.textContent = l.content;   // textContent: 입력값이 코드로 실행되지 않게
+    const p = document.createElement("p"); p.textContent = l.content; if (isAutoLog(l)) p.classList.add("auto");   // textContent: 입력값이 코드로 실행되지 않게
     const eb = document.createElement("button"); eb.className = "mini gray"; eb.textContent = "수정";
     eb.onclick = () => {
       editingLogId = l.id; $("logDate").value = l.date; $("logType").value = l.type; syncType();
@@ -3641,6 +3655,7 @@ function renderLogs(){
     };
     el.append(h, p, eb, db_); box.append(el);
   });
+  addLegend(box);
 }
 $("logForm").onsubmit = async e => {
   e.preventDefault();
@@ -3747,7 +3762,7 @@ $("custForm").onsubmit = async e => {
 };
 
 // ===== 설정 확장: 로그인 · 프린터 · 라벨 리스트 · 백업 · 버전 · 초기화 =====
-const APP_VERSION = "v12.232";   // ← 파일을 수정할 때마다 이 숫자를 올립니다 (자동 업데이트가 이 값을 비교)
+const APP_VERSION = "v12.233";   // ← 파일을 수정할 때마다 이 숫자를 올립니다 (자동 업데이트가 이 값을 비교)
 function lsGet(k, d){ try { return JSON.parse(localStorage.getItem(k)) ?? d; } catch { return d; } }
 function lsSet(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch {} }
 // 원격 전송 상태 · 기기 복사 · 외부 알림 · 로그인 화면 동작은 파일 맨 위 [원격 구간]에 있습니다 (로컬일 때는 [로컬 구간]의 기본 동작)
