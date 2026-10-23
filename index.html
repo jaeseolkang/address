@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- 2026-10-23 10:08 KST | 수정: 앱 버전 v12.226, 달력 일정 추가의 고객 연결을 여러 명 선택 가능하게 변경(검색해서 고를 때마다 목록에 추가, 줄마다 연결 해제·전체 해제, 이미 고른 고객은 검색 결과에서 제외, 일정 수정 때 직접 고른 고객 전부 불러옴) (이전 수정: 2026-10-22 KST | 수정: 앱 버전 v12.225, 명함전송을 이미지전송으로 바꾸고 설정>내 정보에 명함·사업자등록증·통장 이미지를 저장(한 문서에 같이 저장하므로 한 장 약 300KB 이하로 자동 압축), 보내기 창에서 3개를 복수 선택해 공유 창으로 한 번에 보냄(문자 바로 보내기는 한 장일 때만), 엑셀 가져오기가 설정을 저장할 때 이미지가 지워지던 부분 보완 (이전 수정: 2026-10-22 KST | 수정: 앱 버전 v12.224, 에이닷 통화 요약으로 저장하는 상담 기록에서 첫 줄 "통화 요약 (에이닷) · 시각 · 통화시간" 표시를 없애고 정리 내용만 기록 (이전 수정: 2026-10-22 KST | 수정: 앱 버전 v12.223, 통화에서 추가하는 일정 내용에서 [통화일정] 표시를 없애고 "회사 이름 - 내용" 형태로 표시 (이전 수정: 2026-10-22 KST | 수정: 앱 버전 v12.222, 에이닷 통화 기록을 앱에서 삭제한 뒤 같은 통화를 다시 가져오면 언제나 새 기록으로 저장하고 일정 확인 창도 다시 띄움 - 이전에 추가한 같은 날짜 일정이 달력에 남아 있으면 체크 해제 + 안내 문구로 표시해 중복을 막음 (이전 수정: 2026-10-22 KST | 수정: 앱 버전 v12.221, 에이닷 통화 요약의 일정 추가 확인 창을 이미 저장된 통화(기록은 건너뛰는 경우)에서도 띄우도록 변경 - 이전 버전에서 가져온 통화 파일을 다시 가져와도 날짜 일정을 추가할 수 있음 (이전 수정: 2026-10-22 KST | 수정: 앱 버전 v12.220, 에이닷 통화 요약 속 날짜 표현(내일·모레·다음 주 월요일·10월 30일·3일 후 등)을 통화 날짜 기준으로 계산해 달력 일정으로 추가 - 저장 전에 찾은 일정을 보여 주고 체크·날짜·시간·내용을 고쳐서 추가하며, 같은 통화의 같은 일정은 다시 묻지 않음 (이전 수정: 2026-10-22 KST | 수정: 앱 버전 v12.219, 달력 상담 기록 색인(새로고침 포함)을 고객 300명을 한 명씩 읽던 방식에서 모든 고객의 기록을 서버에서 한 번에 읽는 방식(collectionGroup)으로 변경해 속도 개선 - 파이어베이스 색인·규칙이 막혀 있으면 자동으로 예전 방식(고객별 읽기)으로 진행하고 새로고침 버튼에 '완료·느림' 표시, 새로고침 때 일정 읽기를 고객 목록 읽기와 동시에 시작 (이전 수정: 2026-10-22 KST | 수정: 앱 버전 v12.218, 상단 메뉴를 달력·목록·신규등록·새로고침·설정 5칸으로 변경하고 새로고침 버튼 추가(누르면 보던 화면은 그대로 두고 고객 목록·달력 상담 기록 색인·일정을 다시 읽어 바로 반영, 고객 상세 화면이면 그 고객의 기록도 다시 읽음, 에이닷으로 저장한 기록도 달력에 바로 표시)))))))) -->
+<!-- 2026-10-23 12:21 KST | 수정: 앱 버전 v12.227, 달력 일정에 "끝나는 날짜(선택)" 추가 - 기간 일정(예: 10/23~10/30)은 기간 안의 모든 날짜 칸·일정 목록에 표시(몇 일째인지 함께), 고객 연결 기록은 첫날에 기간을 적어 1건 + 끝나는 날에 1건을 남기고 수정·삭제·연결 해제 때 함께 처리, 수정은 중간 날짜에서 눌러도 시작일 유지, 백업·복원에 끝나는 날짜 포함 (이전 수정: 2026-10-23 10:08 KST | 수정: 앱 버전 v12.226, 달력 일정 추가의 고객 연결을 여러 명 선택 가능하게 변경(검색해서 고를 때마다 목록에 추가, 줄마다 연결 해제·전체 해제, 이미 고른 고객은 검색 결과에서 제외, 일정 수정 때 직접 고른 고객 전부 불러옴) (이전 수정: 2026-10-22 KST | 수정: 앱 버전 v12.225, 명함전송을 이미지전송으로 바꾸고 설정>내 정보에 명함·사업자등록증·통장 이미지를 저장(한 문서에 같이 저장하므로 한 장 약 300KB 이하로 자동 압축), 보내기 창에서 3개를 복수 선택해 공유 창으로 한 번에 보냄(문자 바로 보내기는 한 장일 때만), 엑셀 가져오기가 설정을 저장할 때 이미지가 지워지던 부분 보완 (이전 수정: 2026-10-22 KST | 수정: 앱 버전 v12.224, 에이닷 통화 요약으로 저장하는 상담 기록에서 첫 줄 "통화 요약 (에이닷) · 시각 · 통화시간" 표시를 없애고 정리 내용만 기록 (이전 수정: 2026-10-22 KST | 수정: 앱 버전 v12.223, 통화에서 추가하는 일정 내용에서 [통화일정] 표시를 없애고 "회사 이름 - 내용" 형태로 표시 (이전 수정: 2026-10-22 KST | 수정: 앱 버전 v12.222, 에이닷 통화 기록을 앱에서 삭제한 뒤 같은 통화를 다시 가져오면 언제나 새 기록으로 저장하고 일정 확인 창도 다시 띄움 - 이전에 추가한 같은 날짜 일정이 달력에 남아 있으면 체크 해제 + 안내 문구로 표시해 중복을 막음 (이전 수정: 2026-10-22 KST | 수정: 앱 버전 v12.221, 에이닷 통화 요약의 일정 추가 확인 창을 이미 저장된 통화(기록은 건너뛰는 경우)에서도 띄우도록 변경 - 이전 버전에서 가져온 통화 파일을 다시 가져와도 날짜 일정을 추가할 수 있음 (이전 수정: 2026-10-22 KST | 수정: 앱 버전 v12.220, 에이닷 통화 요약 속 날짜 표현(내일·모레·다음 주 월요일·10월 30일·3일 후 등)을 통화 날짜 기준으로 계산해 달력 일정으로 추가 - 저장 전에 찾은 일정을 보여 주고 체크·날짜·시간·내용을 고쳐서 추가하며, 같은 통화의 같은 일정은 다시 묻지 않음 (이전 수정: 2026-10-22 KST | 수정: 앱 버전 v12.219, 달력 상담 기록 색인(새로고침 포함)을 고객 300명을 한 명씩 읽던 방식에서 모든 고객의 기록을 서버에서 한 번에 읽는 방식(collectionGroup)으로 변경해 속도 개선 - 파이어베이스 색인·규칙이 막혀 있으면 자동으로 예전 방식(고객별 읽기)으로 진행하고 새로고침 버튼에 '완료·느림' 표시, 새로고침 때 일정 읽기를 고객 목록 읽기와 동시에 시작 (이전 수정: 2026-10-22 KST | 수정: 앱 버전 v12.218, 상단 메뉴를 달력·목록·신규등록·새로고침·설정 5칸으로 변경하고 새로고침 버튼 추가(누르면 보던 화면은 그대로 두고 고객 목록·달력 상담 기록 색인·일정을 다시 읽어 바로 반영, 고객 상세 화면이면 그 고객의 기록도 다시 읽음, 에이닷으로 저장한 기록도 달력에 바로 표시)))))))))) -->
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
@@ -590,6 +590,8 @@ window.REMOTE_READY = (async () => {
             <div><label>끝나는 시간 (선택)</label><input id="dsEndTime" type="time"></div>
           </div>
           <button id="dsTimeClr" type="button" class="mini gray" style="margin:8px 0 0">시간 지우기</button>
+          <label style="margin-top:12px">끝나는 날짜 (선택) - 며칠에 걸친 일정일 때만 (비우면 하루 일정)</label>
+          <div style="display:flex;gap:8px;align-items:center"><input id="dsEndDate" type="date" style="flex:1"><button id="dsEndDateClr" type="button" class="mini gray" style="margin:0">지우기</button></div>
           <label>일정 내용 *</label>
           <textarea id="dsContent" rows="3" required></textarea>
           <label style="margin-top:12px">고객 연결 (선택, 여러 명 가능) - 고르면 각 회사·개인 파일에 기록이 남습니다</label>
@@ -1899,10 +1901,10 @@ function renderCal(){
   const grid = mk("div", "cg" + (wkMode ? " wk" : ""));
   const first = new Date(calY, calM, 1).getDay(), dim = new Date(calY, calM + 1, 0).getDate();
   const todayKey = dkey(calNow);
-  const scMap = {}; (schedList || []).forEach(x => { scMap[x.date] = (scMap[x.date] || 0) + 1; });   // 날짜별 일정 개수
+  const scMap = {}; (schedList || []).forEach(x => { schEach(x, k => { scMap[k] = (scMap[k] || 0) + 1; }); });   // 날짜별 일정 개수
   let hl = [], wkN = 0, wkS = 0, wkH = 0;
   if (wkMode) {   // ----- 주간보기: 2줄×4단 8칸 = 일~토 7일 + 주간 합계 (한달 칸 35개 크기를 8칸에 넓게)
-    const schBy = {}; (schedList || []).forEach(x => { (schBy[x.date] = schBy[x.date] || []).push(x); });
+    const schBy = {}; (schedList || []).forEach(x => { schEach(x, k => { (schBy[k] = schBy[k] || []).push(x); }); });
     for (let i = 0; i < 7; i++) {
       const d = addD(calWeek, i), dow = d.getDay(), key = dkey(d);
       const names = (calView() && calView()[key]) || [], sch = (schBy[key] || []).slice().sort((x, y) => String(x.time || "99:99").localeCompare(String(y.time || "99:99")));
@@ -1972,10 +1974,17 @@ function renderCal(){
 // ===== 일정: 달력의 날짜를 누르면 그날 일정을 적고 볼 수 있음 (users/{uid}/schedules 에 저장) =====
 const KDOW = ["일","월","화","수","목","금","토"];
 const dayLabel = key => { const [y, m, d] = key.split("-").map(Number); return `${y}년 ${m}월 ${d}일 (${KDOW[new Date(y, m - 1, d).getDay()]})`; };
-let schedList = null, schedBusy = null, schedErr = "", schEditId = null, schLinks = [];   // schLinks = 일정 입력창에서 직접 고른 연결 고객들 [{cid, pid, pname, label}] (여러 명 가능)
+let schedList = null, schedBusy = null, schedErr = "", schEditId = null, schEditDate = "", schLinks = [];   // schLinks = 일정 입력창에서 직접 고른 연결 고객들 [{cid, pid, pname, label}] (여러 명 가능)
 calSel = dkey(calNow);   // 앱을 열면 오늘 날짜가 선택되어 있음
 const schedCol = () => collection(db, "users", auth.currentUser.uid, "schedules");
 const schedDoc = id => doc(db, "users", auth.currentUser.uid, "schedules", id);
+const mdK = k => Number(k.slice(5, 7)) + "/" + Number(k.slice(8, 10));   // "2026-10-23" → "10/23"
+const schOn = (x, k) => x.date === k || (!!x.endDate && x.endDate > x.date && x.date < k && k <= x.endDate);   // 그 날짜가 일정 기간 안에 있는지 (기간 일정은 첫날~끝나는 날 모두 해당)
+function schEach(x, fn){   // 일정이 걸쳐 있는 날짜(첫날~끝나는 날)마다 fn(날짜키) 호출
+  fn(x.date); if (!x.endDate || x.endDate <= x.date) return;
+  let d = keyDate(x.date); const end = keyDate(x.endDate);
+  for (let n = 0; n < 400; n++) { d = new Date(d.getFullYear(), d.getMonth(), d.getDate() + 1); if (d > end) break; fn(dkey(d)); }
+}
 const schSort = () => schedList.sort((a, b) => (a.date || "").localeCompare(b.date || "") || (a.time || "").localeCompare(b.time || "") || (a.endTime || "").localeCompare(b.endTime || ""));
 async function schedLoad(){
   if (schedList) return schedList;
@@ -1992,7 +2001,7 @@ async function schedLoad(){
   try { return await schedBusy; } finally { schedBusy = null; }
 }
 function resetSchedForm(){
-  schEditId = null; $("dsTime").value = ""; $("dsEndTime").value = ""; $("dsContent").value = "";
+  schEditId = null; schEditDate = ""; $("dsEndDate").value = ""; $("dsTime").value = ""; $("dsEndTime").value = ""; $("dsContent").value = "";
   $("dsFormTitle").textContent = "일정 추가"; $("dsSaveBtn").textContent = "일정 저장";
   $("dsCancelBtn").classList.add("hide"); $("dsMsg").textContent = ""; setSchLinks([]);
 }
@@ -2010,16 +2019,21 @@ function renderDaySched(){
   const list = $("dsList"); list.textContent = "";
   const note = t => { const e = document.createElement("div"); e.style.cssText = "font-size:14px;color:var(--sub)"; e.textContent = t; list.append(e); };
   if (schedList === null) { if (!schedErr) note("불러오는 중..."); return; }
-  const items = schedList.filter(x => x.date === calSel);
+  const items = schedList.filter(x => schOn(x, calSel));
   if (!items.length) { note("이 날 등록된 일정이 없습니다."); return; }
   items.forEach(x => {
     const el = document.createElement("div"); el.className = "log";
     const h = document.createElement("div"); h.className = "h";
     { const tr = timeRange(x); if (tr) { const t = document.createElement("b"); t.textContent = tr; h.append(t); } }   // 시간이 없는 일정은 시간 표시를 하지 않음
+    if (x.endDate && x.endDate > x.date) {   // 기간 일정: 기간과 오늘이 몇 일째인지 표시
+      const rb = document.createElement("span"); rb.style.cssText = "font-size:13px;color:var(--sub,#667);margin-left:6px";
+      const nth = Math.round((keyDate(calSel) - keyDate(x.date)) / 86400000) + 1;
+      rb.textContent = "📅 " + mdK(x.date) + " ~ " + mdK(x.endDate) + (calSel === x.date ? " (첫날)" : calSel === x.endDate ? " (마지막 날)" : " (" + nth + "일째)"); h.append(rb);
+    }
     const p = document.createElement("p"); p.textContent = x.content;   // textContent: 입력값이 코드로 실행되지 않게
     const eb = document.createElement("button"); eb.className = "mini gray"; eb.textContent = "수정";
     eb.onclick = () => {
-      schEditId = x.id; $("dsTime").value = x.time || ""; $("dsEndTime").value = x.endTime || ""; $("dsContent").value = x.content; setSchLinks((x.links || []).filter(l => l.manual).map(m => ({ cid: m.cid, pid: m.pid || "", pname: m.pname || "", label: linkLabelOf(m) })));
+      schEditId = x.id; schEditDate = x.date; $("dsEndDate").value = x.endDate || ""; $("dsTime").value = x.time || ""; $("dsEndTime").value = x.endTime || ""; $("dsContent").value = x.content; setSchLinks((x.links || []).filter(l => l.manual).map(m => ({ cid: m.cid, pid: m.pid || "", pname: m.pname || "", label: linkLabelOf(m) })));
       $("dsFormTitle").textContent = "일정 수정"; $("dsSaveBtn").textContent = "수정 저장";
       $("dsCancelBtn").classList.remove("hide"); $("dsMsg").textContent = "";
       $("dsForm").scrollIntoView({ behavior: "smooth", block: "nearest" });
@@ -2027,10 +2041,10 @@ function renderDaySched(){
     const del = document.createElement("button"); del.className = "mini gray"; del.textContent = "삭제";
     del.onclick = async () => {
       if (!confirm(`${dayLabel(x.date)} ${timeRange(x) ? timeRange(x) + " " : ""}일정을 삭제할까요?`)) return;
-      const ln = x.links || [], delLogs = ln.length ? confirm("이 일정과 연결된 고객 파일의 기록 " + ln.length + "건도 함께 삭제할까요?\n\n[확인] 기록도 삭제\n[취소] 기록은 남기고 일정만 삭제") : false;
+      const ln = x.links || [], nLogs = ln.reduce((n, l) => n + 1 + (l.elid ? 1 : 0), 0), delLogs = ln.length ? confirm("이 일정과 연결된 고객 파일의 기록 " + nLogs + "건도 함께 삭제할까요?\n\n[확인] 기록도 삭제\n[취소] 기록은 남기고 일정만 삭제") : false;
       try {
         await deleteDoc(schedDoc(x.id)); schedList = schedList.filter(y => y.id !== x.id);
-        if (delLogs) for (const l of ln) { try { await deleteDoc(doc(db, "customers", l.cid, "logs", l.lid)); srchIdx = null; calRefreshOne(l.cid); if (cur && cur.id === l.cid) loadLogs(); } catch {} }
+        if (delLogs) for (const l of ln) { try { await deleteDoc(doc(db, "customers", l.cid, "logs", l.lid)); if (l.elid) { try { await deleteDoc(doc(db, "customers", l.cid, "logs", l.elid)); } catch {} } srchIdx = null; calRefreshOne(l.cid); if (cur && cur.id === l.cid) loadLogs(); } catch {} }
         if (schEditId === x.id) resetSchedForm();
         renderCal(); renderDaySched();
       } catch (err) { alert("삭제 실패: " + err.message); }
@@ -2183,8 +2197,11 @@ $("dsLinkQ").addEventListener("input", () => {
     b.onclick = () => addSchLink(o); res.append(b);
   });
 });
-async function syncSchedLogs(schedId, date, content, prev){   // 일정 ↔ 고객 파일 기록 맞추기: 연결 대상(직접 고른 고객 + 일정 글에서 찾은 이름)마다 상담 기록 추가·수정, 빠진 대상의 기록은 삭제. 미래 날짜는 '예정'으로 표시됨
+async function syncSchedLogs(schedId, date, content, prev, endDate){   // 일정 ↔ 고객 파일 기록 맞추기: 연결 대상(직접 고른 고객 + 일정 글에서 찾은 이름)마다 상담 기록 추가·수정, 빠진 대상의 기록은 삭제. 미래 날짜는 '예정'으로 표시됨
   const res = { links: [], added: [], updated: [], removed: [], err: "" }, want = [], prevMap = {};
+  const rng = endDate && endDate > date ? endDate : "";   // 기간 일정이면 끝나는 날짜 (아니면 빈 값 = 하루 일정)
+  const tag = rng ? "[" + mdK(date) + "~" + mdK(rng) + " 기간" : "";
+  const sTxt = rng ? tag + "] " + content : content, eTxt = rng ? tag + " · 마지막 날] " + content : "";   // 첫날 기록엔 기간을 적고, 끝나는 날 기록엔 '마지막 날' 표시
   (prev || []).forEach(l => { prevMap[lnKey(l.cid, l.pid)] = l; });
   const add = (cid, pid, pname, manual) => { if (!want.some(w => lnKey(w.cid, w.pid) === lnKey(cid, pid))) want.push({ cid, pid: pid || "", pname: pname || "", manual: !!manual }); };
   schLinks.forEach(l => add(l.cid, l.pid, l.pname, true));
@@ -2192,22 +2209,32 @@ async function syncSchedLogs(schedId, date, content, prev){   // 일정 ↔ 고�
   const w2 = want.filter(w => w.pid || !want.some(o => o.cid === w.cid && o.pid));   // 같은 회사의 소속 개인이 있으면 회사 단독 기록은 만들지 않음(개인 기록이 회사 기록에도 보임)
   const touched = new Set();
   for (const w of w2) {
-    const old = prevMap[lnKey(w.cid, w.pid)], nm = whoOfLink(w);
+    const old = prevMap[lnKey(w.cid, w.pid)], nm = whoOfLink(w), logRef = id => doc(db, "customers", w.cid, "logs", id), logs = collection(db, "customers", w.cid, "logs");
     try {
-      if (old) {
-        try { await updateDoc(doc(db, "customers", w.cid, "logs", old.lid), { date, content, updatedAt: serverTimestamp() }); res.links.push({ ...w, lid: old.lid }); res.updated.push(nm); touched.add(w.cid); continue; } catch {}   // 기록이 이미 지워졌으면 새로 만듦
-      }
-      const ref = await addDoc(collection(db, "customers", w.cid, "logs"), { ownerUid: auth.currentUser.uid, date, type: "상담", content, method: "", ...(w.pid ? { pid: w.pid, pname: w.pname } : {}), fromSched: schedId, createdAt: serverTimestamp() });
-      res.links.push({ ...w, lid: ref.id }); res.added.push(nm); touched.add(w.cid);
+      let lid = "", upd = false;
+      if (old) { try { await updateDoc(logRef(old.lid), { date, content: sTxt, updatedAt: serverTimestamp() }); lid = old.lid; upd = true; } catch {} }   // 기록이 이미 지워졌으면 새로 만듦
+      const base = { ownerUid: auth.currentUser.uid, type: "상담", method: "", ...(w.pid ? { pid: w.pid, pname: w.pname } : {}), fromSched: schedId };
+      if (!lid) { const ref = await addDoc(logs, { ...base, date, content: sTxt, createdAt: serverTimestamp() }); lid = ref.id; }
+      const lk = { ...w, lid }; res.links.push(lk); (upd ? res.updated : res.added).push(nm); touched.add(w.cid);   // 첫날 기록이 되면 먼저 연결을 남겨 둠 (끝나는 날 기록이 실패해도 중복 기록이 생기지 않게)
+      try {
+        if (rng) {   // 끝나는 날에도 기록을 남김
+          let elid = "";
+          if (old && old.elid) { try { await updateDoc(logRef(old.elid), { date: rng, content: eTxt, updatedAt: serverTimestamp() }); elid = old.elid; } catch {} }
+          if (!elid) { const ref2 = await addDoc(logs, { ...base, date: rng, content: eTxt, schedEnd: true, createdAt: serverTimestamp() }); elid = ref2.id; }
+          lk.elid = elid;
+        } else if (old && old.elid) { try { await deleteDoc(logRef(old.elid)); } catch {} }   // 기간을 없앤 경우 끝나는 날 기록은 지움
+      } catch (e2) { res.err += (res.err ? " / " : "") + nm + "(끝나는 날 기록): " + (e2.message || e2); if (old && old.elid) lk.elid = old.elid; }
     } catch (e) { res.err += (res.err ? " / " : "") + nm + ": " + (e.message || e); }
   }
-  for (const l of (prev || [])) {   // 이번에 빠진 연결: 그 기록 삭제
+  for (const l of (prev || [])) {   // 이번에 빠진 연결: 그 기록(끝나는 날 기록 포함) 삭제
     if (w2.some(w => lnKey(w.cid, w.pid) === lnKey(l.cid, l.pid))) continue;
     try { await deleteDoc(doc(db, "customers", l.cid, "logs", l.lid)); res.removed.push(whoOfLink(l)); touched.add(l.cid); } catch {}
+    if (l.elid) { try { await deleteDoc(doc(db, "customers", l.cid, "logs", l.elid)); touched.add(l.cid); } catch {} }
   }
   srchIdx = null; touched.forEach(cid => { calRefreshOne(cid); if (cur && cur.id === cid) loadLogs(); });
   return res;
 }
+$("dsEndDateClr").onclick = () => { $("dsEndDate").value = ""; };
 $("dsForm").onsubmit = async e => {
   e.preventDefault();
   const btn = $("dsSaveBtn"), msg = $("dsMsg"), content = $("dsContent").value.trim();
@@ -2216,7 +2243,9 @@ $("dsForm").onsubmit = async e => {
   if (en && !st) { msg.className = "msg err"; msg.textContent = "끝나는 시간을 넣으려면 시작 시간도 입력하세요."; return; }
   if (en && en <= st) { msg.className = "msg err"; msg.textContent = "끝나는 시간은 시작 시간보다 늦어야 합니다."; return; }
   btn.disabled = true; msg.className = "msg"; msg.textContent = "저장 중...";
-  const data = { date: calSel, time: st, endTime: en, content }, crt = [];
+  const sdate = (schEditId && schEditDate) || calSel, endDate = $("dsEndDate").value || "";   // 수정할 때는 일정의 원래 시작 날짜를 그대로 씀 (기간 중간 날짜에서 눌러도 시작일이 바뀌지 않게)
+  if (endDate && endDate <= sdate) { msg.className = "msg err"; msg.textContent = "끝나는 날짜는 시작 날짜(" + mdK(sdate) + ")보다 늦어야 합니다."; btn.disabled = false; return; }
+  const data = { date: sdate, endDate, time: st, endTime: en, content }, crt = [];
   try {
     await schedLoad();
     if (schedErr) throw new Error("일정을 불러오지 못한 상태라 저장할 수 없습니다. 보안 규칙을 확인하세요.");
@@ -2231,14 +2260,15 @@ $("dsForm").onsubmit = async e => {
       sid = ref.id; schedList.push({ id: sid, ...data });
       await newFromSched(content, crt);   // 새 일정만: 등록 안 된 #회사·@이름(또는 추정한 이름)을 새로 등록
     }
-    const r = await syncSchedLogs(sid, calSel, content, prev);
+    const r = await syncSchedLogs(sid, sdate, content, prev, endDate);
     if (r.links.length || prev.length) { try { await updateDoc(schedDoc(sid), { links: r.links, updatedAt: serverTimestamp() }); } catch (e) { r.err += (r.err ? " / " : "") + "연결 정보 저장 실패: " + (e.message || e); } }
     const i2 = schedList.findIndex(x => x.id === sid); if (i2 >= 0) schedList[i2] = { ...schedList[i2], links: r.links };
     schSort(); resetSchedForm(); renderCal(); renderDaySched();
-    const kind = isFutureDay(calSel) ? "예정 기록" : "상담 기록", parts = ["저장되었습니다."];
+    const kind = isFutureDay(sdate) ? "예정 기록" : "상담 기록", parts = ["저장되었습니다."];
     if (r.added.length) parts.push("✔ 고객 파일에 " + kind + "을 남겼습니다: " + r.added.join(", "));
     if (r.updated.length) parts.push("✔ 연결된 고객 파일의 기록도 함께 고쳤습니다: " + r.updated.join(", "));
     if (r.removed.length) parts.push("연결이 빠진 고객 파일의 기록은 삭제했습니다: " + r.removed.join(", "));
+    if (endDate && r.links.length) parts.push("📅 기간 일정(" + mdK(sdate) + " ~ " + mdK(endDate) + "): 첫날과 끝나는 날(" + mdK(endDate) + ")에 기록을 남겼습니다.");
     if (crt.length) parts.push("새로 등록(분류 미지정): " + crt.join(", "));
     const dup = schedDupNames(content); if (dup.length) parts.push("⚠ 같은 이름이 여러 고객에 있어 자동 연결을 건너뛴 이름: " + dup.join(", ") + " → '고객 연결'에서 직접 고르세요");
     if (!r.links.length && !r.removed.length) parts.push("ℹ 고객 파일에는 기록하지 않았습니다. 일정에 등록된 회사·이름을 그대로 적거나(2글자 이상), '고객 연결'에서 고객을 고르면 그 파일에 남습니다.");
@@ -3612,7 +3642,7 @@ $("custForm").onsubmit = async e => {
 };
 
 // ===== 설정 확장: 로그인 · 프린터 · 라벨 리스트 · 백업 · 버전 · 초기화 =====
-const APP_VERSION = "v12.226";   // ← 파일을 수정할 때마다 이 숫자를 올립니다 (자동 업데이트가 이 값을 비교)
+const APP_VERSION = "v12.227";   // ← 파일을 수정할 때마다 이 숫자를 올립니다 (자동 업데이트가 이 값을 비교)
 function lsGet(k, d){ try { return JSON.parse(localStorage.getItem(k)) ?? d; } catch { return d; } }
 function lsSet(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch {} }
 // 원격 전송 상태 · 기기 복사 · 외부 알림 · 로그인 화면 동작은 파일 맨 위 [원격 구간]에 있습니다 (로컬일 때는 [로컬 구간]의 기본 동작)
@@ -3675,7 +3705,7 @@ async function makeBackup(m){
   let labelReports = [];
   try { labelReports = (await getDocs(histCol())).docs.map(d => { const x = d.data(); return { ...x, createdAt: x.createdAt?.toDate ? x.createdAt.toDate().toISOString() : "" }; }); } catch {}
   let schedules = []; bkSchedWarn = "";
-  try { schedules = (await getDocs(schedCol())).docs.map(d => { const x = d.data(); return { date: x.date || "", time: x.time || "", endTime: x.endTime || "", content: x.content || "" }; }).filter(x => x.date); }
+  try { schedules = (await getDocs(schedCol())).docs.map(d => { const x = d.data(); return { date: x.date || "", endDate: x.endDate || "", time: x.time || "", endTime: x.endTime || "", content: x.content || "" }; }).filter(x => x.date); }
   catch (e) { bkSchedWarn = "일정을 읽지 못해 이번 백업에서 빠졌습니다 (" + (e.message || e) + "). 보안 규칙의 schedules 허용을 확인하세요."; }
   schedules.sort((a, b) => a.date.localeCompare(b.date) || a.time.localeCompare(b.time)); bkSchedN = schedules.length;
   const data = { app: "ad-customer", version: APP_VERSION, exportedAt: new Date().toISOString(), license: window.AD_LICENSE ? { user: window.AD_LICENSE.email, order: window.AD_LICENSE.order } : undefined, settings: curSettings(), labelReports, schedules, customers: out };
@@ -3719,7 +3749,7 @@ $("bkFile").onchange = async e => {
       const have = new Set(schedList.map(x => x.date + "|" + (x.time || "") + "|" + (x.endTime || "") + "|" + x.content));
       for (const r of d.schedules) {
         const k = r.date + "|" + (r.time || "") + "|" + (r.endTime || "") + "|" + r.content; if (!r.date || !r.content || have.has(k)) continue;
-        const data = { date: r.date, time: r.time || "", endTime: r.endTime || "", content: r.content };
+        const data = { date: r.date, endDate: r.endDate || "", time: r.time || "", endTime: r.endTime || "", content: r.content };
         const ref = await addDoc(schedCol(), { ownerUid: auth.currentUser.uid, ...data, createdAt: serverTimestamp() });
         schedList.push({ id: ref.id, ...data }); have.add(k); nSAdd++;
       }
