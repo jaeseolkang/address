@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- 2026-10-23 16:36 KST | 수정: 앱 버전 v12.233, 자동으로 기록된 기록·일정의 글자를 적색으로 표시(자동 = 달력 일정에서 만든 기록·문자/명함 전송 기록·에이닷 가져오기·DM 발송 기록, 상담 기록에서 만든 일정·에이닷 일정), 직접 기록한 것은 기존 색 유지, 목록 위에 색 설명 한 줄 (이전 수정: 2026-10-23 16:26 KST | 수정: 앱 버전 v12.232, 일정과 상담 통합: ① 달력 날짜별 화면은 일정 카드 + 어느 일정에도 연결되지 않은 상담 기록을 기록 단위로 카드로 보여 줌(고객이 일정 카드에 붙어 있어도 따로 남긴 상담은 누락 없이 표시), ② 개인·회사 카드의 기록 목록에 그 고객과 관계있는(연결·이름 포함) 달력 일정 중 고객 파일에 기록이 없는 것을 '일정' 태그로 함께 표시(날짜 최신순, 달력에서 보기 버튼) (이전 수정: 2026-10-23 16:18 KST | 수정: 앱 버전 v12.231, 날짜별 화면: 윗줄의 상담 고객 칩을 없애고 그 고객을 해당 일정 카드 안(수정·삭제 줄 오른쪽)에 넣음(일정에 연결된 고객·상담 기록에서 만든 일정의 고객·일정 내용에 이름이 있는 고객), 어느 일정에도 없는 상담은 상담 내용을 카드로 표시(일정 없이 기록된 상담), 선택 줄은 전체(일정+일정 없는 상담) / 일정(실제 일정만) / 상담 고객(고객이 붙은 카드만) (이전 수정: 2026-10-23 16:01 KST | 수정: 앱 버전 v12.230, 날짜별 화면에 [전체 | 일정 N | 상담 고객 N] 선택 줄 추가(고른 보기는 기억함), 상담 고객은 이름 칩으로 보여 주고 누르면 그 고객 화면으로 이동, 기존 '고객 목록에서 모아 보기' 버튼은 상담 고객 영역 안으로 이동, 연결 고객 줄이 숨겨지지 않던 오류 수정 (이전 수정: 2026-10-23 12:57 KST | 수정: 앱 버전 v12.229, 기간 일정 선을 가늘게(4px→2px) 하고 흐리게(투명도 50%) 변경, 줄 간격도 좁힘 (이전 수정: 2026-10-23 12:32 KST | 수정: 기간 일정은 달력 칸에 첫날과 끝나는 날에만 일정으로 표시하고(건수·날짜별 목록 포함) 그 사이 날짜는 칸 아래의 선으로 이어서 표시(첫날 가운데→끝나는 날 가운데, 겹치는 기간은 줄을 나눠 최대 4줄, 월간·주간 보기 모두), 앱 버전 v12.228 (이전 수정: 2026-10-23 12:21 KST | 수정: 앱 버전 v12.227, 달력 일정에 "끝나는 날짜(선택)" 추가 - 기간 일정(예: 10/23~10/30)은 기간 안의 모든 날짜 칸·일정 목록에 표시(몇 일째인지 함께), 고객 연결 기록은 첫날에 기간을 적어 1건 + 끝나는 날에 1건을 남기고 수정·삭제·연결 해제 때 함께 처리, 수정은 중간 날짜에서 눌러도 시작일 유지, 백업·복원에 끝나는 날짜 포함 (이전 수정: 2026-10-23 10:08 KST | 수정: 앱 버전 v12.226, 달력 일정 추가의 고객 연결을 여러 명 선택 가능하게 변경(검색해서 고를 때마다 목록에 추가, 줄마다 연결 해제·전체 해제, 이미 고른 고객은 검색 결과에서 제외, 일정 수정 때 직접 고른 고객 전부 불러옴) (이전 수정: 2026-10-22 KST | 수정: 앱 버전 v12.225, 명함전송을 이미지전송으로 바꾸고 설정>내 정보에 명함·사업자등록증·통장 이미지를 저장(한 문서에 같이 저장하므로 한 장 약 300KB 이하로 자동 압축), 보내기 창에서 3개를 복수 선택해 공유 창으로 한 번에 보냄(문자 바로 보내기는 한 장일 때만), 엑셀 가져오기가 설정을 저장할 때 이미지가 지워지던 부분 보완 (이전 수정: 2026-10-22 KST | 수정: 앱 버전 v12.224, 에이닷 통화 요약으로 저장하는 상담 기록에서 첫 줄 "통화 요약 (에이닷) · 시각 · 통화시간" 표시를 없애고 정리 내용만 기록 (이전 수정: 2026-10-22 KST | 수정: 앱 버전 v12.223, 통화에서 추가하는 일정 내용에서 [통화일정] 표시를 없애고 "회사 이름 - 내용" 형태로 표시 (이전 수정: 2026-10-22 KST | 수정: 앱 버전 v12.222, 에이닷 통화 기록을 앱에서 삭제한 뒤 같은 통화를 다시 가져오면 언제나 새 기록으로 저장하고 일정 확인 창도 다시 띄움 - 이전에 추가한 같은 날짜 일정이 달력에 남아 있으면 체크 해제 + 안내 문구로 표시해 중복을 막음 (이전 수정: 2026-10-22 KST | 수정: 앱 버전 v12.221, 에이닷 통화 요약의 일정 추가 확인 창을 이미 저장된 통화(기록은 건너뛰는 경우)에서도 띄우도록 변경 - 이전 버전에서 가져온 통화 파일을 다시 가져와도 날짜 일정을 추가할 수 있음 (이전 수정: 2026-10-22 KST | 수정: 앱 버전 v12.220, 에이닷 통화 요약 속 날짜 표현(내일·모레·다음 주 월요일·10월 30일·3일 후 등)을 통화 날짜 기준으로 계산해 달력 일정으로 추가 - 저장 전에 찾은 일정을 보여 주고 체크·날짜·시간·내용을 고쳐서 추가하며, 같은 통화의 같은 일정은 다시 묻지 않음 (이전 수정: 2026-10-22 KST | 수정: 앱 버전 v12.219, 달력 상담 기록 색인(새로고침 포함)을 고객 300명을 한 명씩 읽던 방식에서 모든 고객의 기록을 서버에서 한 번에 읽는 방식(collectionGroup)으로 변경해 속도 개선 - 파이어베이스 색인·규칙이 막혀 있으면 자동으로 예전 방식(고객별 읽기)으로 진행하고 새로고침 버튼에 '완료·느림' 표시, 새로고침 때 일정 읽기를 고객 목록 읽기와 동시에 시작 (이전 수정: 2026-10-22 KST | 수정: 앱 버전 v12.218, 상단 메뉴를 달력·목록·신규등록·새로고침·설정 5칸으로 변경하고 새로고침 버튼 추가(누르면 보던 화면은 그대로 두고 고객 목록·달력 상담 기록 색인·일정을 다시 읽어 바로 반영, 고객 상세 화면이면 그 고객의 기록도 다시 읽음, 에이닷으로 저장한 기록도 달력에 바로 표시)))))))))))))))) -->
+<!-- 2026-10-27 16:30 KST | 수정: 앱 버전 v12.234, ① 달력 일정에 '완료' 체크란 추가(날짜별 일정 카드에서 체크, 완료한 일정은 흐리게·취소선, 전체 백업/복원에 포함), ② 완료하지 않은 일정 경고: 일정의 끝나는 시간(없으면 시작 시간, 둘 다 없으면 오전 9시)이 지났는데 체크가 안 된 일정을 달력 위 경고 줄·달력 탭 숫자·달력 칸의 ⚠ 로 표시하고, 앱이 열려 있으면 그 시각에 경고 팝업(10분 뒤 다시 알림/닫기)으로 알림, 앱 잠금 중에는 팝업을 띄우지 않음, 직접 적은 일정과 에이닷 일정만 대상(상담 기록·문자/명함 기록에서 자동으로 생긴 일정은 제외), 2026-10-27 이전 일정은 경고 제외, ③ 주간보기 날짜 칸: 일정 내용보다 연결된 회사·개인 이름을 먼저 보여 주고 없으면 일정 내용을 표시 (이전 수정: 2026-10-23 16:36 KST | 수정: 앱 버전 v12.233, 자동으로 기록된 기록·일정의 글자를 적색으로 표시(자동 = 달력 일정에서 만든 기록·문자/명함 전송 기록·에이닷 가져오기·DM 발송 기록, 상담 기록에서 만든 일정·에이닷 일정), 직접 기록한 것은 기존 색 유지, 목록 위에 색 설명 한 줄 (이전 수정: 2026-10-23 16:26 KST | 수정: 앱 버전 v12.232, 일정과 상담 통합: ① 달력 날짜별 화면은 일정 카드 + 어느 일정에도 연결되지 않은 상담 기록을 기록 단위로 카드로 보여 줌(고객이 일정 카드에 붙어 있어도 따로 남긴 상담은 누락 없이 표시), ② 개인·회사 카드의 기록 목록에 그 고객과 관계있는(연결·이름 포함) 달력 일정 중 고객 파일에 기록이 없는 것을 '일정' 태그로 함께 표시(날짜 최신순, 달력에서 보기 버튼) (이전 수정: 2026-10-23 16:18 KST | 수정: 앱 버전 v12.231, 날짜별 화면: 윗줄의 상담 고객 칩을 없애고 그 고객을 해당 일정 카드 안(수정·삭제 줄 오른쪽)에 넣음(일정에 연결된 고객·상담 기록에서 만든 일정의 고객·일정 내용에 이름이 있는 고객), 어느 일정에도 없는 상담은 상담 내용을 카드로 표시(일정 없이 기록된 상담), 선택 줄은 전체(일정+일정 없는 상담) / 일정(실제 일정만) / 상담 고객(고객이 붙은 카드만) (이전 수정: 2026-10-23 16:01 KST | 수정: 앱 버전 v12.230, 날짜별 화면에 [전체 | 일정 N | 상담 고객 N] 선택 줄 추가(고른 보기는 기억함), 상담 고객은 이름 칩으로 보여 주고 누르면 그 고객 화면으로 이동, 기존 '고객 목록에서 모아 보기' 버튼은 상담 고객 영역 안으로 이동, 연결 고객 줄이 숨겨지지 않던 오류 수정 (이전 수정: 2026-10-23 12:57 KST | 수정: 앱 버전 v12.229, 기간 일정 선을 가늘게(4px→2px) 하고 흐리게(투명도 50%) 변경, 줄 간격도 좁힘 (이전 수정: 2026-10-23 12:32 KST | 수정: 기간 일정은 달력 칸에 첫날과 끝나는 날에만 일정으로 표시하고(건수·날짜별 목록 포함) 그 사이 날짜는 칸 아래의 선으로 이어서 표시(첫날 가운데→끝나는 날 가운데, 겹치는 기간은 줄을 나눠 최대 4줄, 월간·주간 보기 모두), 앱 버전 v12.228 (이전 수정: 2026-10-23 12:21 KST | 수정: 앱 버전 v12.227, 달력 일정에 "끝나는 날짜(선택)" 추가 - 기간 일정(예: 10/23~10/30)은 기간 안의 모든 날짜 칸·일정 목록에 표시(몇 일째인지 함께), 고객 연결 기록은 첫날에 기간을 적어 1건 + 끝나는 날에 1건을 남기고 수정·삭제·연결 해제 때 함께 처리, 수정은 중간 날짜에서 눌러도 시작일 유지, 백업·복원에 끝나는 날짜 포함 (이전 수정: 2026-10-23 10:08 KST | 수정: 앱 버전 v12.226, 달력 일정 추가의 고객 연결을 여러 명 선택 가능하게 변경(검색해서 고를 때마다 목록에 추가, 줄마다 연결 해제·전체 해제, 이미 고른 고객은 검색 결과에서 제외, 일정 수정 때 직접 고른 고객 전부 불러옴) (이전 수정: 2026-10-22 KST | 수정: 앱 버전 v12.225, 명함전송을 이미지전송으로 바꾸고 설정>내 정보에 명함·사업자등록증·통장 이미지를 저장(한 문서에 같이 저장하므로 한 장 약 300KB 이하로 자동 압축), 보내기 창에서 3개를 복수 선택해 공유 창으로 한 번에 보냄(문자 바로 보내기는 한 장일 때만), 엑셀 가져오기가 설정을 저장할 때 이미지가 지워지던 부분 보완 (이전 수정: 2026-10-22 KST | 수정: 앱 버전 v12.224, 에이닷 통화 요약으로 저장하는 상담 기록에서 첫 줄 "통화 요약 (에이닷) · 시각 · 통화시간" 표시를 없애고 정리 내용만 기록 (이전 수정: 2026-10-22 KST | 수정: 앱 버전 v12.223, 통화에서 추가하는 일정 내용에서 [통화일정] 표시를 없애고 "회사 이름 - 내용" 형태로 표시 (이전 수정: 2026-10-22 KST | 수정: 앱 버전 v12.222, 에이닷 통화 기록을 앱에서 삭제한 뒤 같은 통화를 다시 가져오면 언제나 새 기록으로 저장하고 일정 확인 창도 다시 띄움 - 이전에 추가한 같은 날짜 일정이 달력에 남아 있으면 체크 해제 + 안내 문구로 표시해 중복을 막음 (이전 수정: 2026-10-22 KST | 수정: 앱 버전 v12.221, 에이닷 통화 요약의 일정 추가 확인 창을 이미 저장된 통화(기록은 건너뛰는 경우)에서도 띄우도록 변경 - 이전 버전에서 가져온 통화 파일을 다시 가져와도 날짜 일정을 추가할 수 있음 (이전 수정: 2026-10-22 KST | 수정: 앱 버전 v12.220, 에이닷 통화 요약 속 날짜 표현(내일·모레·다음 주 월요일·10월 30일·3일 후 등)을 통화 날짜 기준으로 계산해 달력 일정으로 추가 - 저장 전에 찾은 일정을 보여 주고 체크·날짜·시간·내용을 고쳐서 추가하며, 같은 통화의 같은 일정은 다시 묻지 않음 (이전 수정: 2026-10-22 KST | 수정: 앱 버전 v12.219, 달력 상담 기록 색인(새로고침 포함)을 고객 300명을 한 명씩 읽던 방식에서 모든 고객의 기록을 서버에서 한 번에 읽는 방식(collectionGroup)으로 변경해 속도 개선 - 파이어베이스 색인·규칙이 막혀 있으면 자동으로 예전 방식(고객별 읽기)으로 진행하고 새로고침 버튼에 '완료·느림' 표시, 새로고침 때 일정 읽기를 고객 목록 읽기와 동시에 시작 (이전 수정: 2026-10-22 KST | 수정: 앱 버전 v12.218, 상단 메뉴를 달력·목록·신규등록·새로고침·설정 5칸으로 변경하고 새로고침 버튼 추가(누르면 보던 화면은 그대로 두고 고객 목록·달력 상담 기록 색인·일정을 다시 읽어 바로 반영, 고객 상세 화면이면 그 고객의 기록도 다시 읽음, 에이닷으로 저장한 기록도 달력에 바로 표시))))))))))))))))) -->
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
@@ -303,6 +303,30 @@ window.REMOTE_READY = (async () => {
   .cal .d.today{background:var(--main);color:#fff;font-weight:700}
   .hide{display:none}
   .auto{color:#dc2626!important}@media (prefers-color-scheme:dark){.auto{color:#f87171!important}}   /* 자동으로 기록된 기록·일정의 글자 색(적색) */
+  /* 일정 완료 체크 · 완료하지 않은 일정 경고 */
+  .log .h.dsH{flex-wrap:wrap}.log .h .dsChk{display:flex;align-items:center;gap:6px;margin:0 0 0 auto;padding:2px 0;font-size:14px;font-weight:700;color:var(--text);cursor:pointer}
+  .log .h .dsChk input{width:22px;height:22px;padding:0;margin:0;flex:none;accent-color:#12a150;cursor:pointer}
+  .log .h .twTag{font-size:12px;font-weight:700;color:#d92d20}
+  .log.warn{border:2px solid #d92d20}.log.done{opacity:.6}.log.done p{text-decoration:line-through}
+  .cal .d:not(.today) .sc.ov{color:#d92d20}   /* 달력 칸: 완료하지 않은 일정이 있는 날 */
+  .cal .cg.wk .d:not(.today) .sc2.ov{color:#d92d20}.cal .cg.wk .d .sc2.dn{opacity:.55;text-decoration:line-through}.cal .cg.wk .d.wsum .wov{color:#d92d20;font-weight:700}
+  #todoWarn{border:2px solid #d92d20;background:rgba(217,45,32,.08);border-radius:12px;padding:10px 12px;margin:0 0 12px}
+  #todoWarn .tw-h{font-size:15px;font-weight:700;color:#d92d20;margin:0 0 4px}
+  #todoWarn .tw-row{display:flex;align-items:center;gap:8px;border-top:1px solid var(--line);padding:6px 0}
+  #todoWarn button{margin:0;width:auto}
+  #todoWarn .tw-t{flex:1 1 auto;min-width:0;padding:4px 0;background:none;color:var(--text);font-size:14px;text-align:left;line-height:1.35;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  #todoWarn .tw-ok{flex:none;padding:6px 14px;font-size:13px;background:#12a150}
+  #todoWarn .tw-more{font-size:12px;color:var(--sub);margin-top:4px}
+  #todoPop{position:fixed;inset:0;z-index:9400;background:rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;padding:16px}   /* 앱 잠금(10000)보다 아래: 잠금 화면 위로는 뜨지 않음 */
+  #todoPop .tp-box{width:100%;max-width:460px;max-height:80vh;overflow:auto;background:var(--card);color:var(--text);border:2px solid #d92d20;border-radius:14px;padding:16px;box-shadow:0 6px 24px rgba(0,0,0,.35)}
+  #todoPop .tp-h{font-size:17px;font-weight:700;color:#d92d20;margin:0 0 8px}
+  #todoPop .tp-it{border-top:1px solid var(--line);padding:10px 0}
+  #todoPop .tp-t{font-size:15px;font-weight:700;word-break:break-all}
+  #todoPop .tp-c{font-size:14px;color:var(--sub);margin-top:2px;white-space:pre-wrap;word-break:break-all}
+  #todoPop .tp-r,#todoPop .tp-f{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}#todoPop .tp-f{justify-content:flex-end}
+  #todoPop button{width:auto;margin:0;padding:8px 14px;font-size:14px}
+  #todoPop .tp-ok{background:#12a150}#todoPop .tp-go{background:var(--cell);color:var(--text);border:1px solid var(--line)}
+  @media (prefers-color-scheme:dark){.log .h .twTag,#todoWarn .tw-h,#todoPop .tp-h{color:#f97066}}
   #dsSeg:not(.hide){display:flex}#dsLinkChip:not(.hide){display:flex;flex-direction:column;gap:6px}   /* 일정/상담 고객 선택 줄, 연결 고객 줄: 인라인 display를 쓰면 .hide가 안 먹으므로 규칙으로 지정 */
   mark{background:#ffd54a;color:#1d2330;border-radius:2px;padding:0 1px}
   /* 모바일 좌우 밀림 방지: 가로 스크롤을 막고, 띄어쓰기 없는 긴 글(이메일·주소·숫자)은 줄을 바꿔서 보여줌 */
@@ -577,6 +601,7 @@ window.REMOTE_READY = (async () => {
     <!-- 목록 -->
     <div class="card" id="calBox">
       <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin:4px 0 16px"><h1 style="margin:0">달력</h1><button id="calAdotBtn" type="button" aria-label="통화 요약 가져오기 (에이닷)">에이닷</button></div>
+      <div id="todoWarn" class="hide"></div>
       <div class="cal" id="cal"></div>
       <input id="calImpFile" type="file" multiple style="display:none">
       <div class="msg" id="calImpMsg" style="white-space:pre-wrap"></div>
@@ -1911,6 +1936,7 @@ function renderCal(){
   const first = new Date(calY, calM, 1).getDay(), dim = new Date(calY, calM + 1, 0).getDate();
   const todayKey = dkey(calNow);
   const scMap = {}; (schedList || []).forEach(x => { schEnds(x, k => { scMap[k] = (scMap[k] || 0) + 1; }); });   // 날짜별 일정 개수
+  const nowD = new Date(), ovMap = {}; (schedList || []).forEach(x => { if (todoOver(x, nowD)) { const k = x.endDate && x.endDate > x.date ? x.endDate : x.date; ovMap[k] = (ovMap[k] || 0) + 1; } });   // 날짜별 완료하지 않은 일정 수 (경고 시각이 지난 것)
   const lineBy = {};   // 날짜키 → [{ lane(줄 번호), type: s(첫날)/m(중간)/e(끝나는 날), color }] : 기간 일정을 칸 아래쪽 선으로 이어서 그림
   {
     const vs = wkMode ? dkey(calWeek) : dkey(new Date(calY, calM, 1 - first)), ve = wkMode ? dkey(addD(calWeek, 6)) : dkey(new Date(calY, calM, 1 - first + Math.ceil((first + dim) / 7) * 7 - 1));
@@ -1933,13 +1959,13 @@ function renderCal(){
       b.append(e);
     });
   };
-  let hl = [], wkN = 0, wkS = 0, wkH = 0;
+  let hl = [], wkN = 0, wkS = 0, wkH = 0; const wkOv = new Set(), nctx = wkMode ? schedNameCtx() : null, nmC = new Map();   // wkOv = 이 주의 완료하지 않은 일정, nctx·nmC = 일정에 연결된 이름 찾기용
   if (wkMode) {   // ----- 주간보기: 2줄×4단 8칸 = 일~토 7일 + 주간 합계 (한달 칸 35개 크기를 8칸에 넓게)
     const schBy = {}; (schedList || []).forEach(x => { schEnds(x, k => { (schBy[k] = schBy[k] || []).push(x); }); });
     for (let i = 0; i < 7; i++) {
       const d = addD(calWeek, i), dow = d.getDay(), key = dkey(d);
       const names = (calView() && calView()[key]) || [], sch = (schBy[key] || []).slice().sort((x, y) => String(x.time || "99:99").localeCompare(String(y.time || "99:99")));
-      wkN += names.length; wkS += sch.length;
+      wkN += names.length; wkS += sch.length; sch.forEach(x => { if (todoOver(x, nowD)) wkOv.add(x.id); });
       let cls = "d" + (dow === 0 ? " su" : dow === 6 ? " sa" : "");
       const hd = holidayOn(key); if (hd) { cls += " hd"; wkH++; hl.push((d.getMonth() + 1) + "/" + d.getDate() + " " + hd.name); }
       if (key === todayKey) cls += " today";
@@ -1947,12 +1973,15 @@ function renderCal(){
       const b = mk("button", cls); b.type = "button";
       b.append(mk("span", "wd", (d.getMonth() + 1) + "." + d.getDate() + " (" + DOWN[dow] + ")"));
       if (hd) { b.append(mk("span", "hn", hd.name)); b.title = hd.name; }
-      // 같은 내용은 한 번만 표시: 같은 줄이 겹치는 일정은 하나로, 일정 글에 이미 이름이 나온 상담 고객과 같은 이름이 겹치는 고객은 빼고 보여 줌 (건수·합계는 그대로)
-      const sLine = x => (x.time ? x.time + " " : "") + String(x.content || "").split("\n")[0], seenS = new Set();
-      const schShow = sch.filter(x => { const s = sLine(x).replace(/\s+/g, ""); if (seenS.has(s)) return false; seenS.add(s); return true; });
+      // 날짜 칸에는 일정 내용보다 연결된 회사·개인 이름을 먼저 보여 주고(2곳까지, 더 있으면 '외 N'), 이름이 없으면 일정 내용 첫 줄을 보여 줌. 완료한 일정은 ✓, 경고 시각이 지났는데 완료하지 않은 일정은 ⚠ 표시
+      // 같은 줄(같은 시간·표시·상태)이 겹치는 일정은 하나로, 일정 줄에 이미 이름이 나온 상담 고객은 아래 이름 목록에서 뺌 (건수·합계는 그대로)
+      const sNm = x => { if (!nmC.has(x)) { const a = schedNamesOf(x, nctx); nmC.set(x, a.length ? a.slice(0, 2).join("·") + (a.length > 2 ? " 외 " + (a.length - 2) : "") : ""); } return nmC.get(x); };
+      const sLine = x => (x.time ? x.time + " " : "") + (sNm(x) || String(x.content || "").split("\n")[0]);
+      const sSt = x => x.done ? "dn" : todoOver(x, nowD) ? "ov" : "", seenS = new Set();
+      const schShow = sch.filter(x => { const s = sSt(x) + "|" + sLine(x).replace(/\s+/g, ""); if (seenS.has(s)) return false; seenS.add(s); return true; });
       const schTxt = schShow.map(x => sLine(x).replace(/\s+/g, "")).join("|"), seenN = new Set();
       const namesShow = names.filter(p => { const n = String(p.name || "").replace(/\s+/g, ""); if (seenN.has(n)) return false; seenN.add(n); return !(n && schTxt.includes(n)); });
-      schShow.slice(0, 4).forEach(x => b.append(mk("span", "sc2", sLine(x))));
+      schShow.slice(0, 4).forEach(x => { const st = sSt(x), e = mk("span", "sc2" + (st ? " " + st : ""), (st === "dn" ? "✓ " : st === "ov" ? "⚠ " : "") + sLine(x)); e.title = (x.time ? x.time + " " : "") + String(x.content || ""); b.append(e); });
       if (schShow.length > 4) b.append(mk("span", "more", "일정 +" + (schShow.length - 4)));
       namesShow.slice(0, 4).forEach(p => b.append(mk("span", "nm", p.name)));
       if (namesShow.length > 4) b.append(mk("span", "more", "+" + (namesShow.length - 4)));
@@ -1965,6 +1994,7 @@ function renderCal(){
     }
     const sm = mk("div", "d wsum");   // 8번째 칸: 이 주의 합계
     sm.append(mk("b", "", "주간 합계"), mk("span", "", "일정 " + wkS + "건"), mk("span", "", "상담 " + wkN + "건"));
+    if (wkOv.size) sm.append(mk("span", "wov", "⚠ 미완료 " + wkOv.size + "건"));
     if (wkH) sm.append(mk("span", "", "공휴일 " + wkH + "일"));
     grid.append(sm);
   } else {   // ----- 한달보기 (기존 그대로)
@@ -1980,7 +2010,7 @@ function renderCal(){
       const b = mk("button", cls); b.type = "button";
       b.append(mk("span", "", d.getDate()));
       if (hd) { b.append(mk("span", "hn", hd.short)); b.title = hd.name; }
-      if (scMap[key]) b.append(mk("span", "sc", "일정 " + scMap[key]));
+      if (scMap[key]) b.append(mk("span", "sc" + (ovMap[key] ? " ov" : ""), (ovMap[key] ? "⚠ " : "") + "일정 " + scMap[key]));
       names.slice(0, 2).forEach(p => b.append(mk("span", "nm", p.name)));
       if (names.length > 2) b.append(mk("span", "more", "+" + (names.length - 2)));
       drawLines(b, key, i % 7 > 0, i % 7 < 6, 3);
@@ -1994,9 +2024,10 @@ function renderCal(){
     for (let dd = 1; dd <= dim; dd++) { const h = holidayOn(calY + "-" + pad2(calM + 1) + "-" + pad2(dd)); if (h) hl.push(dd + "일 " + h.name); }   // 이 달의 공휴일 목록
   }
   box.append(grid);
+  todoRender();   // 완료하지 않은 일정 경고 줄 · 달력 탭의 숫자 갱신
   if (hl.length) box.append(mk("div", "hdl", "공휴일: " + hl.join(" · ")));
   const msg = mk("div", "sub"); msg.style.margin = "10px 0 0"; box.append(msg);
-  if (schedList === null && auth.currentUser) schedLoad().then(() => { renderCal(); renderDaySched(); });
+  if (schedList === null && auth.currentUser) schedLoad().then(() => { renderCal(); renderDaySched(); todoPopCheck(); });
   if (!customers.length) return;
   if (!calIdx) {
     calBuild().then(() => { renderCal(); renderDaySched(); }).catch(e => { msg.className = "msg err"; msg.textContent = "상담 기록 불러오기 실패: " + e.message; });
@@ -2015,6 +2046,13 @@ const mdK = k => Number(k.slice(5, 7)) + "/" + Number(k.slice(8, 10));   // "202
 const schOn = (x, k) => x.date === k || (!!x.endDate && x.endDate > x.date && x.endDate === k);   // 그 날짜에 보일 일정인지 (기간 일정은 첫날과 끝나는 날만, 사이 날짜는 선으로만 표시)
 function schEnds(x, fn){ fn(x.date); if (x.endDate && x.endDate > x.date) fn(x.endDate); }   // 일정이 보일 날짜(하루 일정은 그날, 기간 일정은 첫날·끝나는 날)마다 fn(날짜키) 호출
 const schSort = () => schedList.sort((a, b) => (a.date || "").localeCompare(b.date || "") || (a.time || "").localeCompare(b.time || "") || (a.endTime || "").localeCompare(b.endTime || ""));
+// ===== 일정 완료 체크 · 완료하지 않은 일정 경고 (함수는 아래 '일정 입력' 구간 끝에 있음) =====
+// · 날짜별 일정 카드의 '완료' 체크란 → 일정에 done 값 저장. 경고 시각 = 끝나는 시간 → 없으면 시작 시간 → 둘 다 없으면 TODO_DEFAULT_TIME (기간 일정은 마지막 날)
+const TODO_WARN_FROM = "2026-10-27";   // 이 날짜 '이전' 일정은 경고하지 않음 (기능을 넣기 전 일정이 한꺼번에 경고로 뜨는 것을 막음)
+const TODO_DEFAULT_TIME = "09:00";     // 시간을 안 적은 일정의 경고 시각
+const TODO_SNOOZE_MIN = 10;            // 경고 팝업의 '다시 알림' 간격(분)
+const todoNext = new Map();            // 일정 id → 이 시각(ms) 전에는 팝업으로 다시 알리지 않음 (Infinity = 이번 실행 동안 다시 알리지 않음, 경고 줄은 계속 표시)
+let todoPopIds = null;                 // 지금 열려 있는 경고 팝업의 일정 id들 (null = 팝업이 닫혀 있음)
 async function schedLoad(){
   if (schedList) return schedList;
   if (schedBusy) return schedBusy;
@@ -2067,12 +2105,20 @@ function renderDaySched(){
   };
   shownItems.forEach(x => {
     const el = document.createElement("div"); el.className = "log";
-    const h = document.createElement("div"); h.className = "h";
+    const h = document.createElement("div"); h.className = "h dsH";
     { const tr = timeRange(x); if (tr) { const t = document.createElement("b"); t.textContent = tr; h.append(t); } }   // 시간이 없는 일정은 시간 표시를 하지 않음
     if (x.endDate && x.endDate > x.date) {   // 기간 일정: 기간과 오늘이 몇 일째인지 표시
       const rb = document.createElement("span"); rb.style.cssText = "font-size:13px;color:var(--sub,#667);margin-left:6px";
       const nth = Math.round((keyDate(calSel) - keyDate(x.date)) / 86400000) + 1;
       rb.textContent = "📅 " + mdK(x.date) + " ~ " + mdK(x.endDate) + (calSel === x.date ? " (첫날)" : calSel === x.endDate ? " (마지막 날)" : " (" + nth + "일째)"); h.append(rb);
+    }
+    if (x.done) el.classList.add("done"); else if (todoOver(x)) el.classList.add("warn");   // 완료: 흐리게 / 경고 시각이 지났는데 미완료: 빨간 테두리
+    {   // 완료 체크란 (누르면 바로 저장)
+      const lb = document.createElement("label"), ck = document.createElement("input"), tx = document.createElement("span");
+      lb.className = "dsChk"; ck.type = "checkbox"; ck.checked = !!x.done; tx.textContent = "완료";
+      ck.onchange = () => schedSetDone(x, ck.checked);
+      if (!x.done && todoOver(x)) { const w = document.createElement("span"); w.className = "twTag"; w.textContent = "⚠ 미완료"; h.append(w); }
+      lb.append(ck, tx); h.append(lb);
     }
     const p = document.createElement("p"); p.textContent = x.content; if (isAutoSched(x)) p.classList.add("auto");   // textContent: 입력값이 코드로 실행되지 않게
     const eb = document.createElement("button"); eb.className = "mini gray"; eb.textContent = "수정";
@@ -2173,8 +2219,8 @@ function schedCands(){   // 이름으로 찾을 후보: 회사명 / 회사 소�
   return cand;
 }
 function schedKeyCount(cand){ const s = {}, cnt = {}; cand.forEach(x => { (s[x.key] || (s[x.key] = new Set())).add(x.c.id); }); Object.keys(s).forEach(k => { cnt[k] = s[k].size; }); return cnt; }   // 이름마다 서로 다른 카드가 몇 장인지 (같은 카드 안의 중복은 한 번)
-function schedMatches(text){   // 일정 내용에 이름이 들어간 카드들 (2글자 이상). 같은 이름이 다른 카드 여러 곳에 있으면(동명이인) 건너뜀
-  const k = nmKey(text), cand = schedCands(), cnt = schedKeyCount(cand);
+function schedMatches(text, ctx){   // 일정 내용에 이름이 들어간 카드들 (2글자 이상). 같은 이름이 다른 카드 여러 곳에 있으면(동명이인) 건너뜀
+  const k = nmKey(text), cand = ctx ? ctx.cand : schedCands(), cnt = ctx ? ctx.cnt : schedKeyCount(cand);   // ctx = 여러 일정을 한꺼번에 볼 때 미리 만들어 둔 후보(schedNameCtx)
   const hit = cand.filter(x => x.key.length >= 2 && cnt[x.key] === 1 && k.includes(x.key));
   const withP = new Set(hit.filter(x => x.pid).map(x => x.c.id));
   return hit.filter(x => x.pid || !withP.has(x.c.id));   // 회사명과 소속 개인 이름이 같이 있으면 개인 기록으로만 남김(회사 기록에도 함께 보임)
@@ -2335,7 +2381,7 @@ $("dsForm").onsubmit = async e => {
       const i = schedList.findIndex(x => x.id === sid); if (i >= 0) schedList[i] = { ...schedList[i], ...data };
     } else {
       const ref = await addDoc(schedCol(), { ownerUid: auth.currentUser.uid, ...data, createdAt: serverTimestamp() });
-      sid = ref.id; schedList.push({ id: sid, ...data });
+      sid = ref.id; schedList.push({ id: sid, ...data }); if (todoOver({ id: sid, ...data })) todoNext.set(sid, Infinity);   // 이미 지난 시각의 일정을 방금 적은 경우: 팝업은 건너뛰고 경고 줄에만 표시
       await newFromSched(content, crt);   // 새 일정만: 등록 안 된 #회사·@이름(또는 추정한 이름)을 새로 등록
     }
     const r = await syncSchedLogs(sid, sdate, content, prev, endDate);
@@ -2356,6 +2402,94 @@ $("dsForm").onsubmit = async e => {
   } catch (err) { msg.className = "msg err"; msg.textContent = "저장 실패: " + err.message; }
   finally { btn.disabled = false; }
 };
+// ===== 일정 완료 체크 · 완료하지 않은 일정 경고 (상수는 위 '일정' 구간 맨 앞) =====
+function todoDue(x){   // 이 일정의 경고 시각(Date). 경고 대상이 아니면(완료한 일정·상담 기록에서 자동으로 생긴 일정·기능 도입 전 일정) null
+  if (!x || x.done || !x.date || x.logId) return null;   // logId = 상담 기록·문자/명함 기록에서 자동으로 만들어진 일정(이미 한 일의 기록). 에이닷 일정은 할 일이라 대상
+  const per = !!x.endDate && x.endDate > x.date, day = per ? x.endDate : x.date;
+  if (day < TODO_WARN_FROM) return null;
+  const hm = (per ? x.endTime : (x.endTime || x.time)) || TODO_DEFAULT_TIME;
+  const [y, m, d] = day.split("-").map(Number), [hh, mm] = hm.split(":").map(Number);
+  return new Date(y, m - 1, d, hh || 0, mm || 0);
+}
+function todoOver(x, now){ const d = todoDue(x); return !!d && d <= (now || new Date()); }   // 경고 시각이 지났는데 아직 완료하지 않은 일정인지
+function todoDueList(now){ return (schedList || []).filter(x => todoOver(x, now)).sort((a, b) => todoDue(a) - todoDue(b) || String(a.id).localeCompare(String(b.id))); }
+function appLocked(){ return ["pinLock", "licLock", "termsLock"].some(id => { const e = document.getElementById(id); return !!e && !e.classList.contains("hide"); }); }
+function schedNameCtx(){ const cand = schedCands(); return { cand, cnt: schedKeyCount(cand), byId: new Map(customers.map(c => [c.id, c])) }; }   // 이름 찾기용 후보를 한 번만 만들어 여러 일정에 씀
+function schedNamesOf(x, ctx){   // 일정에 붙은 회사·개인 이름들: ① 고객 연결(직접 고른 것·자동 연결된 것) ② 상담 기록·에이닷에서 만든 일정의 고객 ③ 일정 글에 이름이 들어 있는 고객. 하나도 없으면 빈 배열(→ 화면에는 일정 내용을 보여 줌)
+  const out = [], seen = new Set();
+  const add = nm => { nm = String(nm || "").trim(); const k = nmKey(nm); if (nm && !seen.has(k)) { seen.add(k); out.push(nm); } };
+  (x.links || []).forEach(l => { const c = ctx.byId.get(l.cid); if (c) add(schedWho(c, l.pname || "")); });
+  if (x.custId) { const c = ctx.byId.get(x.custId); if (c) { const m = /^\[상담\]\s+(.+?)(?:\s+-\s|$)/.exec(String(x.content || "")); add(m ? m[1] : schedWho(c, "")); } }
+  schedMatches(x.content, ctx).forEach(h => add(schedWho(h.c, h.pname)));
+  return out.filter(n => !out.some(o => o !== n && o.startsWith(n + " ")));   // '회사'와 '회사 담당자'가 같이 있으면 더 자세한 쪽만
+}
+function todoLabel(x, ctx){   // "10/27 14:00 · 주원교회 홍길동" (회사·개인 이름이 있으면 이름, 없으면 일정 내용 첫 줄)
+  const per = !!x.endDate && x.endDate > x.date, nm = schedNamesOf(x, ctx).slice(0, 2).join("·"), tx = String(x.content || "").split("\n")[0];
+  return (per ? mdK(x.date) + "~" + mdK(x.endDate) : mdK(x.date)) + (!per && timeRange(x) ? " " + timeRange(x) : "") + " · " + (nm || tx);
+}
+async function schedSetDone(x, v){   // 완료 체크 저장 (x 는 schedList 안의 그 일정이라 화면에 바로 반영됨. 저장에 실패하면 되돌림)
+  const was = !!x.done; x.done = !!v;
+  renderCal(); renderDaySched(); if (todoPopIds) todoPopDraw();
+  try { await updateDoc(schedDoc(x.id), { done: !!v, updatedAt: serverTimestamp() }); }
+  catch (e) { x.done = was; renderCal(); renderDaySched(); if (todoPopIds) todoPopDraw(); alert("완료 표시를 저장하지 못했습니다: " + (e.message || e)); }
+}
+function todoRender(){   // 달력 위 경고 줄 + 달력 탭의 숫자
+  const list = todoDueList(new Date()), n = list.length, tb = $("tabCal");
+  if (tb) tb.textContent = n ? "달력 ⚠" + n : "달력";
+  const box = $("todoWarn"); if (!box) return;
+  box.textContent = ""; box.classList.toggle("hide", !n); if (!n) return;
+  const mk = (tag, cls, txt) => { const e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; }, ctx = schedNameCtx();
+  box.append(mk("div", "tw-h", "⚠ 완료하지 않은 일정 " + n + "건"));
+  list.slice(0, 5).forEach(x => {
+    const row = mk("div", "tw-row"), go = mk("button", "tw-t", todoLabel(x, ctx)), ok = mk("button", "tw-ok", "완료");
+    go.type = "button"; ok.type = "button"; go.title = String(x.content || "");
+    go.onclick = () => gotoCalDate(x.endDate && x.endDate > x.date ? x.endDate : x.date);   // 누르면 그 날짜의 일정으로 이동
+    ok.onclick = () => schedSetDone(x, true);
+    row.append(go, ok); box.append(row);
+  });
+  if (n > 5) box.append(mk("div", "tw-more", "외 " + (n - 5) + "건 - 달력에서 ⚠ 가 있는 날짜를 눌러 확인하세요"));
+}
+function todoPopClose(){ const e = $("todoPop"); if (e) e.remove(); todoPopIds = null; }
+function todoPopDraw(){   // 경고 팝업 그리기 (보이는 일정 중 완료된 것은 빠지고, 모두 없어지면 팝업이 닫힘)
+  if (!todoPopIds) return;
+  const now = new Date(), items = [...todoPopIds].map(id => (schedList || []).find(x => x.id === id)).filter(x => x && todoOver(x, now));
+  if (!items.length) { todoPopClose(); return; }
+  const mk = (tag, cls, txt) => { const e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; }, ctx = schedNameCtx();
+  let bg = $("todoPop"); if (!bg) { bg = mk("div"); bg.id = "todoPop"; bg.setAttribute("role", "alertdialog"); bg.setAttribute("aria-label", "완료하지 않은 일정 경고"); document.body.append(bg); }
+  bg.textContent = "";
+  const box = mk("div", "tp-box"); bg.append(box);
+  box.append(mk("div", "tp-h", "⏰ 완료하지 않은 일정이 " + items.length + "건 있습니다"));
+  items.forEach(x => {
+    const it = mk("div", "tp-it"), nm = schedNamesOf(x, ctx).length;
+    it.append(mk("div", "tp-t", todoLabel(x, ctx)));
+    if (nm && String(x.content || "").trim()) it.append(mk("div", "tp-c", String(x.content)));   // 이름을 먼저 보여 줬으면 일정 내용은 아래 줄에
+    const r = mk("div", "tp-r"), ok = mk("button", "tp-ok", "완료"), go = mk("button", "tp-go", "일정 보기");
+    ok.type = "button"; go.type = "button";
+    ok.onclick = () => schedSetDone(x, true);
+    go.onclick = () => { todoPopClose(); gotoCalDate(x.endDate && x.endDate > x.date ? x.endDate : x.date); };
+    r.append(ok, go); it.append(r); box.append(it);
+  });
+  const f = mk("div", "tp-f"), later = mk("button", "tp-go", TODO_SNOOZE_MIN + "분 뒤 다시 알림"), cl = mk("button", "tp-go", "닫기");
+  later.type = "button"; cl.type = "button";
+  later.onclick = () => { const at = Date.now() + TODO_SNOOZE_MIN * 60000; todoPopIds.forEach(id => todoNext.set(id, at)); todoPopClose(); };
+  cl.onclick = todoPopClose;   // 닫기: 이번 실행 동안은 팝업으로 다시 알리지 않음 (경고 줄·⚠ 표시는 완료할 때까지 계속)
+  f.append(later, cl); box.append(f);
+}
+function todoPopCheck(){   // 경고 시각이 된(지난) 일정 중 아직 팝업으로 알리지 않은 것이 있으면 팝업으로 알림
+  if (!auth.currentUser || !schedList || appLocked()) return;
+  const now = Date.now(), fresh = todoDueList(new Date(now)).filter(x => (todoNext.get(x.id) || 0) <= now);
+  if (!fresh.length) return;
+  const wasOpen = !!todoPopIds; todoPopIds = todoPopIds || new Set();
+  fresh.forEach(x => { todoPopIds.add(x.id); todoNext.set(x.id, Infinity); });
+  todoPopDraw();
+  const ua = navigator.userActivation;   // 화면을 한 번이라도 누른 뒤에만 진동 (안 그러면 브라우저가 막고 경고를 남김)
+  if (!wasOpen && (!ua || ua.hasBeenActive)) { try { navigator.vibrate && navigator.vibrate([200, 100, 200]); } catch {} }
+}
+setInterval(() => {   // 30초마다 경고 시각 확인 (앱이 보이는 동안만)
+  if (!auth.currentUser) { if (todoPopIds) todoPopClose(); return; }
+  if (document.visibilityState === "visible") { todoRender(); todoPopCheck(); }
+}, 30000);
+document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible" && auth.currentUser) { todoRender(); todoPopCheck(); } });
 renderCal();
 
 // 전화 입력: 일반전화는 지역번호 선택 + 번호, 휴대폰은 010 기본 + 다른 앞자리 선택 ('기타'는 전체 번호 직접 입력)
@@ -3762,7 +3896,7 @@ $("custForm").onsubmit = async e => {
 };
 
 // ===== 설정 확장: 로그인 · 프린터 · 라벨 리스트 · 백업 · 버전 · 초기화 =====
-const APP_VERSION = "v12.233";   // ← 파일을 수정할 때마다 이 숫자를 올립니다 (자동 업데이트가 이 값을 비교)
+const APP_VERSION = "v12.234";   // ← 파일을 수정할 때마다 이 숫자를 올립니다 (자동 업데이트가 이 값을 비교)
 function lsGet(k, d){ try { return JSON.parse(localStorage.getItem(k)) ?? d; } catch { return d; } }
 function lsSet(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch {} }
 // 원격 전송 상태 · 기기 복사 · 외부 알림 · 로그인 화면 동작은 파일 맨 위 [원격 구간]에 있습니다 (로컬일 때는 [로컬 구간]의 기본 동작)
@@ -3825,7 +3959,7 @@ async function makeBackup(m){
   let labelReports = [];
   try { labelReports = (await getDocs(histCol())).docs.map(d => { const x = d.data(); return { ...x, createdAt: x.createdAt?.toDate ? x.createdAt.toDate().toISOString() : "" }; }); } catch {}
   let schedules = []; bkSchedWarn = "";
-  try { schedules = (await getDocs(schedCol())).docs.map(d => { const x = d.data(); return { date: x.date || "", endDate: x.endDate || "", time: x.time || "", endTime: x.endTime || "", content: x.content || "" }; }).filter(x => x.date); }
+  try { schedules = (await getDocs(schedCol())).docs.map(d => { const x = d.data(); return { date: x.date || "", endDate: x.endDate || "", time: x.time || "", endTime: x.endTime || "", content: x.content || "", done: !!x.done }; }).filter(x => x.date); }
   catch (e) { bkSchedWarn = "일정을 읽지 못해 이번 백업에서 빠졌습니다 (" + (e.message || e) + "). 보안 규칙의 schedules 허용을 확인하세요."; }
   schedules.sort((a, b) => a.date.localeCompare(b.date) || a.time.localeCompare(b.time)); bkSchedN = schedules.length;
   const data = { app: "ad-customer", version: APP_VERSION, exportedAt: new Date().toISOString(), license: window.AD_LICENSE ? { user: window.AD_LICENSE.email, order: window.AD_LICENSE.order } : undefined, settings: curSettings(), labelReports, schedules, customers: out };
@@ -3869,7 +4003,7 @@ $("bkFile").onchange = async e => {
       const have = new Set(schedList.map(x => x.date + "|" + (x.time || "") + "|" + (x.endTime || "") + "|" + x.content));
       for (const r of d.schedules) {
         const k = r.date + "|" + (r.time || "") + "|" + (r.endTime || "") + "|" + r.content; if (!r.date || !r.content || have.has(k)) continue;
-        const data = { date: r.date, endDate: r.endDate || "", time: r.time || "", endTime: r.endTime || "", content: r.content };
+        const data = { date: r.date, endDate: r.endDate || "", time: r.time || "", endTime: r.endTime || "", content: r.content, ...(r.done ? { done: true } : {}) };
         const ref = await addDoc(schedCol(), { ownerUid: auth.currentUser.uid, ...data, createdAt: serverTimestamp() });
         schedList.push({ id: ref.id, ...data }); have.add(k); nSAdd++;
       }
