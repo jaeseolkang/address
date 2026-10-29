@@ -283,6 +283,7 @@ window.REMOTE_READY = (async () => {
   .cal .d .hn{max-width:100%;font-size:10px;line-height:1.25;font-weight:600;color:#d92d20;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .cal .hdl{margin-top:8px;font-size:12px;line-height:1.5;color:#d92d20}
   .cal .d .nm.dn{opacity:.55;text-decoration:line-through}   /* 그날 그 고객의 일정이 모두 완료됨 */
+  .cal .d .sc{overflow:hidden;text-overflow:ellipsis}.cal .d .sc.dn{opacity:.55;text-decoration:line-through}   /* 월간 칸: 긴 이름은 …, 완료한 일정은 주간보기처럼 흐리게·취소선 */
   .cal .d.today .nm,.cal .d.today .more,.cal .d.today .sc,.cal .d.today .hn{color:#fff}
   #daySched{margin-top:20px;padding-top:16px;border-top:1px solid var(--line)}
   .daybar{display:flex;align-items:center;gap:8px;margin:0 0 12px;padding:10px 12px;border:1px solid var(--main);border-radius:8px;font-size:14px}
@@ -2071,7 +2072,16 @@ function renderCal(){
       const b = mk("button", cls); b.type = "button";
       b.append(mk("span", "", d.getDate()));
       if (hd) { b.append(mk("span", "hn", hd.short)); b.title = hd.name; }
-      if (scMap[key]) b.append(mk("span", "sc" + (ovMap[key] ? " ov" : ""), (ovMap[key] ? "⚠ " : "") + "일정 " + scMap[key]));
+      if (scMap[key]) {   // "일정 N" 대신 일정에 붙은 회사·개인 이름(없으면 일정 내용 첫 줄)을 최대 2줄까지 보여 줌 (주간보기와 같은 이름·같은 표시: 완료 ✓·흐림·취소선, 미완료 ⚠)
+        const seenM = new Set(), shM = [];
+        (schByK[key] || []).slice().sort((p, q) => String(p.time || "99:99").localeCompare(String(q.time || "99:99"))).forEach(x => {
+          const a = schedNamesOf(x, dctx), lb = a.length ? a.slice(0, 2).join("·") + (a.length > 2 ? " 외 " + (a.length - 2) : "") : (String(x.content || "").split("\n")[0].trim() || "일정");
+          const st = x.done ? "dn" : todoOver(x, nowD) ? "ov" : "", k = st + "|" + lb.replace(/\s+/g, "");
+          if (!seenM.has(k)) { seenM.add(k); shM.push({ x, lb, st }); }
+        });
+        shM.slice(0, 2).forEach(({ x, lb, st }) => { const e = mk("span", "sc" + (st ? " " + st : ""), (st === "dn" ? "✓ " : st === "ov" ? "⚠ " : "") + lb); e.title = (x.time ? x.time + " " : "") + String(x.content || ""); b.append(e); });
+        if (shM.length > 2) b.append(mk("span", "more", "일정 +" + (shM.length - 2)));
+      }
       const dnIds = names.length ? calDoneIds(schByK[key] || [], dctx, names) : new Set();
       names.slice(0, 2).forEach(p => b.append(mk("span", "nm" + (dnIds.has(p.id) ? " dn" : ""), (dnIds.has(p.id) ? "✔ " : "") + p.name)));
       if (names.length > 2) b.append(mk("span", "more", "+" + (names.length - 2)));
