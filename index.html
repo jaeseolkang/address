@@ -1707,7 +1707,7 @@ let formGrade = "";   // 신규 등록·수정 폼에서 고른 분류
 let gradeFilter = "";   // 고객 목록에서 박스로 고른 분류 (빈 값 = 전체) — 달력에서 날짜로 들어온 목록(dayFilter)에서는 쓰지 않고 그대로 보관만 함
 let dayGrade = "";   // 달력에서 날짜로 들어온 목록 안에서만 쓰는 분류 선택 (들어올 때 항상 전체)
 const curGrade = () => dayFilter ? dayGrade : gradeFilter;   // 지금 목록에 적용되는 분류
-const gradeHit = c => !curGrade() || gradeSet(c.grade).includes(curGrade());
+const gradeHit = c => { const f = curGrade(); if (!f) return true; const gs = gradeSet(c.grade); return gs.includes(f) || (f === "N" && !gs); };   // 미분류(N) 칸: 분류를 하나도 고르지 않은 고객도 함께 보임 (아래 경고 문구의 대상과 같게)
 function fillBars(w, grade){   // 색 칸 8개(2줄×4단, 고정 위치): 선택된 분류(여러 개 가능)만 색을 채우고 나머지는 빈 박스
   w.textContent = ""; const g = gradeMap();
   GRADE_SLOTS.forEach(k => { const i = document.createElement("i"); i.className = "gk" + k + ((g[k] && (grade || "").includes(k)) ? " on" : ""); if (g[k]) i.title = g[k]; w.append(i); });
