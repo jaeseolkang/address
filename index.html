@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- 2026-10-30 14:20 KST | 수정: 앱 버전 v12.247 (2026-10-30), '표로 보기'에서 당일·한달·1년·기간으로 전체를 볼 수 있게 하고, 업무노트 내보내기·메모로 보내기와 아래쪽 체크리스트 삭제 (AD·FP 공통 버전), 원격 파일을 이름만 바꿔(예: admin.html) 올려도 바로 쓰도록 이용약관 동의 기록 키를 파일 이름별로 나눔(index.html이나 주소만으로 열면 기존 키 그대로) -->
+<!-- 2026-10-30 14:35 KST | 수정: 앱 버전 v12.248 (2026-10-30), '표로 보기' 표에서 시간 칸을 보이지 않게 함 (AD·FP 공통 버전), 원격 파일을 이름만 바꿔(예: admin.html) 올려도 바로 쓰도록 이용약관 동의 기록 키를 파일 이름별로 나눔(index.html이나 주소만으로 열면 기존 키 그대로) -->
 <!-- 2026-10-29 KST | 수정: 앱 버전 v12.242, 달력 칸(월간·주간)의 파랑 이름 ✔·취소선을 '일정 없이 기록된 상담'의 완료 체크에도 반영 (그날 그 고객의 일정과 상담 기록이 모두 완료되면 표시, 상담 기록의 완료 값을 달력 색인에 함께 저장, 체크하면 달력이 바로 갱신) (이전 수정: 2026-10-29 00:50 KST | 수정: 앱 버전 v12.241, 같은 날 같은 고객의 일정이 모두 완료되면 달력 칸(월간·주간)의 파랑 이름에도 ✔와 취소선 표시 (일정 카드·경고·팝업 등 나머지는 그대로) -->
 <!-- 2026-10-28 KST | 수정: 앱 버전 v12.240, 달력에서 오늘이 아닌 다른 날짜를 누르면 달력 아래 '완료하지 않은 일정' 경고 줄을 숨기고, 오늘 날짜를 보면 다시 표시 (달력 탭의 ⚠ 숫자·경고 팝업·날짜별 일정 카드의 경고 표시는 그대로) -->
 <!-- 2026-10-28 KST | 수정: 앱 버전 v12.239, '완료하지 않은 일정' 경고 줄과 경고 팝업의 각 일정에 '연기·취소' 버튼 추가 - 누르면 '취소할까요, 다음으로 연기할까요?'를 묻고, 취소는 확인 후 삭제(연결된 고객 기록 삭제 여부도 확인), 연기는 새 날짜·시작/끝 시간을 고르면(바뀐 일시를 바로 표시) 일정과 연결된 고객 파일 기록을 그 일시로 옮기고 달력이 그 날짜로 이동(기간 일정은 같은 기간만큼 함께 이동, 원래 날짜는 postponedFrom에 기록) -->
@@ -2748,19 +2748,18 @@ function tsDraw(){
   box.append(mk("div", "ts-note", "총 " + total + "건 · 완료 " + nDone + "건"));
   const cnt = new Map(); tsRows.forEach(r => cnt.set(r.date, (cnt.get(r.date) || 0) + 1));
   const wrap = mk("div", "ts-wrap"), tb = mk("table", "ts-tb");
-  const cg = mk("colgroup"); ["27%", "", "70px", "46px"].forEach(w => { const c = mk("col"); if (w) c.style.width = w; cg.append(c); }); tb.append(cg);
-  const th = mk("tr"); ["회사/개인", "내용", "시간", "체크"].forEach(t => th.append(mk("th", "", t))); const thead = mk("thead"); thead.append(th); tb.append(thead);
+  const cg = mk("colgroup"); ["27%", "", "46px"].forEach(w => { const c = mk("col"); if (w) c.style.width = w; cg.append(c); }); tb.append(cg);
+  const th = mk("tr"); ["회사/개인", "내용", "체크"].forEach(t => th.append(mk("th", "", t))); const thead = mk("thead"); thead.append(th); tb.append(thead);
   const tbody = mk("tbody"); let lastD = "";
   tsRows.forEach(r => {
     if (tsRange !== "day" && r.date !== lastD) {   // 하루가 넘는 기간은 날짜마다 제목 줄을 넣음
-      lastD = r.date; const gr = mk("tr", "ts-gr"), gt = mk("td", "ts-g", dayLabel(r.date) + " · " + cnt.get(r.date) + "건"); gt.colSpan = 4; gr.append(gt); tbody.append(gr);
+      lastD = r.date; const gr = mk("tr", "ts-gr"), gt = mk("td", "ts-g", dayLabel(r.date) + " · " + cnt.get(r.date) + "건"); gt.colSpan = 3; gr.append(gt); tbody.append(gr);
     }
     const dn = r.isDone(), tr = mk("tr", dn ? "ts-dn" : "");
     const tn = mk("td", "ts-n"); tn.append(mk("b", "", r.who || "-"), mk("small", "", r.kind));
     const tc = mk("td", "ts-c"); tc.append(document.createTextNode(r.text)); if (r.auto) tc.classList.add("auto"); if (r.sub) tc.append(mk("small", "", r.sub));
-    const tt = mk("td", "ts-t", r.time || "-");
     const tk = mk("td", "ts-k"), ck = mk("input"); ck.type = "checkbox"; ck.checked = dn; ck.setAttribute("aria-label", "완료"); ck.onchange = () => r.setDone(ck.checked); tk.append(ck);
-    tr.append(tn, tc, tt, tk); tbody.append(tr);
+    tr.append(tn, tc, tk); tbody.append(tr);
   });
   tb.append(tbody); wrap.append(tb); box.append(wrap);
   bg.scrollTop = keep;
@@ -4187,7 +4186,7 @@ $("custForm").onsubmit = async e => {
 };
 
 // ===== 설정 확장: 로그인 · 프린터 · 라벨 리스트 · 백업 · 버전 · 초기화 =====
-const APP_VERSION = "v12.247 (2026-10-30)";   // ← 파일을 수정할 때마다 이 숫자를 올립니다 (자동 업데이트가 이 값을 비교)
+const APP_VERSION = "v12.248 (2026-10-30)";   // ← 파일을 수정할 때마다 이 숫자를 올립니다 (자동 업데이트가 이 값을 비교)
 function lsGet(k, d){ try { return JSON.parse(localStorage.getItem(k)) ?? d; } catch { return d; } }
 function lsSet(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch {} }
 // 원격 전송 상태 · 기기 복사 · 외부 알림 · 로그인 화면 동작은 파일 맨 위 [원격 구간]에 있습니다 (로컬일 때는 [로컬 구간]의 기본 동작)
