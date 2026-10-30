@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- 2026-10-30 17:10 KST | 수정: 앱 버전 v12.255 (2026-10-30), 달력 일정 칸에서 '전체·일정·상담 고객' 선택 줄과 '빨간 글자' 안내 줄을 없애고 항상 전체만 보이게 함(날짜와 '표로 보기'만 남김) (AD·FP 공통 버전), 원격 파일을 이름만 바꿔(예: admin.html) 올려도 바로 쓰도록 이용약관 동의 기록 키를 파일 이름별로 나눔(index.html이나 주소만으로 열면 기존 키 그대로) -->
+<!-- 2026-10-31 06:30 KST | 수정: 앱 버전 v12.258 (2026-10-31), 설정 메뉴는 FP 화면 구성·순서·문구를 AD에 맞추고(내 정보 안내 문구, 적색 라벨 수정·저장·테스트 출력 버튼 위치, AD 고유 항목은 유지), 가져오기는 AD 화면 구성·문구를 FP에 맞춤(백업 불러오기 아래 파일 선택·메시지 순서, 엑셀파일로 받기 안내·오류 문구, FP 데이터 구조는 유지) (AD·FP 공통 버전), 원격 파일을 이름만 바꿔(예: admin.html) 올려도 바로 쓰도록 이용약관 동의 기록 키를 파일 이름별로 나눔(index.html이나 주소만으로 열면 기존 키 그대로) -->
 <!-- 2026-10-29 KST | 수정: 앱 버전 v12.242, 달력 칸(월간·주간)의 파랑 이름 ✔·취소선을 '일정 없이 기록된 상담'의 완료 체크에도 반영 (그날 그 고객의 일정과 상담 기록이 모두 완료되면 표시, 상담 기록의 완료 값을 달력 색인에 함께 저장, 체크하면 달력이 바로 갱신) (이전 수정: 2026-10-29 00:50 KST | 수정: 앱 버전 v12.241, 같은 날 같은 고객의 일정이 모두 완료되면 달력 칸(월간·주간)의 파랑 이름에도 ✔와 취소선 표시 (일정 카드·경고·팝업 등 나머지는 그대로) -->
 <!-- 2026-10-28 KST | 수정: 앱 버전 v12.240, 달력에서 오늘이 아닌 다른 날짜를 누르면 달력 아래 '완료하지 않은 일정' 경고 줄을 숨기고, 오늘 날짜를 보면 다시 표시 (달력 탭의 ⚠ 숫자·경고 팝업·날짜별 일정 카드의 경고 표시는 그대로) -->
 <!-- 2026-10-28 KST | 수정: 앱 버전 v12.239, '완료하지 않은 일정' 경고 줄과 경고 팝업의 각 일정에 '연기·취소' 버튼 추가 - 누르면 '취소할까요, 다음으로 연기할까요?'를 묻고, 취소는 확인 후 삭제(연결된 고객 기록 삭제 여부도 확인), 연기는 새 날짜·시작/끝 시간을 고르면(바뀐 일시를 바로 표시) 일정과 연결된 고객 파일 기록을 그 일시로 옮기고 달력이 그 날짜로 이동(기간 일정은 같은 기간만큼 함께 이동, 원래 날짜는 postponedFrom에 기록) -->
@@ -741,7 +741,7 @@ window.REMOTE_READY = (async () => {
     <!-- 설정 -->
     <div class="hide" id="setBox">
       <div class="sec">내 정보</div>
-      <div class="srow" data-tg="pInfo"><div class="tx"><div class="t">내 정보</div></div><div class="r">›</div></div>
+      <div class="srow" data-tg="pInfo"><div class="tx"><div class="t">내 정보</div><div class="d">회사명, 이름, 우편번호, 주소1·주소2, 명함·사업자등록증·통장</div></div><div class="r">›</div></div>
       <div class="spanel hide" id="pInfo">
         <label>회사명</label><input id="setCompany">
         <label>이름</label><input id="setName">
@@ -776,7 +776,7 @@ window.REMOTE_READY = (async () => {
       </div>
 
       <div class="sec">고객 분류</div>
-      <div class="srow" data-tg="pGrade"><div class="tx"><div class="t">분류 바 이름·컬러</div><div class="d">고객 목록의 색 칸 이름과 색 정하기 (최대 8개 · 수정 후 저장)</div></div><div class="r">›</div></div>
+      <div class="srow" data-tg="pGrade"><div class="tx"><div class="t">분류 바 이름·컬러</div><div class="d">고객 목록의 색 칸 이름과 색 정하기 (최대 8개 · 수정 후 저장 · '미분류'는 지울 수 없고 칸만 옮길 수 있음)</div></div><div class="r">›</div></div>
       <div class="spanel hide" id="pGrade">
         <div class="gcrows">
         <div class="gcrow"><i class="gkY"></i><input id="gnY" class="gcn" maxlength="10" placeholder="사용 안 함"><input type="color" class="gcsw" id="gcY" aria-label="분류 컬러 Y" disabled></div>
@@ -858,15 +858,15 @@ window.REMOTE_READY = (async () => {
             <select id="setSeq" class="hide"><option value="1">발신인 우선</option><option value="0">1:1</option></select>
           </div>
         </details>
-        <div class="btnrow" style="margin-top:4px">
+        <div class="sub" id="paperInfo" style="margin:0 0 8px"></div>
+        <div style="font-weight:700;margin:8px 0 4px">적색 라벨 그림 (입력한 값 그대로 · 눌러서 확대)</div>
+        <div id="paperPreview"></div>
+        <div class="btnrow" style="margin-top:10px">
           <button id="paperEditBtn" type="button">수정</button>
           <button id="paperSaveBtn" type="button" disabled>저장</button>
         </div>
         <button id="paperTestBtn" type="button" class="gray" style="margin-top:8px">프린터 선택 · 테스트 출력 (적색 라벨)</button>
         <div class="msg" id="paperMsg"></div>
-        <div class="sub" id="paperInfo" style="margin:0 0 8px"></div>
-        <div style="font-weight:700;margin:8px 0 4px">적색 라벨 그림 (입력한 값 그대로 · 눌러서 확대)</div>
-        <div id="paperPreview"></div>
       </div>
       <div class="srow" data-tg="pLabelSet"><div class="tx"><div class="t">라벨 문자 배치</div><div class="d">라벨 안 글자 영역(여백) · 우편번호·주소·이름 상자 위치와 크기 · 프린터 맞춤</div></div><div class="r">›</div></div>
       <div class="spanel hide" id="pLabelSet">
@@ -1705,6 +1705,8 @@ function nameHit(name, q){
 const IS_MOBILE = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent) || (window.matchMedia && matchMedia("(pointer:coarse)").matches);
 const GCOL_DEFAULT = { Y: "#f5b800", G: "#2da44e", S: "#5ac8fa", R: "#e5484d", L: "#84cc16", B: "#2f6bff", P: "#a855f7", N: "#8e8e93" };   // 분류 컬러 기본값 (설정에서 바꾼 색은 settings.gcol 에 저장)
 const GRADE_SLOTS = ["Y", "G", "S", "R", "L", "B", "P", "N"];   // 색 칸 8개(2줄×4단, 왼쪽에서 오른쪽·위에서 아래 순): 노랑·녹색·연파랑·빨강 / 연두·파랑·보라·미분류(회색) 고정, 이름은 설정에서 정함
+const UNCLS = "미분류";   // 지울 수 없는 기본 분류 이름 (이 이름이 들어 있는 색 칸은 옮기거나 컬러만 바꿀 수 있음)
+const unclsKey = () => { const g = curSettings().grades || {}; return GRADE_SLOTS.find(k => g[k] === UNCLS) || ""; };   // '미분류' 이름이 들어 있는 색 칸 (새 카드를 등록할 때 분류를 고르지 않으면 이 칸으로 저장)
 const gradeMap = () => { const g = curSettings().grades || {}, o = {}; GRADE_SLOTS.forEach(k => { if (g[k]) o[k] = g[k]; }); return o; };   // 이름이 있는 바만 사용
 const gradeNorm = v => GRADE_SLOTS.filter(k => (v || "").includes(k)).join("");   // 저장값은 글자를 이어 붙인 문자열 (예: "RY" = 적색+노랑, 이전 단일 값 "Y"도 그대로 사용)
 const gradeSet = v => { const g = gradeMap(); return GRADE_SLOTS.filter(k => g[k] && (v || "").includes(k)).join(""); };   // 이름이 있는 분류만
@@ -1712,7 +1714,7 @@ let formGrade = "";   // 신규 등록·수정 폼에서 고른 분류
 let gradeFilter = "";   // 고객 목록에서 박스로 고른 분류 (빈 값 = 전체) — 달력에서 날짜로 들어온 목록(dayFilter)에서는 쓰지 않고 그대로 보관만 함
 let dayGrade = "";   // 달력에서 날짜로 들어온 목록 안에서만 쓰는 분류 선택 (들어올 때 항상 전체)
 const curGrade = () => dayFilter ? dayGrade : gradeFilter;   // 지금 목록에 적용되는 분류
-const gradeHit = c => { const f = curGrade(); if (!f) return true; const gs = gradeSet(c.grade); return gs.includes(f) || (f === "N" && !gs); };   // 미분류(N) 칸: 분류를 하나도 고르지 않은 고객도 함께 보임 (아래 경고 문구의 대상과 같게)
+const gradeHit = c => { const f = curGrade(); if (!f) return true; const gs = gradeSet(c.grade); return gs.includes(f) || (f === unclsKey() && !gs); };   // 미분류(N) 칸: 분류를 하나도 고르지 않은 고객도 함께 보임 (아래 경고 문구의 대상과 같게)
 function fillBars(w, grade){   // 색 칸 8개(2줄×4단, 고정 위치): 선택된 분류(여러 개 가능)만 색을 채우고 나머지는 빈 박스
   w.textContent = ""; const g = gradeMap();
   GRADE_SLOTS.forEach(k => { const i = document.createElement("i"); i.className = "gk" + k + ((g[k] && (grade || "").includes(k)) ? " on" : ""); if (g[k]) i.title = g[k]; w.append(i); });
@@ -2431,9 +2433,9 @@ async function newFromSched(content, created){   // 일정에 적힌 등록 안 
     if (keys.has(key) || seen.has(key)) return; seen.add(key); guess.push({ nm, org });
   });
   let ok = guess;
-  if (guess.length && SCHED_AUTO_CONFIRM) ok = confirm("일정에서 새 고객으로 보이는 이름이 있습니다.\n\n" + guess.map(x => (x.org ? "거래처: " : "개인: ") + x.nm).join("\n") + "\n\n새로 등록할까요? (분류는 '미지정'으로 저장됩니다. 취소하면 일정만 저장합니다)") ? guess : [];
+  if (guess.length && SCHED_AUTO_CONFIRM) ok = confirm("일정에서 새 고객으로 보이는 이름이 있습니다.\n\n" + guess.map(x => (x.org ? "거래처: " : "개인: ") + x.nm).join("\n") + "\n\n새로 등록할까요? (분류는 '미분류'으로 저장됩니다. 취소하면 일정만 저장합니다)") ? guess : [];
   const list = todo.concat(ok); if (!list.length) return;
-  const base = () => ({ ownerUid: auth.currentUser.uid, phone: "", fax: "", zip: "", addr: "", memo: "", grade: "", regDate: today(), consent: { privacy: false, dm: false, at: serverTimestamp(), source: "일정 자동 등록" }, createdAt: serverTimestamp() });
+  const base = () => ({ ownerUid: auth.currentUser.uid, phone: "", fax: "", zip: "", addr: "", memo: "", grade: unclsKey(), regDate: today(), consent: { privacy: false, dm: false, at: serverTimestamp(), source: "일정 자동 등록" }, createdAt: serverTimestamp() });
   let any = false;
   for (const x of list) {
     try {
@@ -2955,7 +2957,7 @@ function startEdit(c){
   $("saveMsg").textContent = ""; showTab("form");
 }
 function resetForm(){
-  editingId = null; $("name").placeholder = ""; $("custForm").reset(); $("regDate").value = today(); showAddrPrev(); setFormGrade(""); setPeopleUI([]); setAreaUI("phone", ""); setAreaUI("phone2", ""); setAreaUI("fax", "");
+  editingId = null; $("name").placeholder = ""; $("custForm").reset(); $("regDate").value = today(); showAddrPrev(); setFormGrade(unclsKey()); setPeopleUI([]); setAreaUI("phone", ""); setAreaUI("phone2", ""); setAreaUI("fax", "");
   $("formTitle").textContent = "신규 등록"; $("saveBtn").textContent = "저장";
   $("cancelBtn").classList.add("hide"); $("saveMsg").textContent = "";
 }
@@ -3149,7 +3151,7 @@ const mergeSettings = d => {
 const mergeGcol = g => { const o = {}; GRADE_SLOTS.forEach(k => { const v = g && typeof g[k] === "string" && /^#[0-9a-fA-F]{6}$/.test(g[k]) ? g[k].toLowerCase() : ""; if (v && v !== GCOL_DEFAULT[k]) o[k] = v; }); return o; };   // 기본과 다른 색만 보관
 const imgOk = v => typeof v === "string" && v.startsWith("data:image/") ? v : "";
 const mergeCard = c => ({ img: imgOk(c && c.img), biz: imgOk(c && c.biz), bank: imgOk(c && c.bank), msg: c && typeof c.msg === "string" ? c.msg.slice(0, 500) : DEFAULT_SETTINGS.card.msg });
-const mergeGrades = g => { const o = {}; GRADE_SLOTS.forEach(k => { o[k] = g && typeof g[k] === "string" ? g[k].trim().slice(0, 10) : DEFAULT_SETTINGS.grades[k]; }); return o; };
+const mergeGrades = g => { const o = {}; GRADE_SLOTS.forEach(k => { o[k] = g && typeof g[k] === "string" ? g[k].trim().slice(0, 10) : DEFAULT_SETTINGS.grades[k]; }); if (!o.N && !GRADE_SLOTS.some(k => o[k] === UNCLS)) o.N = UNCLS; return o; };   // 마지막 칸(N)이 비어 있고 '미분류' 이름이 어느 칸에도 없으면(저장값이 비어 있는 경우 등) N칸을 기본 이름 '미분류'로 표시 (미분류를 다른 칸으로 옮겨 둔 경우는 그대로)
 function labelCols(v){ return Math.min(Math.max(Math.round(Number(v)) || 2, 1), 3); }
 function labelValOk(k, v){ return Number.isFinite(v); }   // 숫자인지만 확인 (범위 조건 없음)
 const SET_MAP = { rows:"setRows", cols:"setCols", seq:"setSeq", offX:"setOffX", offY:"setOffY", marginY:"setMarginY", xL:"setXL", col2X:"setCol2X", row2Y:"setRow2Y", nameTop:"setNameTop", szZip:"setSzZip", szAddr:"setSzAddr", szName:"setSzName", lblW:"pgW", lblH:"pgH", padT:"setPadT", padB:"setPadB", padL:"setPadL", padR:"setPadR", zipX:"setZipX", zipY:"setZipY", a1X:"setA1X", a1Y:"setA1Y", a2X:"setA2X", a2Y:"setA2Y", nameX:"setNameX", szAddr2:"setSzAddr2" };
@@ -3368,6 +3370,7 @@ $("gradeSaveBtn").onclick = async () => {   // 분류 바 이름 저장: 이미 
   if ($("gradeSaveBtn").disabled) return;
   const g0 = curSettings().grades || {}, old = {}, nw = {};
   GRADE_SLOTS.forEach(k => { old[k] = (g0[k] || "").trim(); nw[k] = $("gn" + k).value.trim().slice(0, 10); });
+  if (!GRADE_SLOTS.some(k => nw[k] === UNCLS)) { m.textContent = "'미분류'는 지울 수 없습니다. 다른 색 칸으로 옮기려면 그 칸의 이름을 '미분류'로 적어 주세요."; return; }   // 미분류 이름은 어느 칸엔가 항상 있어야 함 (새 카드의 기본 분류)
   const changed = GRADE_SLOTS.filter(k => old[k] !== nw[k]);
   const newGcol = mergeGcol(readGcol()), oldGcol = mergeGcol(curSettings().gcol), colChanged = GRADE_SLOTS.some(k => (newGcol[k] || GCOL_DEFAULT[k]) !== (oldGcol[k] || GCOL_DEFAULT[k]));   // 컬러가 바뀌었는지
   if (!changed.length && colChanged) {   // 이름은 그대로이고 컬러만 바꾼 경우: 컬러만 저장
@@ -4232,12 +4235,12 @@ $("custForm").onsubmit = async e => {
     if (!confirm("'" + (old.name || "회사") + "' 회사를 개인으로 바꿀까요?" + (people.length > 1 ? "\n\n소속 개인 " + people.length + "명은 각각 따로 개인으로 등록되고, 기록도 각자에게 옮겨집니다." : "") + "\n\n기존 기록은 개인 기록으로 그대로 유지됩니다.")) return;
   }
   btn.disabled = true; msg.className = "msg"; msg.textContent = "저장 중...";
-  const data = {}; FIELDS.forEach(f => data[f] = $(f).value.trim()); data.phone = phoneOnly ? "" : $("phone").value.trim(); if (phoneOnly) data.phoneLabel = ""; data.addr = composeAddr(); data.grade = gradeNorm(formGrade); data.memo = $("fMemo").value.trim();   // 비고 = 기존 상담메모 칸
+  const data = {}; FIELDS.forEach(f => data[f] = $(f).value.trim()); data.phone = phoneOnly ? "" : $("phone").value.trim(); if (phoneOnly) data.phoneLabel = ""; data.addr = composeAddr(); data.grade = gradeNorm(formGrade) || unclsKey(); data.memo = $("fMemo").value.trim();   // 비고 = 기존 상담메모 칸
   const old0 = { gender: "", birth: "", birthLunar: false, job: "", email: "", insurance: "" };   // 예전 방식 칸은 비움
   const cons = () => ({ "consent.privacy": $("consent").checked, "consent.dm": $("dmConsent").checked });
   const mkNew = (extra) => { const customer = { ownerUid: auth.currentUser.uid, ...data, ...extra, regDate: data.regDate || today(),   // 등록일: 비워 두면 오늘
       consent: { privacy: $("consent").checked, dm: $("dmConsent").checked, at: serverTimestamp() }, createdAt: serverTimestamp() }; return customer; };
-  const clearForm = () => { $("custForm").reset(); $("regDate").value = today(); showAddrPrev(); setFormGrade(""); setPeopleUI([]); setAreaUI("phone", ""); setAreaUI("phone2", ""); setAreaUI("fax", ""); };
+  const clearForm = () => { $("custForm").reset(); $("regDate").value = today(); showAddrPrev(); setFormGrade(unclsKey()); setPeopleUI([]); setAreaUI("phone", ""); setAreaUI("phone2", ""); setAreaUI("fax", ""); };
   const notify = async (id, customer) => {   // 알림은 민감정보 없이 (마스킹된 이름 + 문서ID만)
     const nm = customer.name || "", masked = nm.slice(0,1) + "○".repeat(Math.max(nm.length-1,0));
     await HOOK.onCustomerCreated({ id, masked, consent: customer.consent });   // 외부 알림: 원격 구간에서만 동작
@@ -4290,7 +4293,7 @@ $("custForm").onsubmit = async e => {
 };
 
 // ===== 설정 확장: 로그인 · 프린터 · 라벨 리스트 · 백업 · 버전 · 초기화 =====
-const APP_VERSION = "v12.255 (2026-10-30)";   // ← 파일을 수정할 때마다 이 숫자를 올립니다 (자동 업데이트가 이 값을 비교)
+const APP_VERSION = "v12.258 (2026-10-31)";   // ← 파일을 수정할 때마다 이 숫자를 올립니다 (자동 업데이트가 이 값을 비교)
 function lsGet(k, d){ try { return JSON.parse(localStorage.getItem(k)) ?? d; } catch { return d; } }
 function lsSet(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch {} }
 // 원격 전송 상태 · 기기 복사 · 외부 알림 · 로그인 화면 동작은 파일 맨 위 [원격 구간]에 있습니다 (로컬일 때는 [로컬 구간]의 기본 동작)
@@ -4676,7 +4679,7 @@ async function xlBuildPlan(wb, m){
         if (newByKey.has(key)) { warn("고객", r.n, "파일 안에 같은 회사명·대표전화 고객이 있어 건너뜀"); return; }
         const ref = doc(collection(db, "customers"));
         const rec = { ref, logs: [], data: { ownerUid: uid, name, kind: isP ? "person" : "company", phone, phoneLabel: f.phoneLabel || "", phone2: f.phone2 || "", phone2Label: f.phone2Label || "", fax: f.fax || "", people: (isP && !(f.people && f.people.length) ? [{ name, rank: "", dept: "", phone: "", email: "" }] : (f.people || [])).map(p => ({ ...p, id: newPid() })), zip: f.zip || "", addr: f.addr || "", memo: f.memo || "", regDate: f.regDate || today(),
-          consent: { privacy: prC ?? true, dm: dmC ?? true, at: serverTimestamp(), source: "엑셀 가져오기" }, dmMonths: [], lastDmDate: "", grade: f.grade || "", createdAt: serverTimestamp() } };
+          consent: { privacy: prC ?? true, dm: dmC ?? true, at: serverTimestamp(), source: "엑셀 가져오기" }, dmMonths: [], lastDmDate: "", grade: f.grade || unclsKey(), createdAt: serverTimestamp() } };
         P.cAdd.push(rec); newByKey.set(key, rec);
       }
     });
@@ -5044,7 +5047,7 @@ const abMemo = (a, np) => np <= 1 && a.length === 1 ? a[0].m : a.map(x => (x.n ?
 async function abApply(R, m){   // 계획대로 저장 (100건씩) → 목록 새로고침
   const uid = auth.currentUser.uid, ops = [];
   const mk = (name, kind, g) => ({ ownerUid: uid, name, kind, phone: g.phone || "", phoneLabel: g.phoneLabel || "", phone2: g.phone2 || "", phone2Label: g.phone2Label || "", fax: g.fax || "", people: g.people, zip: g.zip || "", addr: g.addr || "", memo: g.memos ? abMemo(g.memos, g.people.length) : (g.memo || ""), regDate: today(),
-    consent: { privacy: true, dm: true, at: serverTimestamp(), source: "주소록 가져오기" }, dmMonths: [], lastDmDate: "", grade: gradeNorm(g.grade || ""), createdAt: serverTimestamp() });
+    consent: { privacy: true, dm: true, at: serverTimestamp(), source: "주소록 가져오기" }, dmMonths: [], lastDmDate: "", grade: gradeNorm(g.grade || "") || unclsKey(), createdAt: serverTimestamp() });
   if (Object.keys(R.newG).length) {   // 새 분류 이름을 빈 색 칸에 먼저 등록
     const nextSet = { ...curSettings(), grades: { ...curSettings().grades, ...R.newG } };
     await setDoc(doc(db, "users", uid), nextSet); settings = nextSet; fillGradeInputs(); renderGradeUI();
@@ -5535,7 +5538,7 @@ function aidaPick(a, cands, prog){   // 자동으로 한 명을 정하지 못할
 }
 async function aidaNewCustomer(a, kind){   // 통화 상대를 새 고객으로 등록 (회사: 회사명만·번호가 휴대폰이면 이름 없는 연락처 / 개인: 일반 개인) → 문서 id
   const uid = auth.currentUser.uid, dg = digitsOf(a.phone), ph = a.phone ? abFmtPhone(a.phone) : "", mobile = /^01\d/.test(dg);
-  const base = { ownerUid: uid, fax: "", zip: "", addr: "", memo: "", regDate: today(), consent: { privacy: true, dm: true, at: serverTimestamp(), source: "에이닷 통화요약" }, dmMonths: [], lastDmDate: "", grade: gradeMap().N ? "N" : "", createdAt: serverTimestamp() };   // 에이닷으로 새로 등록하면 '미분류'
+  const base = { ownerUid: uid, fax: "", zip: "", addr: "", memo: "", regDate: today(), consent: { privacy: true, dm: true, at: serverTimestamp(), source: "에이닷 통화요약" }, dmMonths: [], lastDmDate: "", grade: unclsKey(), createdAt: serverTimestamp() };   // 에이닷으로 새로 등록하면 '미분류'
   const data = kind === "person"
     ? { ...base, name: a.name || ph, kind: "person", phone: "", people: [{ id: newPid(), name: a.name || ph, rank: a.name ? "" : "사원", dept: "", phone: ph, email: "" }] }   // 이름이 없으면(번호만) 번호가 이름 자리에 표시되고 직책은 기본값 '사원'
     : { ...base, name: a.name, kind: "company", phone: mobile ? "" : ph, people: mobile && ph ? [{ id: newPid(), name: "", rank: "", dept: "", phone: ph, email: "" }] : [] };
