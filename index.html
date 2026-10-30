@@ -2698,7 +2698,7 @@ function tsDraw(){
   const keep = bg.scrollTop; bg.textContent = "";
   const box = mk("div", "ts-box"); bg.append(box);
   const hd = mk("div", "ts-hd"), cl = mk("button", "ts-x", "닫기"); cl.type = "button"; cl.onclick = tsClose;
-  hd.append(mk("b", "", "📋 " + dayLabel(tsDate) + " 정리"), cl); box.append(hd);
+  hd.append(mk("b", "", "📋 " + dayLabel(tsDate) + " 정리"), cl); box.append(hd); nwBar(box);
   if (tsErr) box.append(mk("div", "msg err", tsErr));
   if (tsRows === null) { box.append(mk("div", "ts-note", "불러오는 중...")); return; }
   if (!tsRows.length) { box.append(mk("div", "ts-note", "이 날 등록된 일정과 기록이 없습니다.")); return; }
@@ -2728,6 +2728,107 @@ function tsDraw(){
   });
   if (nDone === total) box.append(mk("div", "ts-fin", "오늘 항목을 모두 완료했습니다."));
   bg.scrollTop = keep;
+}
+// ===== 업무노트 내보내기: '표로 보기'의 날짜별 정리(일정+상담 기록)를 마크다운 노트 묶음(zip)으로 만들어 공유·저장. 회사·개인 이름은 [[링크]]로 이어짐 =====
+let nw = { busy: false, msg: "", file: null };
+function nwZip(files){   // 압축 없이 담는 최소 zip 만들기 (한글 파일 이름은 UTF-8)
+  const te = new TextEncoder(), T = new Uint32Array(256);
+  for (let n = 0; n < 256; n++) { let c = n; for (let k = 0; k < 8; k++) c = c & 1 ? 0xEDB88320 ^ (c >>> 1) : c >>> 1; T[n] = c >>> 0; }
+  const crc = b => { let c = 0xFFFFFFFF; for (let i = 0; i < b.length; i++) c = T[(c ^ b[i]) & 255] ^ (c >>> 8); return (c ^ 0xFFFFFFFF) >>> 0; };
+  const d = new Date(), dt = ((d.getFullYear() - 1980) << 9 | (d.getMonth() + 1) << 5 | d.getDate()) & 0xFFFF, tm = (d.getHours() << 11 | d.getMinutes() << 5 | d.getSeconds() >> 1) & 0xFFFF;
+  const parts = [], cen = []; let off = 0;
+  files.forEach(f => {
+    const nb = te.encode(f.name), db = te.encode(f.text), cr = crc(db);
+    const lh = new DataView(new ArrayBuffer(30));
+    lh.setUint32(0, 0x04034b50, true); lh.setUint16(4, 20, true); lh.setUint16(6, 0x0800, true); lh.setUint16(10, tm, true); lh.setUint16(12, dt, true);
+    lh.setUint32(14, cr, true); lh.setUint32(18, db.length, true); lh.setUint32(22, db.length, true); lh.setUint16(26, nb.length, true);
+    parts.push(new Uint8Array(lh.buffer), nb, db);
+    const ch = new DataView(new ArrayBuffer(46));
+    ch.setUint32(0, 0x02014b50, true); ch.setUint16(4, 20, true); ch.setUint16(6, 20, true); ch.setUint16(8, 0x0800, true); ch.setUint16(12, tm, true); ch.setUint16(14, dt, true);
+    ch.setUint32(16, cr, true); ch.setUint32(20, db.length, true); ch.setUint32(24, db.length, true); ch.setUint16(28, nb.length, true); ch.setUint32(42, off, true);
+    cen.push(new Uint8Array(ch.buffer), nb); off += 30 + nb.length + db.length;
+  });
+  const cl = cen.reduce((a, b) => a + b.length, 0), e = new DataView(new ArrayBuffer(22));
+  e.setUint32(0, 0x06054b50, true); e.setUint16(8, files.length, true); e.setUint16(10, files.length, true); e.setUint32(12, cl, true); e.setUint32(16, off, true);
+  return new Blob([...parts, ...cen, new Uint8Array(e.buffer)], { type: "application/zip" });
+}
+function nwBar(box){   // '표로 보기' 창 위쪽의 내보내기 줄
+  const row = document.createElement("div"); row.style.cssText = "display:flex;flex-wrap:wrap;gap:6px;margin:8px 0;align-items:center";
+  const b = (t, fn, dis) => { const e = document.createElement("button"); e.type = "button"; e.textContent = t; e.disabled = !!dis; e.onclick = fn; e.style.cssText = "padding:8px 12px;font-size:14px"; row.append(e); };
+  if (nw.file) {
+    if (navigator.canShare && navigator.canShare({ files: [nw.file] })) b("📤 공유하기 (노트 앱으로)", () => navigator.share({ files: [nw.file], title: nw.file.name }).catch(e => { if (e && e.name !== "AbortError") alert("공유하지 못했습니다: " + e.message); }));
+    b("💾 파일로 저장", () => saveFile(nw.file));
+    b("다시 만들기", () => { nw.file = null; nw.msg = ""; tsDraw(); });
+  } else b(nw.busy ? "만드는 중..." : "📓 업무노트로 내보내기", nwExport, nw.busy);
+  if (nw.msg) { const sp = document.createElement("span"); sp.style.cssText = "font-size:12px;color:var(--sub)"; sp.textContent = nw.msg; row.append(sp); }
+  box.append(row);
+}
+async function nwExport(){   // 모든 날짜의 일정·상담 기록을 읽어 일지/회사/개인 노트로 만듦 ('표로 보기'와 같은 규칙: 일정에 이미 연결된 상담 기록은 일정 한 줄로만)
+  if (nw.busy || !auth.currentUser) return;
+  nw.busy = true; nw.msg = "일정을 읽는 중..."; tsDraw();
+  try {
+    await schedLoad(); if (schedErr) throw new Error(schedErr);
+    const nm = s => String(s || "").replace(/[\\/:*?"<>|#^\[\]]/g, " ").replace(/\s+/g, " ").trim();
+    const all = customers || [], ctx = schedNameCtx(), sl = schedList || [], byId = ctx.byId, ent = [];
+    const addRef = (arr, c, pname) => { pname = pname || ""; if (c && !arr.some(r => r.c.id === c.id && r.pname === pname)) arr.push({ c, pname }); };
+    const linked = new Set(), schIds = new Set(sl.map(x => x.id));
+    sl.forEach(x => { if (x.logId) linked.add(x.logId); (x.links || []).forEach(l => { if (l.lid) linked.add(l.lid); if (l.elid) linked.add(l.elid); }); });
+    sl.forEach(x => {
+      const raw = String(x.content || "").trim(), refs = [], per = !!x.endDate && x.endDate > x.date;
+      (x.links || []).forEach(l => addRef(refs, byId.get(l.cid), l.pname));
+      if (x.custId) { const c = byId.get(x.custId); if (c) { const m = /^\[상담\]\s+(.+?)(?:\s+-\s|$)/.exec(raw); addRef(refs, c, m && c.name && m[1].startsWith(c.name + " ") ? m[1].slice(c.name.length + 1).trim() : ""); } }
+      schedMatches(x.content, ctx).forEach(h => addRef(refs, h.c, h.pname));
+      const tx = x.custId && refs.length ? (raw.replace(/^\[상담\]\s+.+?(?:\s+-\s+|$)/, "").trim() || raw) : raw;
+      schEnds(x, k => ent.push({ date: k, kind: "일정", time: timeRange(x), sort: x.time || "99:99", text: tx, sub: per ? mdK(x.date) + " ~ " + mdK(x.endDate) : "", done: !!x.done, refs }));
+    });
+    for (let s0 = 0; s0 < all.length; s0 += 10) {
+      await Promise.all(all.slice(s0, s0 + 10).map(async c => {
+        const sn = await getDocs(query(collection(db, "customers", c.id, "logs"), where("ownerUid", "==", auth.currentUser.uid)));
+        sn.docs.forEach(d => {
+          const x = { id: d.id, ...d.data() }; if (x.type !== "상담" || !x.date) return;
+          if (linked.has(x.id) || (x.fromSched && schIds.has(x.fromSched)) || (x.schedId && schIds.has(x.schedId))) return;
+          const refs = []; addRef(refs, c, x.pname);
+          ent.push({ date: x.date, kind: "기록", time: "", sort: "99:99", text: String(x.content || "").trim() || "(내용 없음)", sub: "", done: !!x.done, refs });
+        });
+      }));
+      nw.msg = "상담 기록 읽는 중 " + Math.min(s0 + 10, all.length) + "/" + all.length; tsDraw();
+    }
+    if (!ent.length) throw new Error("내보낼 일정이나 기록이 없습니다.");
+    const cname = c => nm(c.name || (isPersonDoc(c) ? personNm((Array.isArray(c.people) ? c.people[0] : null) || {}) : ""));
+    const P = new Map(), C = new Map(), D = new Map();
+    ent.forEach(e => {
+      e.cn = []; e.pp = [];
+      e.refs.forEach(r => {
+        const isP = isPersonDoc(r.c), cn = isP ? "" : cname(r.c), pn = r.pname ? nm(schedWho(r.c, r.pname)) : (isP ? cname(r.c) : "");
+        if (cn && !e.cn.includes(cn)) e.cn.push(cn);
+        if (pn && !e.pp.some(p => p.n === pn)) e.pp.push({ n: pn, co: cn });
+      });
+      e.pn = e.pp.map(p => p.n);
+      (D.get(e.date) || D.set(e.date, []).get(e.date)).push(e);
+      e.pp.forEach(p => (P.get(p.n) || P.set(p.n, { co: p.co, list: [] }).get(p.n)).list.push(e));
+      e.cn.forEach(n => (C.get(n) || C.set(n, { ppl: new Set(), list: [] }).get(n)).list.push(e));
+      e.pp.forEach(p => { if (p.co && C.has(p.co)) C.get(p.co).ppl.add(p.n); });
+    });
+    const lm = new Map();   // 본문에 나온 이름 → 노트 이름 (같은 이름이 여러 카드에 있으면 건너뜀)
+    ctx.cand.forEach(x => {
+      if (x.key.length < 2 || ctx.cnt[x.key] !== 1) return;
+      const rawN = String(x.pname || (isPersonDoc(x.c) ? cname(x.c) : x.c.name) || "").trim(), lab = x.pname ? nm(schedWho(x.c, x.pname)) : nm(rawN);
+      if (rawN.length >= 2 && (P.has(lab) || C.has(lab))) lm.set(rawN, lab);
+    });
+    const nn = [...lm.keys()].sort((a, b) => b.length - a.length);
+    const re = nn.length ? new RegExp(nn.map(n => n.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|"), "g") : null;
+    const w = n => "[[" + n + "]]", L = t => re ? t.replace(re, m => { const lb = lm.get(m); return lb === m ? w(m) : "[[" + lb + "|" + m + "]]"; }) : t, body = t => t.split("\n").map(l => "  " + L(l)).join("\n");
+    const head = (e, wd) => "- [" + (e.done ? "x" : " ") + "] **" + (wd ? w(e.date) + " " : "") + (e.time ? e.time + " · " : "") + e.kind + "**" + ([...e.cn, ...e.pn].length ? " · " + [...e.cn, ...e.pn].map(w).join(" · ") : "") + (e.sub ? " · 📅 " + e.sub : "");
+    const cmp = (a, b) => a.sort.localeCompare(b.sort), ord = (a, b) => b.date.localeCompare(a.date) || cmp(a, b), lst = v => v.list.slice().sort(ord).map(e => head(e, true) + "\n" + body(e.text)).join("\n\n");
+    const R = "업무노트/", files = [], dates = [...D.keys()].sort();
+    dates.forEach((k, i) => files.push({ name: R + "일지/" + k + ".md", text: "# " + k + " (" + KDOW[keyDate(k).getDay()] + ")\n\n" + (i ? "이전: " + w(dates[i - 1]) + "　" : "") + (i < dates.length - 1 ? "다음: " + w(dates[i + 1]) : "") + "\n\n" + D.get(k).slice().sort(cmp).map(e => head(e) + "\n" + body(e.text)).join("\n\n") + "\n" }));
+    C.forEach((v, n) => files.push({ name: R + "회사/" + n + ".md", text: "# " + n + "\n\n담당자·구성원: " + ([...v.ppl].map(w).join(", ") || "-") + "\n\n## 기록 (최신순)\n\n" + lst(v) + "\n" }));
+    P.forEach((v, n) => files.push({ name: R + "개인/" + n + ".md", text: "# " + n + "\n\n" + (v.co ? "회사: " + w(v.co) + "\n\n" : "") + "## 기록 (최신순)\n\n" + lst(v) + "\n" }));
+    files.push({ name: R + "업무노트 목차.md", text: "# 업무노트 목차\n\n만든 날: " + today() + " · 항목 " + ent.length + "건\n\n## 회사\n" + ([...C.keys()].sort().map(n => "- " + w(n)).join("\n") || "-") + "\n\n## 개인\n" + ([...P.keys()].sort().map(n => "- " + w(n)).join("\n") || "-") + "\n\n## 날짜 (최신순)\n" + dates.slice().reverse().map(k => "- " + w(k)).join("\n") + "\n" });
+    nw.file = new File([nwZip(files)], "업무노트_" + today() + ".zip", { type: "application/zip" });
+    nw.msg = "일지 " + dates.length + "일 · 회사 " + C.size + "곳 · 개인 " + P.size + "명";
+  } catch (e) { nw.msg = ""; alert("업무노트를 만들지 못했습니다: " + (e.message || e)); }
+  nw.busy = false; tsDraw();
 }
 document.addEventListener("keydown", ev => { if (ev.key === "Escape" && tsOpen && !todoPopIds) tsClose(); });
 renderCal();
