@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- 2026-10-30 14:04 KST | 수정: 앱 버전 v12.246 (2026-10-30), 업무노트 내보내기에 'iOS 메모로 보내기'(날짜별 텍스트 공유·복사) 추가 (AD·FP 공통 버전), 원격 파일을 이름만 바꿔(예: admin.html) 올려도 바로 쓰도록 이용약관 동의 기록 키를 파일 이름별로 나눔(index.html이나 주소만으로 열면 기존 키 그대로) -->
+<!-- 2026-10-30 14:20 KST | 수정: 앱 버전 v12.247 (2026-10-30), '표로 보기'에서 당일·한달·1년·기간으로 전체를 볼 수 있게 하고, 업무노트 내보내기·메모로 보내기와 아래쪽 체크리스트 삭제 (AD·FP 공통 버전), 원격 파일을 이름만 바꿔(예: admin.html) 올려도 바로 쓰도록 이용약관 동의 기록 키를 파일 이름별로 나눔(index.html이나 주소만으로 열면 기존 키 그대로) -->
 <!-- 2026-10-29 KST | 수정: 앱 버전 v12.242, 달력 칸(월간·주간)의 파랑 이름 ✔·취소선을 '일정 없이 기록된 상담'의 완료 체크에도 반영 (그날 그 고객의 일정과 상담 기록이 모두 완료되면 표시, 상담 기록의 완료 값을 달력 색인에 함께 저장, 체크하면 달력이 바로 갱신) (이전 수정: 2026-10-29 00:50 KST | 수정: 앱 버전 v12.241, 같은 날 같은 고객의 일정이 모두 완료되면 달력 칸(월간·주간)의 파랑 이름에도 ✔와 취소선 표시 (일정 카드·경고·팝업 등 나머지는 그대로) -->
 <!-- 2026-10-28 KST | 수정: 앱 버전 v12.240, 달력에서 오늘이 아닌 다른 날짜를 누르면 달력 아래 '완료하지 않은 일정' 경고 줄을 숨기고, 오늘 날짜를 보면 다시 표시 (달력 탭의 ⚠ 숫자·경고 팝업·날짜별 일정 카드의 경고 표시는 그대로) -->
 <!-- 2026-10-28 KST | 수정: 앱 버전 v12.239, '완료하지 않은 일정' 경고 줄과 경고 팝업의 각 일정에 '연기·취소' 버튼 추가 - 누르면 '취소할까요, 다음으로 연기할까요?'를 묻고, 취소는 확인 후 삭제(연결된 고객 기록 삭제 여부도 확인), 연기는 새 날짜·시작/끝 시간을 고르면(바뀐 일시를 바로 표시) 일정과 연결된 고객 파일 기록을 그 일시로 옮기고 달력이 그 날짜로 이동(기간 일정은 같은 기간만큼 함께 이동, 원래 날짜는 postponedFrom에 기록) -->
@@ -363,13 +363,11 @@ window.REMOTE_READY = (async () => {
   #todaySheet .ts-tb td.ts-k{text-align:center;vertical-align:middle;padding:4px 0}
   #todaySheet input[type=checkbox]{width:24px;height:24px;padding:0;margin:0;flex:none;accent-color:#12a150;cursor:pointer}
   #todaySheet tr.ts-dn td.ts-n,#todaySheet tr.ts-dn td.ts-t{opacity:.55}#todaySheet tr.ts-dn td.ts-c{opacity:.55;text-decoration:line-through}
-  #todaySheet .ts-ckh{display:flex;align-items:center;gap:10px;margin:18px 0 6px;font-size:16px;font-weight:700}#todaySheet .ts-ckh span{flex:1;min-width:0}
-  #todaySheet .ts-cnt{font-size:14px;color:#12a150}
-  #todaySheet .ts-bar{height:8px;border-radius:4px;background:var(--cell);overflow:hidden;margin:0 0 6px}#todaySheet .ts-bar i{display:block;height:100%;background:#12a150}
-  #todaySheet .ts-ck{display:flex;align-items:center;gap:10px;margin:0;padding:9px 2px;border-top:1px solid var(--line);font-size:14px;color:var(--text);cursor:pointer}
-  #todaySheet .ts-ck span{flex:1;min-width:0;word-break:break-all}
-  #todaySheet .ts-ck.ts-dn span{opacity:.55;text-decoration:line-through}
-  #todaySheet .ts-fin{font-size:14px;font-weight:700;color:#12a150;margin:8px 2px 0}
+  #todaySheet .ts-rg{display:flex;gap:6px;margin:0 0 8px}
+  #todaySheet .ts-rg button{flex:1;padding:9px 4px;background:var(--cell);color:var(--text);border:1px solid var(--line)}
+  #todaySheet .ts-rg button.on{background:var(--main);color:#fff;border-color:transparent;font-weight:700}
+  #todaySheet .ts-cr{display:flex;align-items:center;gap:6px;margin:0 0 8px}#todaySheet .ts-cr input{flex:1;min-width:0;width:auto;padding:8px;font-size:14px}
+  #todaySheet .ts-tb td.ts-g{background:var(--cell);font-weight:700;font-size:13px;padding:6px 8px}
   #dsSeg:not(.hide){display:flex}#dsLinkChip:not(.hide){display:flex;flex-direction:column;gap:6px}   /* 일정/상담 고객 선택 줄, 연결 고객 줄: 인라인 display를 쓰면 .hide가 안 먹으므로 규칙으로 지정 */
   mark{background:#ffd54a;color:#1d2330;border-radius:2px;padding:0 1px}
   /* 모바일 좌우 밀림 방지: 가로 스크롤을 막고, 띄어쓰기 없는 긴 글(이메일·주소·숫자)은 줄을 바꿔서 보여줌 */
@@ -2267,7 +2265,7 @@ async function dsLoadLogs(cid, date){   // 한 고객의 그날 상담 기록 (�
   if (ok) dsLogCache.set(key, arr); return arr;
 }
 $("dsCancelBtn").onclick = resetSchedForm;
-$("dsTableBtn").onclick = () => tsOpenToday();   // 고른 날짜의 정리 창 (표 + 체크리스트)
+$("dsTableBtn").onclick = () => tsOpenToday();   // 표로 보기 창 (당일·한달·1년·기간)
 $("dsTimeClr").onclick = () => { $("dsTime").value = ""; $("dsEndTime").value = ""; };   // 시작·끝나는 시간 모두 비움 (아이폰은 시간 칸을 직접 비우기 어려워서)
 $("dsCust").onclick = () => {   // 그날 상담한 고객만 고객 목록에 표시
   const names = (calView() && calView()[calSel]) || []; if (!names.length) return;
@@ -2658,239 +2656,114 @@ setInterval(() => {   // 30초마다 경고 시각 확인 (앱이 보이는 동�
   if (document.visibilityState === "visible") { todoRender(); todoPopCheck(); }
 }, 30000);
 document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible" && auth.currentUser) { todoRender(); todoPopCheck(); } });
-// ===== 오늘 정리 창: 달력의 '오늘' 버튼(월간·주간 모두) → 오늘의 일정(약속)과 일정 없이 기록된 상담을 표(회사/개인 · 내용 · 시간 · 체크)로 모으고 끝에 체크리스트를 보여 줌 =====
+// ===== 표로 보기 창: 달력의 '오늘' 버튼(월간·주간 모두) → 오늘의 일정(약속)과 일정 없이 기록된 상담을 표(회사/개인 · 내용 · 시간 · 체크)로 모으고 당일·한달·1년·기간별로 보여 줌 =====
 // · 체크는 달력 아래 카드와 같은 값: 일정 = 일정의 done(schedSetDone), 일정 없이 기록된 상담 = 그 기록의 done(logSetDone). 어느 쪽에서 체크해도 둘 다 바로 바뀜
 // · 일정에 이미 연결된 상담 기록은 그 일정 한 줄로만 나옴 (달력 아래 화면과 같은 규칙)
-let tsOpen = false, tsDate = "", tsRows = null, tsErr = "";
+let tsOpen = false, tsDate = "", tsRows = null, tsErr = "", tsRange = "day", tsFrom = "", tsTo = "", tsMsg = "", tsSeq = 0;
 async function logSetDone(cid, lg, v){   // 상담 기록의 완료 체크 저장 (lg 는 달력에서 읽어 둔 그 기록 객체라 화면에 바로 반영됨. 저장에 실패하면 되돌림)
   const was = !!lg.done; lg.done = !!v; calLogMark(cid, lg, v);
   renderCal(); renderDaySched(); tsDraw();
   try { await updateDoc(doc(db, "customers", cid, "logs", lg.id), { done: !!v, updatedAt: serverTimestamp() }); }
   catch (e) { lg.done = was; calLogMark(cid, lg, was); renderCal(); renderDaySched(); tsDraw(); alert("완료 표시를 저장하지 못했습니다: " + (e.message || e)); }
 }
-async function tsCollect(T){   // 그날의 일정 + 일정에 연결되지 않은 상담 기록 → 표의 줄들
+async function tsCollect(from, to, prog){   // 고른 기간(from~to)의 일정 + 일정에 연결되지 않은 상담 기록 → 표의 줄들 (날짜순, 같은 날은 시간순)
   await schedLoad();
-  const rows = [], ctx = schedNameCtx(), sl = schedList || [];
-  sl.filter(x => schOn(x, T)).forEach(x => {
+  const rows = [], ctx = schedNameCtx(), sl = schedList || [], inR = k => k >= from && k <= to;
+  sl.forEach(x => {
     const nm = schedNamesOf(x, ctx).slice(0, 3).join(", "), raw = String(x.content || "").trim();
     let tx = raw; if (x.custId && nm) tx = raw.replace(/^\[상담\]\s+.+?(?:\s+-\s+|$)/, "").trim() || raw;   // 상담 기록에서 자동으로 생긴 일정은 '[상담] 이름 - ' 앞부분을 빼고 보여 줌
     const per = !!x.endDate && x.endDate > x.date;
-    rows.push({ kind: "일정", who: nm, text: tx, sub: per ? "📅 " + mdK(x.date) + " ~ " + mdK(x.endDate) + (T === x.date ? " (첫날)" : " (마지막 날)") : "", time: timeRange(x), sort: x.time || "99:99", auto: isAutoSched(x), isDone: () => !!x.done, setDone: v => schedSetDone(x, v) });
+    schEnds(x, k => { if (!inR(k)) return; rows.push({ date: k, kind: "일정", who: nm, text: tx, sub: per ? "📅 " + mdK(x.date) + " ~ " + mdK(x.endDate) + (k === x.date ? " (첫날)" : " (마지막 날)") : "", time: timeRange(x), sort: x.time || "99:99", auto: isAutoSched(x), isDone: () => !!x.done, setDone: v => schedSetDone(x, v) }); });
   });
-  const names = (calView() && calView()[T]) || [];
-  if (names.length) {
+  const ix = calView() || {}, dates = Object.keys(ix).filter(k => /^\d{4}-\d{2}-\d{2}$/.test(k) && inR(k)).sort();
+  if (dates.length) {
     const schIds = new Set(sl.map(x => x.id)), linked = new Set();
     sl.forEach(x => { if (x.logId) linked.add(x.logId); (x.links || []).forEach(l => { if (l.lid) linked.add(l.lid); if (l.elid) linked.add(l.elid); }); });
     const repr = lg => linked.has(lg.id) || (lg.fromSched && schIds.has(lg.fromSched)) || (lg.schedId && schIds.has(lg.schedId));
-    const rs = await Promise.all(names.map(e => dsLoadLogs(e.id, T).then(logs => ({ e, logs: logs.filter(lg => !repr(lg)) }))));
-    rs.forEach(({ e, logs }) => logs.forEach(lg => rows.push({ kind: "기록", who: e.name + (lg.pname ? " " + lg.pname : ""), text: String(lg.content || "").trim() || "(내용 없음)", sub: "", time: "", sort: "99:99", auto: isAutoLog(lg), isDone: () => !!lg.done, setDone: v => logSetDone(e.id, lg, v) })));
+    const jobs = []; dates.forEach(k => (ix[k] || []).forEach(e => jobs.push({ k, e })));
+    for (let i = 0; i < jobs.length; i += 12) {   // 고객·날짜별 기록을 12개씩 동시에 읽음 (이미 읽은 것은 저장해 둔 것을 씀)
+      const part = await Promise.all(jobs.slice(i, i + 12).map(j => dsLoadLogs(j.e.id, j.k).then(logs => ({ k: j.k, e: j.e, logs: logs.filter(lg => !repr(lg)) }))));
+      part.forEach(({ k, e, logs }) => logs.forEach(lg => rows.push({ date: k, kind: "기록", who: e.name + (lg.pname ? " " + lg.pname : ""), text: String(lg.content || "").trim() || "(내용 없음)", sub: "", time: "", sort: "99:99", auto: isAutoLog(lg), isDone: () => !!lg.done, setDone: v => logSetDone(e.id, lg, v) })));
+      if (prog) prog(Math.min(i + 12, jobs.length), jobs.length);
+    }
   }
-  return rows.map((r, i) => ({ r, i })).sort((a, b) => a.r.sort.localeCompare(b.r.sort) || a.i - b.i).map(o => o.r);   // 시간 있는 것은 시간순, 시간 없는 것은 그 뒤에 (같으면 원래 순서)
+  return rows.map((r, i) => ({ r, i })).sort((a, b) => a.r.date.localeCompare(b.r.date) || a.r.sort.localeCompare(b.r.sort) || a.i - b.i).map(o => o.r);   // 날짜순 → 시간 있는 것은 시간순, 시간 없는 것은 그 뒤에 (같으면 원래 순서)
 }
-function tsClose(){ const e = $("todaySheet"); if (e) e.remove(); tsOpen = false; tsRows = null; }
+function tsSpan(){   // 지금 고른 보기 기간 [시작, 끝]: 당일 = 고른 날, 한달 = 그 날이 속한 달 전체, 1년 = 그 해 전체, 기간 = 직접 고른 시작~끝
+  const [y, m] = tsDate.split("-").map(Number);
+  if (tsRange === "month") return [dkey(new Date(y, m - 1, 1)), dkey(new Date(y, m, 0))];
+  if (tsRange === "year") return [y + "-01-01", y + "-12-31"];
+  if (tsRange === "custom") { const a = tsFrom || tsDate, b = tsTo || tsDate; return a <= b ? [a, b] : [b, a]; }
+  return [tsDate, tsDate];
+}
+function tsTitle(){   // 창 제목에 보이는 기간 이름
+  const [y, m] = tsDate.split("-").map(Number), sp = tsSpan();
+  if (tsRange === "month") return y + "년 " + m + "월";
+  if (tsRange === "year") return y + "년";
+  if (tsRange === "custom") return sp[0] === sp[1] ? dayLabel(sp[0]) : sp[0] + " ~ " + sp[1];
+  return dayLabel(tsDate);
+}
+function tsClose(){ const e = $("todaySheet"); if (e) e.remove(); tsOpen = false; tsRows = null; tsSeq++; }
+async function tsLoad(){   // 고른 기간의 일정·기록을 읽어 표를 다시 그림 (기간을 바꾸면 앞서 읽던 것은 버림)
+  const seq = ++tsSeq, [from, to] = tsSpan();
+  tsRows = null; tsErr = ""; tsMsg = ""; tsDraw();
+  try { if (!calView()) await calBuild(); } catch {}   // 상담 기록 색인이 아직 없으면 먼저 만듦
+  let rows = [], err = "";
+  try { rows = await tsCollect(from, to, (d, n) => { if (tsOpen && seq === tsSeq) { tsMsg = "상담 기록 읽는 중 " + d + "/" + n; tsDraw(); } }); } catch (e) { err = e.message || String(e); }
+  if (!tsOpen || seq !== tsSeq) return;
+  tsErr = schedErr ? "일정을 불러오지 못했습니다: " + schedErr : err;
+  tsRows = rows; tsMsg = ""; tsDraw();
+}
 async function tsOpenToday(){
   if (!auth.currentUser) return;
-  tsOpen = true; tsDate = calSel || today(); tsRows = null; tsErr = ""; tsDraw();
-  const T = tsDate;
-  try { if (!calView()) await calBuild(); } catch {}   // 상담 기록 색인이 아직 없으면 먼저 만듦
-  let rows = [];
-  try { rows = await tsCollect(T); } catch (e) { tsErr = e.message || String(e); }
-  if (!tsOpen || tsDate !== T) return;
-  if (schedErr) tsErr = "일정을 불러오지 못했습니다: " + schedErr;
-  tsRows = rows; tsDraw();
+  tsOpen = true; tsDate = calSel || today(); tsRange = "day"; tsFrom = ""; tsTo = "";
+  await tsLoad();
 }
 function tsDraw(){
   if (!tsOpen) return;
   const mk = (tag, cls, txt) => { const e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; };
   let bg = $("todaySheet");
-  if (!bg) { bg = mk("div"); bg.id = "todaySheet"; bg.setAttribute("role", "dialog"); bg.setAttribute("aria-label", "오늘 정리"); bg.onclick = ev => { if (ev.target === bg) tsClose(); }; document.body.append(bg); }
+  if (!bg) { bg = mk("div"); bg.id = "todaySheet"; bg.setAttribute("role", "dialog"); bg.setAttribute("aria-label", "표로 보기"); bg.onclick = ev => { if (ev.target === bg) tsClose(); }; document.body.append(bg); }
   const keep = bg.scrollTop; bg.textContent = "";
   const box = mk("div", "ts-box"); bg.append(box);
   const hd = mk("div", "ts-hd"), cl = mk("button", "ts-x", "닫기"); cl.type = "button"; cl.onclick = tsClose;
-  hd.append(mk("b", "", "📋 " + dayLabel(tsDate) + " 정리"), cl); box.append(hd); nwBar(box);
+  hd.append(mk("b", "", "📋 " + tsTitle() + " 정리"), cl); box.append(hd);
+  const rg = mk("div", "ts-rg");   // 보기 기간: 당일(고른 날) · 한달 · 1년 · 기간
+  [["day", "당일"], ["month", "한달"], ["year", "1년"], ["custom", "기간"]].forEach(([v, t]) => {
+    const b = mk("button", tsRange === v ? "on" : "", t); b.type = "button";
+    b.onclick = () => { if (tsRange === v) return; tsRange = v; if (v === "custom" && !tsFrom) { tsFrom = tsDate.slice(0, 8) + "01"; tsTo = tsDate; } tsLoad(); };
+    rg.append(b);
+  });
+  box.append(rg);
+  if (tsRange === "custom") {
+    const cr = mk("div", "ts-cr"), f = mk("input"), t2 = mk("input"); f.type = "date"; t2.type = "date"; f.value = tsFrom; t2.value = tsTo;
+    f.setAttribute("aria-label", "시작 날짜"); t2.setAttribute("aria-label", "끝 날짜");
+    f.onchange = () => { tsFrom = f.value; tsLoad(); }; t2.onchange = () => { tsTo = t2.value; tsLoad(); };
+    cr.append(f, mk("span", "", "~"), t2); box.append(cr);
+  }
   if (tsErr) box.append(mk("div", "msg err", tsErr));
-  if (tsRows === null) { box.append(mk("div", "ts-note", "불러오는 중...")); return; }
-  if (!tsRows.length) { box.append(mk("div", "ts-note", "이 날 등록된 일정과 기록이 없습니다.")); return; }
+  if (tsRows === null) { box.append(mk("div", "ts-note", tsMsg || "불러오는 중...")); return; }
+  if (!tsRows.length) { box.append(mk("div", "ts-note", tsRange === "day" ? "이 날 등록된 일정과 기록이 없습니다." : "이 기간에 등록된 일정과 기록이 없습니다.")); return; }
+  const total = tsRows.length, nDone = tsRows.filter(r => r.isDone()).length;
+  box.append(mk("div", "ts-note", "총 " + total + "건 · 완료 " + nDone + "건"));
+  const cnt = new Map(); tsRows.forEach(r => cnt.set(r.date, (cnt.get(r.date) || 0) + 1));
   const wrap = mk("div", "ts-wrap"), tb = mk("table", "ts-tb");
   const cg = mk("colgroup"); ["27%", "", "70px", "46px"].forEach(w => { const c = mk("col"); if (w) c.style.width = w; cg.append(c); }); tb.append(cg);
   const th = mk("tr"); ["회사/개인", "내용", "시간", "체크"].forEach(t => th.append(mk("th", "", t))); const thead = mk("thead"); thead.append(th); tb.append(thead);
-  const tbody = mk("tbody");
+  const tbody = mk("tbody"); let lastD = "";
   tsRows.forEach(r => {
+    if (tsRange !== "day" && r.date !== lastD) {   // 하루가 넘는 기간은 날짜마다 제목 줄을 넣음
+      lastD = r.date; const gr = mk("tr", "ts-gr"), gt = mk("td", "ts-g", dayLabel(r.date) + " · " + cnt.get(r.date) + "건"); gt.colSpan = 4; gr.append(gt); tbody.append(gr);
+    }
     const dn = r.isDone(), tr = mk("tr", dn ? "ts-dn" : "");
-    const tn = mk("td", "ts-n"); tn.append(mk("b", "", r.who || "-"), mk("small", "", r.kind)); 
+    const tn = mk("td", "ts-n"); tn.append(mk("b", "", r.who || "-"), mk("small", "", r.kind));
     const tc = mk("td", "ts-c"); tc.append(document.createTextNode(r.text)); if (r.auto) tc.classList.add("auto"); if (r.sub) tc.append(mk("small", "", r.sub));
     const tt = mk("td", "ts-t", r.time || "-");
     const tk = mk("td", "ts-k"), ck = mk("input"); ck.type = "checkbox"; ck.checked = dn; ck.setAttribute("aria-label", "완료"); ck.onchange = () => r.setDone(ck.checked); tk.append(ck);
     tr.append(tn, tc, tt, tk); tbody.append(tr);
   });
   tb.append(tbody); wrap.append(tb); box.append(wrap);
-  // ----- 끝: 체크리스트 (표와 같은 줄들, 체크는 서로 같은 값) -----
-  const total = tsRows.length, nDone = tsRows.filter(r => r.isDone()).length;
-  const ch = mk("div", "ts-ckh"); ch.append(mk("span", "", "✅ 체크리스트"), mk("span", "ts-cnt", "완료 " + nDone + " / " + total)); ch.lastChild.style.cssText = "flex:none"; box.append(ch);
-  const bar = mk("div", "ts-bar"), fill = mk("i"); fill.style.width = Math.round(nDone / total * 100) + "%"; bar.append(fill); box.append(bar);
-  tsRows.forEach(r => {
-    const dn = r.isDone(), lb = mk("label", "ts-ck" + (dn ? " ts-dn" : "")), ck = mk("input");
-    ck.type = "checkbox"; ck.checked = dn; ck.onchange = () => r.setDone(ck.checked);
-    const first = r.text.split("\n")[0];
-    lb.append(ck, mk("span", "", (r.time ? r.time + " · " : "") + (r.who ? r.who + " · " : "") + (first.length > 40 ? first.slice(0, 40) + "…" : first)));
-    box.append(lb);
-  });
-  if (nDone === total) box.append(mk("div", "ts-fin", "오늘 항목을 모두 완료했습니다."));
   bg.scrollTop = keep;
-}
-// ===== 업무노트 내보내기: '표로 보기'의 날짜별 정리(일정+상담 기록)를 마크다운 노트 묶음(zip)으로 만들어 공유·저장. 회사·개인 이름은 [[링크]]로 이어짐 =====
-let nw = { busy: false, msg: "", file: null, range: "all", memo: null };
-const NW_RANGES = [["day", "오늘"], ["week", "1주"], ["month", "1개월"], ["all", "전체"]];
-function nwSpan(r){   // 내보낼 기간: '표로 보기' 창에 보이는 날짜(기준일)까지 거꾸로 센 [시작, 끝] 날짜. 전체면 null
-  if (r === "all") return null;
-  const end = tsDate || today(), e = keyDate(end);
-  let s = new Date(e);
-  if (r === "week") s.setDate(s.getDate() - 6);
-  else if (r === "month") { s = new Date(e.getFullYear(), e.getMonth() - 1, e.getDate()); if (s.getDate() !== e.getDate()) s = new Date(e.getFullYear(), e.getMonth(), 0); s.setDate(s.getDate() + 1); }
-  return [dkey(s), end];
-}
-function nwLabel(r){   // 선택 칸에 보이는 글자: 기간 이름과 실제 날짜
-  const sp = nwSpan(r); if (!sp) return "전체 기간";
-  const nm = r === "day" ? ((tsDate || today()) === today() ? "오늘" : "이 날") : "최근 " + (r === "week" ? "1주" : "1개월");
-  return nm + " (" + (sp[0] === sp[1] ? mdK(sp[0]) : mdK(sp[0]) + "~" + mdK(sp[1])) + ")";
-}
-function nwZip(files){   // 압축 없이 담는 최소 zip 만들기 (한글 파일 이름은 UTF-8)
-  const te = new TextEncoder(), T = new Uint32Array(256);
-  for (let n = 0; n < 256; n++) { let c = n; for (let k = 0; k < 8; k++) c = c & 1 ? 0xEDB88320 ^ (c >>> 1) : c >>> 1; T[n] = c >>> 0; }
-  const crc = b => { let c = 0xFFFFFFFF; for (let i = 0; i < b.length; i++) c = T[(c ^ b[i]) & 255] ^ (c >>> 8); return (c ^ 0xFFFFFFFF) >>> 0; };
-  const d = new Date(), dt = ((d.getFullYear() - 1980) << 9 | (d.getMonth() + 1) << 5 | d.getDate()) & 0xFFFF, tm = (d.getHours() << 11 | d.getMinutes() << 5 | d.getSeconds() >> 1) & 0xFFFF;
-  const parts = [], cen = []; let off = 0;
-  files.forEach(f => {
-    const nb = te.encode(f.name), db = te.encode(f.text), cr = crc(db);
-    const lh = new DataView(new ArrayBuffer(30));
-    lh.setUint32(0, 0x04034b50, true); lh.setUint16(4, 20, true); lh.setUint16(6, 0x0800, true); lh.setUint16(10, tm, true); lh.setUint16(12, dt, true);
-    lh.setUint32(14, cr, true); lh.setUint32(18, db.length, true); lh.setUint32(22, db.length, true); lh.setUint16(26, nb.length, true);
-    parts.push(new Uint8Array(lh.buffer), nb, db);
-    const ch = new DataView(new ArrayBuffer(46));
-    ch.setUint32(0, 0x02014b50, true); ch.setUint16(4, 20, true); ch.setUint16(6, 20, true); ch.setUint16(8, 0x0800, true); ch.setUint16(12, tm, true); ch.setUint16(14, dt, true);
-    ch.setUint32(16, cr, true); ch.setUint32(20, db.length, true); ch.setUint32(24, db.length, true); ch.setUint16(28, nb.length, true); ch.setUint32(42, off, true);
-    cen.push(new Uint8Array(ch.buffer), nb); off += 30 + nb.length + db.length;
-  });
-  const cl = cen.reduce((a, b) => a + b.length, 0), e = new DataView(new ArrayBuffer(22));
-  e.setUint32(0, 0x06054b50, true); e.setUint16(8, files.length, true); e.setUint16(10, files.length, true); e.setUint32(12, cl, true); e.setUint32(16, off, true);
-  return new Blob([...parts, ...cen, new Uint8Array(e.buffer)], { type: "application/zip" });
-}
-// ===== iOS 메모로 보내기: 날짜별 일반 텍스트를 공유 창(메모 앱)으로 보냄. 한 날짜 = 메모 한 개 (zip 파일은 메모 앱이 받지 못함) =====
-function nwMemoMake(D, sp){   // 날짜별 텍스트 만들기: 첫 줄이 메모 제목, [[링크]] 기호 없이 보이는 그대로
-  const cmp = (a, b) => a.sort.localeCompare(b.sort), dates = [...D.keys()].sort(), text = new Map(), cnt = new Map();
-  const one = e => (e.done ? "☑ " : "☐ ") + (e.time ? e.time + " · " : "") + e.kind + ([...e.cn, ...e.pn].length ? " · " + [...e.cn, ...e.pn].join(" · ") : "") + (e.sub ? " · 📅 " + e.sub : "") + "\n" + String(e.text || "").split("\n").map(l => "   " + l.replace(/\s+$/, "")).join("\n");
-  dates.forEach(k => { const es = D.get(k).slice().sort(cmp); cnt.set(k, es.length); text.set(k, k + " (" + KDOW[keyDate(k).getDay()] + ") 업무노트\n\n" + es.map(one).join("\n\n") + "\n"); });
-  const all = "업무노트 " + (sp ? sp[0] + (sp[0] === sp[1] ? "" : " ~ " + sp[1]) : "전체") + " (" + dates.length + "일)\n\n" + dates.slice().reverse().map(k => text.get(k)).join("\n――――――――\n\n");
-  return { dates, text, cnt, all, sent: new Set(), i: 0 };   // dates는 오래된 날짜부터 (차례로 보내면 메모 앱에 최신 날짜가 위로 쌓임)
-}
-const nwMemoLabel = (M, k) => mdK(k) + "(" + KDOW[keyDate(k).getDay()] + ") · " + M.cnt.get(k) + "건" + (M.sent.has(k) ? " ✔" : "");
-function nwMemoCopy(text, ok){   // 복사해서 메모 앱에 붙여넣기 (공유가 안 되는 기기용)
-  const fin = good => { nw.msg = good ? ok : "복사하지 못했습니다. 다시 눌러 주세요."; tsDraw(); };
-  try { if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(text).then(() => fin(true), () => fin(false)); return; } } catch (e) {}
-  const ta = document.createElement("textarea"); ta.value = text; ta.style.cssText = "position:fixed;left:0;top:0;opacity:0"; document.body.append(ta); ta.focus(); ta.select(); try { ta.setSelectionRange(0, text.length); } catch (e) {}
-  let good = false; try { good = document.execCommand("copy"); } catch (e) {} ta.remove(); fin(good);
-}
-function nwMemoBar(b, row){   // 날짜를 고르고 '메모로 보내기' → 공유 창에서 '메모' 선택. 공유 창은 눌렀을 때 바로 열려야 해서 글은 미리 만들어 둠
-  const M = nw.memo, can = !!navigator.share, cur = () => M.dates[M.i];
-  const sel = document.createElement("select"); sel.style.cssText = "padding:8px;font-size:14px;width:auto;max-width:100%";
-  M.dates.forEach((k, i) => { const o = document.createElement("option"); o.value = i; o.textContent = nwMemoLabel(M, k); o.selected = M.i === i; sel.append(o); });
-  sel.onchange = () => { M.i = Number(sel.value); };
-  row.append(sel);
-  const fail = e => { if (e && e.name !== "AbortError") alert("공유하지 못했습니다: " + (e.message || e)); };
-  const next = k => { M.sent.add(k); const n = M.dates.length; for (let s = 1; s <= n; s++) { const t = (M.i + s) % n; if (!M.sent.has(M.dates[t])) { M.i = t; break; } } nw.msg = M.sent.size >= n ? "모든 날짜를 보냈습니다." : mdK(k) + " 보냄 · 다음 날짜가 선택되어 있습니다."; tsDraw(); };
-  if (can) b("📤 이 날짜 메모로 보내기", () => { const k = cur(); navigator.share({ text: M.text.get(k) }).then(() => next(k), fail); });
-  b("📋 복사", () => nwMemoCopy(M.text.get(cur()), mdK(cur()) + " 내용을 복사했습니다. 메모 앱에 붙여넣기 하세요."));
-  if (can) b("📚 전체를 메모 한 개로", () => navigator.share({ text: M.all }).then(() => { nw.msg = "전체를 보냈습니다."; tsDraw(); }, fail));
-  b("닫기", () => { nw.memo = null; nw.msg = ""; tsDraw(); });
-}
-function nwBar(box){   // '표로 보기' 창 위쪽의 내보내기 줄
-  const row = document.createElement("div"); row.style.cssText = "display:flex;flex-wrap:wrap;gap:6px;margin:8px 0;align-items:center";
-  const b = (t, fn, dis) => { const e = document.createElement("button"); e.type = "button"; e.textContent = t; e.disabled = !!dis; e.onclick = fn; e.style.cssText = "padding:8px 12px;font-size:14px"; row.append(e); };
-  if (nw.memo) nwMemoBar(b, row);
-  else if (nw.file) {
-    if (navigator.canShare && navigator.canShare({ files: [nw.file] })) b("📤 공유하기 (노트 앱으로)", () => navigator.share({ files: [nw.file], title: nw.file.name }).catch(e => { if (e && e.name !== "AbortError") alert("공유하지 못했습니다: " + e.message); }));
-    b("💾 파일로 저장", () => saveFile(nw.file));
-    b("다시 만들기", () => { nw.file = null; nw.msg = ""; tsDraw(); });
-  } else {
-    const sel = document.createElement("select"); sel.disabled = nw.busy; sel.style.cssText = "padding:8px;font-size:14px;width:auto;max-width:100%";
-    NW_RANGES.forEach(r => { const o = document.createElement("option"); o.value = r[0]; o.textContent = nwLabel(r[0]); o.selected = nw.range === r[0]; sel.append(o); });
-    sel.onchange = () => { nw.range = sel.value; };
-    row.append(sel);
-    b(nw.busy ? "만드는 중..." : "📓 업무노트로 내보내기", nwExport, nw.busy);
-    b(nw.busy ? "만드는 중..." : "📝 메모 앱으로 (날짜별 텍스트)", () => nwExport("memo"), nw.busy);
-  }
-  if (nw.msg) { const sp = document.createElement("span"); sp.style.cssText = "font-size:12px;color:var(--sub)"; sp.textContent = nw.msg; row.append(sp); }
-  box.append(row);
-}
-async function nwExport(mode){   // 모든 날짜의 일정·상담 기록을 읽어 일지/회사/개인 노트로 만듦 ('표로 보기'와 같은 규칙: 일정에 이미 연결된 상담 기록은 일정 한 줄로만)
-  if (nw.busy || !auth.currentUser) return;
-  nw.busy = true; nw.msg = "일정을 읽는 중..."; tsDraw();
-  try {
-    await schedLoad(); if (schedErr) throw new Error(schedErr);
-    const nm = s => String(s || "").replace(/[\\/:*?"<>|#^\[\]]/g, " ").replace(/\s+/g, " ").trim();
-    const all = customers || [], ctx = schedNameCtx(), sl = schedList || [], byId = ctx.byId, ent = [];
-    const addRef = (arr, c, pname) => { pname = pname || ""; if (c && !arr.some(r => r.c.id === c.id && r.pname === pname)) arr.push({ c, pname }); };
-    const linked = new Set(), schIds = new Set(sl.map(x => x.id));
-    sl.forEach(x => { if (x.logId) linked.add(x.logId); (x.links || []).forEach(l => { if (l.lid) linked.add(l.lid); if (l.elid) linked.add(l.elid); }); });
-    sl.forEach(x => {
-      const raw = String(x.content || "").trim(), refs = [], per = !!x.endDate && x.endDate > x.date;
-      (x.links || []).forEach(l => addRef(refs, byId.get(l.cid), l.pname));
-      if (x.custId) { const c = byId.get(x.custId); if (c) { const m = /^\[상담\]\s+(.+?)(?:\s+-\s|$)/.exec(raw); addRef(refs, c, m && c.name && m[1].startsWith(c.name + " ") ? m[1].slice(c.name.length + 1).trim() : ""); } }
-      schedMatches(x.content, ctx).forEach(h => addRef(refs, h.c, h.pname));
-      const tx = x.custId && refs.length ? (raw.replace(/^\[상담\]\s+.+?(?:\s+-\s+|$)/, "").trim() || raw) : raw;
-      schEnds(x, k => ent.push({ date: k, kind: "일정", time: timeRange(x), sort: x.time || "99:99", text: tx, sub: per ? mdK(x.date) + " ~ " + mdK(x.endDate) : "", done: !!x.done, refs }));
-    });
-    for (let s0 = 0; s0 < all.length; s0 += 10) {
-      await Promise.all(all.slice(s0, s0 + 10).map(async c => {
-        const sn = await getDocs(query(collection(db, "customers", c.id, "logs"), where("ownerUid", "==", auth.currentUser.uid)));
-        sn.docs.forEach(d => {
-          const x = { id: d.id, ...d.data() }; if (x.type !== "상담" || !x.date) return;
-          if (linked.has(x.id) || (x.fromSched && schIds.has(x.fromSched)) || (x.schedId && schIds.has(x.schedId))) return;
-          const refs = []; addRef(refs, c, x.pname);
-          ent.push({ date: x.date, kind: "기록", time: "", sort: "99:99", text: String(x.content || "").trim() || "(내용 없음)", sub: "", done: !!x.done, refs });
-        });
-      }));
-      nw.msg = "상담 기록 읽는 중 " + Math.min(s0 + 10, all.length) + "/" + all.length; tsDraw();
-    }
-    const nwSp = nwSpan(nw.range), nwRl = nwLabel(nw.range);   // 고른 기간 밖의 항목은 빼고 내보냄
-    if (nwSp) for (let i = ent.length - 1; i >= 0; i--) if (ent[i].date < nwSp[0] || ent[i].date > nwSp[1]) ent.splice(i, 1);
-    if (!ent.length) throw new Error(nwSp ? nwRl + "에는 내보낼 일정이나 기록이 없습니다." : "내보낼 일정이나 기록이 없습니다.");
-    const cname = c => nm(c.name || (isPersonDoc(c) ? personNm((Array.isArray(c.people) ? c.people[0] : null) || {}) : ""));
-    const P = new Map(), C = new Map(), D = new Map();
-    ent.forEach(e => {
-      e.cn = []; e.pp = [];
-      e.refs.forEach(r => {
-        const isP = isPersonDoc(r.c), cn = isP ? "" : cname(r.c), pn = r.pname ? nm(schedWho(r.c, r.pname)) : (isP ? cname(r.c) : "");
-        if (cn && !e.cn.includes(cn)) e.cn.push(cn);
-        if (pn && !e.pp.some(p => p.n === pn)) e.pp.push({ n: pn, co: cn });
-      });
-      e.pn = e.pp.map(p => p.n);
-      (D.get(e.date) || D.set(e.date, []).get(e.date)).push(e);
-      e.pp.forEach(p => (P.get(p.n) || P.set(p.n, { co: p.co, list: [] }).get(p.n)).list.push(e));
-      e.cn.forEach(n => (C.get(n) || C.set(n, { ppl: new Set(), list: [] }).get(n)).list.push(e));
-      e.pp.forEach(p => { if (p.co && C.has(p.co)) C.get(p.co).ppl.add(p.n); });
-    });
-    if (mode === "memo") { nw.memo = nwMemoMake(D, nwSp); nw.msg = (nwSp ? nwRl + " · " : "") + "날짜 " + D.size + "일 · 항목 " + ent.length + "건 — 날짜를 고르고 '메모로 보내기'를 누르세요"; nw.busy = false; tsDraw(); return; }
-    const lm = new Map();   // 본문에 나온 이름 → 노트 이름 (같은 이름이 여러 카드에 있으면 건너뜀)
-    ctx.cand.forEach(x => {
-      if (x.key.length < 2 || ctx.cnt[x.key] !== 1) return;
-      const rawN = String(x.pname || (isPersonDoc(x.c) ? cname(x.c) : x.c.name) || "").trim(), lab = x.pname ? nm(schedWho(x.c, x.pname)) : nm(rawN);
-      if (rawN.length >= 2 && (P.has(lab) || C.has(lab))) lm.set(rawN, lab);
-    });
-    const nn = [...lm.keys()].sort((a, b) => b.length - a.length);
-    const re = nn.length ? new RegExp(nn.map(n => n.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|"), "g") : null;
-    const w = n => "[[" + n + "]]", L = t => re ? t.replace(re, m => { const lb = lm.get(m); return lb === m ? w(m) : "[[" + lb + "|" + m + "]]"; }) : t, body = t => t.split("\n").map(l => "  " + L(l)).join("\n");
-    const head = (e, wd) => "- [" + (e.done ? "x" : " ") + "] **" + (wd ? w(e.date) + " " : "") + (e.time ? e.time + " · " : "") + e.kind + "**" + ([...e.cn, ...e.pn].length ? " · " + [...e.cn, ...e.pn].map(w).join(" · ") : "") + (e.sub ? " · 📅 " + e.sub : "");
-    const cmp = (a, b) => a.sort.localeCompare(b.sort), ord = (a, b) => b.date.localeCompare(a.date) || cmp(a, b), lst = v => v.list.slice().sort(ord).map(e => head(e, true) + "\n" + body(e.text)).join("\n\n");
-    const R = "업무노트/", files = [], dates = [...D.keys()].sort();
-    dates.forEach((k, i) => files.push({ name: R + "일지/" + k + ".md", text: "# " + k + " (" + KDOW[keyDate(k).getDay()] + ")\n\n" + (i ? "이전: " + w(dates[i - 1]) + "　" : "") + (i < dates.length - 1 ? "다음: " + w(dates[i + 1]) : "") + "\n\n" + D.get(k).slice().sort(cmp).map(e => head(e) + "\n" + body(e.text)).join("\n\n") + "\n" }));
-    C.forEach((v, n) => files.push({ name: R + "회사/" + n + ".md", text: "# " + n + "\n\n담당자·구성원: " + ([...v.ppl].map(w).join(", ") || "-") + "\n\n## 기록 (최신순)\n\n" + lst(v) + "\n" }));
-    P.forEach((v, n) => files.push({ name: R + "개인/" + n + ".md", text: "# " + n + "\n\n" + (v.co ? "회사: " + w(v.co) + "\n\n" : "") + "## 기록 (최신순)\n\n" + lst(v) + "\n" }));
-    files.push({ name: R + "업무노트 목차.md", text: "# 업무노트 목차\n\n만든 날: " + today() + (nwSp ? " · 기간 " + nwSp[0] + (nwSp[0] === nwSp[1] ? "" : " ~ " + nwSp[1]) : " · 기간 전체") + " · 항목 " + ent.length + "건\n\n## 회사\n" + ([...C.keys()].sort().map(n => "- " + w(n)).join("\n") || "-") + "\n\n## 개인\n" + ([...P.keys()].sort().map(n => "- " + w(n)).join("\n") || "-") + "\n\n## 날짜 (최신순)\n" + dates.slice().reverse().map(k => "- " + w(k)).join("\n") + "\n" });
-    nw.file = new File([nwZip(files)], "업무노트_" + today() + (nwSp ? "_" + ({ day: "당일", week: "1주", month: "1개월" })[nw.range] : "") + ".zip", { type: "application/zip" });
-    nw.msg = (nwSp ? nwRl + " · " : "") + "일지 " + dates.length + "일 · 회사 " + C.size + "곳 · 개인 " + P.size + "명";
-  } catch (e) { nw.msg = ""; alert("업무노트를 만들지 못했습니다: " + (e.message || e)); }
-  nw.busy = false; tsDraw();
 }
 document.addEventListener("keydown", ev => { if (ev.key === "Escape" && tsOpen && !todoPopIds) tsClose(); });
 renderCal();
@@ -4314,7 +4187,7 @@ $("custForm").onsubmit = async e => {
 };
 
 // ===== 설정 확장: 로그인 · 프린터 · 라벨 리스트 · 백업 · 버전 · 초기화 =====
-const APP_VERSION = "v12.246 (2026-10-30)";   // ← 파일을 수정할 때마다 이 숫자를 올립니다 (자동 업데이트가 이 값을 비교)
+const APP_VERSION = "v12.247 (2026-10-30)";   // ← 파일을 수정할 때마다 이 숫자를 올립니다 (자동 업데이트가 이 값을 비교)
 function lsGet(k, d){ try { return JSON.parse(localStorage.getItem(k)) ?? d; } catch { return d; } }
 function lsSet(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch {} }
 // 원격 전송 상태 · 기기 복사 · 외부 알림 · 로그인 화면 동작은 파일 맨 위 [원격 구간]에 있습니다 (로컬일 때는 [로컬 구간]의 기본 동작)
