@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- 2026-10-31 06:15 KST | 수정: 앱 버전 v12.257 (2026-10-31), 분류 '미분류'는 지울 수 없고(다른 칸으로 옮기기·컬러 변경만 가능), 새 카드는 분류를 고르지 않으면 미분류 칸으로 저장(등록 폼·에이닷·엑셀·주소록·일정 자동 등록) (AD·FP 공통 버전), 원격 파일을 이름만 바꿔(예: admin.html) 올려도 바로 쓰도록 이용약관 동의 기록 키를 파일 이름별로 나눔(index.html이나 주소만으로 열면 기존 키 그대로) -->
+<!-- 2026-10-31 07:00 KST | 수정: 앱 버전 v12.260 (2026-10-31), FP의 저장 방식을 AD와 똑같이 맞춤(저장할 때 이 기기에 먼저 저장하고 원격 전송은 뒤에서 자동으로 이어짐, 오프라인 대응·원격 저장 실패 시 알림) + FP 설정 화면의 '데이터 저장' 칸(동기화 버튼 포함)을 없애고 '앱 업데이트' 줄만 두어 AD와 통일(동기화는 앱을 열 때·돌아올 때·인터넷 재연결 시·30분마다 자동), AD 앱은 그대로 (AD·FP 공통 버전), 원격 파일을 이름만 바꿔(예: admin.html) 올려도 바로 쓰도록 이용약관 동의 기록 키를 파일 이름별로 나눔(index.html이나 주소만으로 열면 기존 키 그대로) -->
 <!-- 2026-10-29 KST | 수정: 앱 버전 v12.242, 달력 칸(월간·주간)의 파랑 이름 ✔·취소선을 '일정 없이 기록된 상담'의 완료 체크에도 반영 (그날 그 고객의 일정과 상담 기록이 모두 완료되면 표시, 상담 기록의 완료 값을 달력 색인에 함께 저장, 체크하면 달력이 바로 갱신) (이전 수정: 2026-10-29 00:50 KST | 수정: 앱 버전 v12.241, 같은 날 같은 고객의 일정이 모두 완료되면 달력 칸(월간·주간)의 파랑 이름에도 ✔와 취소선 표시 (일정 카드·경고·팝업 등 나머지는 그대로) -->
 <!-- 2026-10-28 KST | 수정: 앱 버전 v12.240, 달력에서 오늘이 아닌 다른 날짜를 누르면 달력 아래 '완료하지 않은 일정' 경고 줄을 숨기고, 오늘 날짜를 보면 다시 표시 (달력 탭의 ⚠ 숫자·경고 팝업·날짜별 일정 카드의 경고 표시는 그대로) -->
 <!-- 2026-10-28 KST | 수정: 앱 버전 v12.239, '완료하지 않은 일정' 경고 줄과 경고 팝업의 각 일정에 '연기·취소' 버튼 추가 - 누르면 '취소할까요, 다음으로 연기할까요?'를 묻고, 취소는 확인 후 삭제(연결된 고객 기록 삭제 여부도 확인), 연기는 새 날짜·시작/끝 시간을 고르면(바뀐 일시를 바로 표시) 일정과 연결된 고객 파일 기록을 그 일시로 옮기고 달력이 그 날짜로 이동(기간 일정은 같은 기간만큼 함께 이동, 원래 날짜는 postponedFrom에 기록) -->
@@ -741,7 +741,7 @@ window.REMOTE_READY = (async () => {
     <!-- 설정 -->
     <div class="hide" id="setBox">
       <div class="sec">내 정보</div>
-      <div class="srow" data-tg="pInfo"><div class="tx"><div class="t">내 정보</div></div><div class="r">›</div></div>
+      <div class="srow" data-tg="pInfo"><div class="tx"><div class="t">내 정보</div><div class="d">회사명, 이름, 우편번호, 주소1·주소2, 명함·사업자등록증·통장</div></div><div class="r">›</div></div>
       <div class="spanel hide" id="pInfo">
         <label>회사명</label><input id="setCompany">
         <label>이름</label><input id="setName">
@@ -858,15 +858,15 @@ window.REMOTE_READY = (async () => {
             <select id="setSeq" class="hide"><option value="1">발신인 우선</option><option value="0">1:1</option></select>
           </div>
         </details>
-        <div class="btnrow" style="margin-top:4px">
+        <div class="sub" id="paperInfo" style="margin:0 0 8px"></div>
+        <div style="font-weight:700;margin:8px 0 4px">적색 라벨 그림 (입력한 값 그대로 · 눌러서 확대)</div>
+        <div id="paperPreview"></div>
+        <div class="btnrow" style="margin-top:10px">
           <button id="paperEditBtn" type="button">수정</button>
           <button id="paperSaveBtn" type="button" disabled>저장</button>
         </div>
         <button id="paperTestBtn" type="button" class="gray" style="margin-top:8px">프린터 선택 · 테스트 출력 (적색 라벨)</button>
         <div class="msg" id="paperMsg"></div>
-        <div class="sub" id="paperInfo" style="margin:0 0 8px"></div>
-        <div style="font-weight:700;margin:8px 0 4px">적색 라벨 그림 (입력한 값 그대로 · 눌러서 확대)</div>
-        <div id="paperPreview"></div>
       </div>
       <div class="srow" data-tg="pLabelSet"><div class="tx"><div class="t">라벨 문자 배치</div><div class="d">라벨 안 글자 영역(여백) · 우편번호·주소·이름 상자 위치와 크기 · 프린터 맞춤</div></div><div class="r">›</div></div>
       <div class="spanel hide" id="pLabelSet">
@@ -4293,7 +4293,7 @@ $("custForm").onsubmit = async e => {
 };
 
 // ===== 설정 확장: 로그인 · 프린터 · 라벨 리스트 · 백업 · 버전 · 초기화 =====
-const APP_VERSION = "v12.257 (2026-10-31)";   // ← 파일을 수정할 때마다 이 숫자를 올립니다 (자동 업데이트가 이 값을 비교)
+const APP_VERSION = "v12.260 (2026-10-31)";   // ← 파일을 수정할 때마다 이 숫자를 올립니다 (자동 업데이트가 이 값을 비교)
 function lsGet(k, d){ try { return JSON.parse(localStorage.getItem(k)) ?? d; } catch { return d; } }
 function lsSet(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch {} }
 // 원격 전송 상태 · 기기 복사 · 외부 알림 · 로그인 화면 동작은 파일 맨 위 [원격 구간]에 있습니다 (로컬일 때는 [로컬 구간]의 기본 동작)
