@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- 2026-11-05 12:52 KST | 수정: 앱 버전 v12.274 (2026-11-05), 체크표(표로 보기)의 '1명씩' 보기가 너무 작던 것을 키움 - 한 줄 높이를 손가락으로 누르기 좋은 크기(최소 48px)로, 이름 글자는 22~28px, 체크 칸은 약 33px로 키우고 번호 칸·확인 칸 폭을 줄여 이름과 체크 칸이 화면 가득 보이게 함(한 화면에 다 안 들어가는 인원은 스크롤), '2명씩' 보기는 그대로, AD·FP 앱 원본에 반영 (AD·FP 공통 버전), 원격 파일을 이름만 바꿔(예: admin.html) 올려도 바로 쓰도록 이용약관 동의 기록 키를 파일 이름별로 나눔(index.html이나 주소만으로 열면 기존 키 그대로) -->
+<!-- 2026-11-09 10:31 KST | 수정: 앱 버전 v12.279 (2026-11-09), 달력·일정 목록의 글자 색을 하나로 통합 - 자동으로 기록된 것과 직접 기록한 것의 색 구분(빨강/검정)을 화면에서 없애고(내부 구분은 그대로) 완료하지 않은 일정은 빨강, 그 외는 파랑으로 표시(달력 칸의 주황 일정 글자도 파랑으로), 달력 월간 칸에서 일정 줄로 이미 보이는 고객 이름이 파란 이름으로 한 번 더 나오던 중복을 없앰(주간 칸도 같은 기준), 일정·기록 목록의 색 설명 줄도 이에 맞게 바꿈, AD·FP 앱 원본에 반영(FP는 달력 칸만) (AD·FP 공통 버전), 원격 파일을 이름만 바꿔(예: admin.html) 올려도 바로 쓰도록 이용약관 동의 기록 키를 파일 이름별로 나눔(index.html이나 주소만으로 열면 기존 키 그대로) -->
 <!-- 2026-10-29 KST | 수정: 앱 버전 v12.242, 달력 칸(월간·주간)의 파랑 이름 ✔·취소선을 '일정 없이 기록된 상담'의 완료 체크에도 반영 (그날 그 고객의 일정과 상담 기록이 모두 완료되면 표시, 상담 기록의 완료 값을 달력 색인에 함께 저장, 체크하면 달력이 바로 갱신) (이전 수정: 2026-10-29 00:50 KST | 수정: 앱 버전 v12.241, 같은 날 같은 고객의 일정이 모두 완료되면 달력 칸(월간·주간)의 파랑 이름에도 ✔와 취소선 표시 (일정 카드·경고·팝업 등 나머지는 그대로) -->
 <!-- 2026-10-28 KST | 수정: 앱 버전 v12.240, 달력에서 오늘이 아닌 다른 날짜를 누르면 달력 아래 '완료하지 않은 일정' 경고 줄을 숨기고, 오늘 날짜를 보면 다시 표시 (달력 탭의 ⚠ 숫자·경고 팝업·날짜별 일정 카드의 경고 표시는 그대로) -->
 <!-- 2026-10-28 KST | 수정: 앱 버전 v12.239, '완료하지 않은 일정' 경고 줄과 경고 팝업의 각 일정에 '연기·취소' 버튼 추가 - 누르면 '취소할까요, 다음으로 연기할까요?'를 묻고, 취소는 확인 후 삭제(연결된 고객 기록 삭제 여부도 확인), 연기는 새 날짜·시작/끝 시간을 고르면(바뀐 일시를 바로 표시) 일정과 연결된 고객 파일 기록을 그 일시로 옮기고 달력이 그 날짜로 이동(기간 일정은 같은 기간만큼 함께 이동, 원래 날짜는 postponedFrom에 기록) -->
@@ -92,7 +92,7 @@ window.REMOTE_READY = (async () => {
     if (!em || !pw) { m.textContent = "이메일과 비밀번호를 입력하세요."; return; }
     btn.disabled = true; btn.textContent = "로그인 중...";
     try { await Au.signInWithEmailAndPassword(auth, em, pw); ls.set("loginEmail", $("loginRemember").checked ? em : ""); $("loginPw").value = ""; }
-    catch (e) { m.textContent = /too-many/.test(e.code) ? "시도 횟수가 많습니다. 잠시 후 다시 시도하거나 비밀번호를 재설정하세요." : /network/.test(e.code) ? "네트워크 연결을 확인하세요." : "로그인에 실패했습니다. 이메일/비밀번호를 확인하세요."; }
+    catch (e) { const c = (e && e.code) || ""; m.textContent = (/too-many/.test(c) ? "시도 횟수가 많습니다. 잠시 후 다시 시도하거나 비밀번호를 재설정하세요." : /network/.test(c) ? "네트워크 연결을 확인하세요." : /unauthorized-domain/.test(c) ? "이 주소에서는 로그인이 허용되지 않았습니다. 파이어베이스 콘솔 > Authentication > 설정 > 승인된 도메인에 이 주소를 추가하세요." : /operation-not-allowed/.test(c) ? "이메일/비밀번호 로그인 방식이 꺼져 있습니다. 파이어베이스 콘솔 > Authentication > 로그인 방법에서 켜 주세요." : /user-disabled/.test(c) ? "사용이 중지된 계정입니다." : /invalid-email/.test(c) ? "이메일 형식이 올바르지 않습니다." : /invalid-credential|wrong-password|user-not-found|invalid-login/.test(c) ? "이메일 또는 비밀번호가 맞지 않습니다. 비밀번호를 바꾸셨다면 새 비밀번호인지 확인하거나 '비밀번호 재설정 메일 받기'를 눌러 주세요." : "로그인에 실패했습니다. 이메일/비밀번호를 확인하세요.") + (c ? " (" + c + ")" : ""); }
     finally { btn.disabled = false; btn.textContent = "로그인"; }
   }
   $("loginBtn").onclick = doLogin;
@@ -280,7 +280,7 @@ window.REMOTE_READY = (async () => {
   .cal .d{width:100%;margin:0;padding:4px 1px;min-height:58px;border-radius:8px;background:var(--cell);color:var(--text);font-size:14px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:1px;overflow:visible;position:relative}
   .cal .d .nm{max-width:100%;font-size:11px;line-height:1.25;font-weight:600;color:var(--main);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .cal .d .more{font-size:10px;line-height:1.2;color:var(--sub)}
-  .cal .d .sc{max-width:100%;font-size:10px;line-height:1.25;font-weight:700;color:#e8590c;white-space:nowrap}
+  .cal .d .sc{max-width:100%;font-size:10px;line-height:1.25;font-weight:700;color:var(--main);white-space:nowrap}
   .cal .d .hn{max-width:100%;font-size:10px;line-height:1.25;font-weight:600;color:#d92d20;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .cal .hdl{margin-top:8px;font-size:12px;line-height:1.5;color:#d92d20}
   .cal .d .nm.dn{opacity:.55;text-decoration:line-through}   /* 그날 그 고객의 일정이 모두 완료됨 */
@@ -302,14 +302,14 @@ window.REMOTE_READY = (async () => {
   .cal .cg.wk .d{align-items:stretch;justify-content:flex-start;text-align:left;min-height:150px;padding:8px 6px;gap:3px;border-radius:10px;font-size:14px}
   .cal .cg.wk .d .wd{font-size:14px;font-weight:700;line-height:1.3;white-space:nowrap}
   .cal .cg.wk .d .nm,.cal .cg.wk .d .sc2{display:block;max-width:100%;font-size:12px;line-height:1.35;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-  .cal .cg.wk .d .sc2{color:#e8590c;font-weight:700}
+  .cal .cg.wk .d .sc2{color:var(--main);font-weight:700}
   .cal .cg.wk .d .hn{font-size:12px}
   .cal .cg.wk .d.today .sc2{color:#fff}
   .cal .cg.wk .d.wsum{background:transparent;border:1px dashed var(--line);color:var(--sub);cursor:default;font-size:13px;line-height:1.6}
   .cal .cg.wk .d.wsum b{color:var(--text);font-size:14px}
   .cal .d.today{background:var(--main);color:#fff;font-weight:700}
   .hide{display:none}
-  .auto{color:#dc2626!important}@media (prefers-color-scheme:dark){.auto{color:#f87171!important}}   /* 자동으로 기록된 기록·일정의 글자 색(적색) */
+  .st-r{color:#d92d20!important}.st-b{color:var(--main)!important}@media (prefers-color-scheme:dark){.st-r{color:#f87171!important}}   /* 보이는 글자 색: 완료하지 않은 일정 = 빨강, 그 외 = 파랑 (자동·직접 기록 구분은 내부에서만, 화면 색은 같음) */
   /* 일정 완료 체크 · 완료하지 않은 일정 경고 */
   .log .h.dsH{flex-wrap:wrap}.log .h .dsChk{display:flex;align-items:center;gap:6px;margin:0 0 0 auto;padding:2px 0;font-size:14px;font-weight:700;color:var(--text);cursor:pointer}
   .log .h .dsChk input{width:22px;height:22px;padding:0;margin:0;flex:none;accent-color:#12a150;cursor:pointer}
@@ -537,6 +537,25 @@ window.REMOTE_READY = (async () => {
   .stp .sb button:disabled{opacity:.35}
   #pinLock .plink{background:transparent;color:var(--sub);font-size:13px;margin-top:16px;text-decoration:underline;padding:8px;width:auto}
   .cardprev{margin:6px 0 8px}.cardprev img{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:8px}   /* 내 이미지(명함·사업자등록증·통장) 미리보기 */
+  /* 문자 보내기: 목록에서 카드를 여러 장 골라 한 명씩 문자 */
+  .lhead #smsModeBtn{width:auto;margin:0;padding:4px 10px;font-size:12px;border-radius:8px}
+  #smsBar{display:flex;align-items:center;gap:6px;margin:0 0 8px;padding:8px 10px;border:1px solid var(--main);border-radius:8px;font-size:13px}
+  #smsBar.hide{display:none}
+  #smsBar #smsCnt{flex:1;min-width:0}
+  #smsBar button{width:auto;margin:0;padding:6px 10px;font-size:13px}
+  .item.smsMode{padding-right:46px}
+  .item .smsCb{position:absolute;right:12px;top:50%;margin:-11px 0 0;width:22px;height:22px;padding:0;pointer-events:none}
+  .item.smsOn{border-color:var(--main);background:rgba(37,99,235,.08)}
+  #smsSheet{position:fixed;inset:0;z-index:90;background:rgba(0,0,0,.5);display:flex;align-items:flex-end;justify-content:center}
+  #smsSheet.hide{display:none}
+  #smsSheet .csbox{width:100%;max-width:560px;max-height:92vh;overflow:auto;box-sizing:border-box;background:var(--card);color:var(--text);border-radius:16px 16px 0 0;padding:16px}
+  #smsSheet .cshead{display:flex;justify-content:space-between;align-items:center;gap:8px}
+  #smsSheet .csx{width:auto;margin:0;padding:4px 12px;background:var(--cell);color:var(--text);font-size:18px}
+  #smsSheet textarea{box-sizing:border-box;font:inherit}
+  #smPeople{border:1px solid var(--line);border-radius:8px;margin:6px 0 10px}
+  #smPeople .cspick{align-items:flex-start}
+  #smPeople .cspick select{display:block;width:100%;margin:4px 0 0;padding:6px;font-size:14px}
+  #smPeople .cspick .warn{display:block;font-size:12px;color:#d92d20}
   #cardSheet{position:fixed;inset:0;z-index:90;background:rgba(0,0,0,.5);display:flex;align-items:flex-end;justify-content:center}   /* 이미지 보내기 창(아래에서 올라오는 판) */
   #cardSheet.hide{display:none}
   #cardSheet .csbox{width:100%;max-width:560px;max-height:92vh;overflow:auto;box-sizing:border-box;background:var(--card);color:var(--text);border-radius:16px 16px 0 0;padding:16px}
@@ -695,6 +714,7 @@ window.REMOTE_READY = (async () => {
         <div id="dsList"></div>
         <form id="dsForm" autocomplete="off">
           <h2 id="dsFormTitle" style="margin:18px 0 0">일정 추가</h2>
+          <div id="dsDateBox" class="hide"><label style="margin-top:12px">날짜 (수정할 때 바꿀 수 있습니다)</label><input id="dsDate" type="date"></div>
           <div class="row">
             <div><label>시작 시간 (선택)</label><input id="dsTime" type="time"></div>
             <div><label>끝나는 시간 (선택)</label><input id="dsEndTime" type="time"></div>
@@ -724,13 +744,14 @@ window.REMOTE_READY = (async () => {
 
     <!-- 고객 목록 -->
     <div class="card hide" id="listBox">
-      <div class="lhead"><h1 id="listTitle">회사 목록</h1><div id="custCount"></div></div>
+      <div class="lhead"><h1 id="listTitle">회사 목록</h1><button id="smsModeBtn" type="button" class="gray">✉ 문자 보내기</button><div id="custCount"></div></div>
       <div class="gboxes" id="glegend"></div>
       <div class="daybar hide" id="dayBar"><span id="dayBarTx"></span><button id="dayBarSw" type="button" class="gray"></button><button id="dayBarX" type="button" class="gray">전체 보기</button></div>
       <div style="position:relative">
         <input id="search" placeholder="이름·초성(ㄱㅈㅇ)·연락처·메모 내용으로 검색" style="height:54px;padding:12px 82px 12px 14px;font-size:17px">
         <button id="searchX" class="hide" type="button" aria-label="검색어 지우기" style="position:absolute;right:8px;top:50%;transform:translateY(-50%);width:62px;height:40px;margin:0;padding:0;border-radius:8px;background:#c9f2b0;border:1px solid #7fcf55;color:#1d5a12;font-size:16px;font-weight:700;line-height:1">지움</button>
       </div>
+      <div id="smsBar" class="hide"><span id="smsCnt"></span><button id="smsAllBtn" type="button" class="gray">전체 선택</button><button id="smsGo" type="button">문자 작성</button></div>
       <div id="list"></div>
       <div class="msg" id="listMsg"></div>
     </div>
@@ -1050,6 +1071,21 @@ window.REMOTE_READY = (async () => {
         <div class="sub" style="margin:12px 0 0">인쇄 창에서 용지 A4, 배율 100%, 여백 '없음', 머리글/바닥글 해제로 설정하세요.</div>
         <h2 style="margin-top:20px" id="prPvTitle">미리보기</h2>
         <div id="prPreview"></div>
+      </div>
+    </div>
+
+    <!-- 문자 보내기 창 (목록에서 고른 카드 여러 개에 한 명씩 문자) -->
+    <div id="smsSheet" class="hide" role="dialog" aria-modal="true" aria-label="문자 보내기">
+      <div class="csbox">
+        <div class="cshead"><b id="smTitle">문자 보내기</b><button id="smClose" type="button" class="csx" aria-label="닫기">✕</button></div>
+        <label style="margin:12px 0 4px">보낼 문구 ({고객}은 받는 사람 이름으로 바뀝니다)</label>
+        <textarea id="smMsg" rows="5" placeholder="예) {고객}님, 안녕하세요. 문의하실 내용이 있으면 편하게 연락 주세요."></textarea>
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:8px"><label style="margin:12px 0 4px">받는 사람 <span id="smCnt" style="font-weight:400"></span></label>
+          <button id="smAll" type="button" class="gray slim" style="width:auto;padding:4px 12px;margin:8px 0 0">전체 선택</button></div>
+        <div id="smPeople"></div>
+        <button id="smSend" type="button">📨 문자 보내기</button>
+        <div class="sub" style="margin:6px 0 2px;font-size:13px">한 명씩 문자 앱이 받는 사람·문구가 입력된 채로 열립니다. 전송한 뒤 이 화면으로 돌아와 다음 사람 버튼을 누르세요. 보낸 문구는 각 고객 기록(상담 · 문자전달)에 남습니다.</div>
+        <div class="msg" id="smStatus" style="white-space:pre-wrap"></div>
       </div>
     </div>
 
@@ -1715,6 +1751,7 @@ window.adSignOut = () => { srchReset(); return signOut(auth); };   // 앱 잠금
 
 // 탭 전환
 function showTab(name){
+  if (name !== "list" && smsMode) smsExit();   // 문자 카드 선택 중 다른 화면으로 가면 선택 모드를 끝냄
   if (name !== "label" && name !== "pr" && typeof BASE_TITLE !== "undefined") document.title = BASE_TITLE;
   ["cal","form","list","detail","dm","set","label","pr"].forEach(n => $(n + "Box").classList.toggle("hide", n !== name));
   document.body.classList.toggle("listfix", name === "list");   // 고객 목록에서만 화면을 고정하고 목록만 스크롤
@@ -1840,6 +1877,114 @@ function ensureSrch(){   // 메모 내용 색인이 없으면 만들고, 끝나�
   if (srchIdx || srchBusy || Date.now() - srchFailAt < 30000) return;
   srchBuild().then(() => { srchProg = ""; renderList(); }).catch(() => { srchFailAt = Date.now(); srchProg = "메모 내용을 읽지 못했습니다"; renderCount(); });
 }
+// ===== 문자 보내기: 목록에서 카드를 여러 장 골라 한 명씩 문자 앱으로 보냄 ({고객}은 받는 사람 이름으로 바뀜 · 보낸 문구는 각 고객 기록(상담·문자전달)에 저장) =====
+var smsMode = false, smsSel = new Set(), smsShown = [], smsRcp = null;
+const SMS_MSG_KEY = "adSmsLastMsg";
+const smsMobile = n => /^(\+?82)?0?1[016789]\d{7,8}$/.test(String(n || "").replace(/[^\d+]/g, ""));
+function smsInfo(c){   // 카드 한 장 → 제목·구분·문자를 보낼 번호 후보 (회사: 대표전화·전화2·소속 개인 휴대폰 / 개인: 개인 휴대폰·일반 전화)
+  const o = [], seen = new Set(), add = (label, num, who, pid, pname) => { const n = String(num || "").trim(), k = n.replace(/\D/g, ""); if (!k || seen.has(k)) return; seen.add(k); o.push({ label, num: n, who, pid: pid || "", pname: pname || "" }); };
+  const wh = (p, fb) => p.name ? p.name + (p.rank ? " " + p.rank : "") : (p.rank || p.dept || fb || "고객");
+  if (isPersonDoc(c)) {
+    const p = peopleOf(c)[0] || { name: c.name, phone: c.phone }, who = wh(p, c.name);
+    add("휴대폰", p.phone, who);
+    if (Array.isArray(c.people)) { add(c.phoneLabel || "일반", c.phone, who); add(c.phone2Label || "일반2", c.phone2, who); }
+    return { title: personLabel(p) || c.name || "(이름 없음)", kind: "개인", opts: o };
+  }
+  add(c.phoneLabel || "대표", c.phone, c.name || "고객"); add(c.phone2Label || "대표2", c.phone2, c.name || "고객");
+  (Array.isArray(c.people) ? c.people : []).forEach((p, i) => add(personLabel(p) || "소속 개인", p.phone, wh(p, c.name), pidOf(p, i), personNm(p)));
+  return { title: c.name || "(이름 없음)", kind: "회사", opts: o };
+}
+function smsBarUpdate(){
+  $("smsBar").classList.toggle("hide", !smsMode);
+  $("smsModeBtn").textContent = smsMode ? "✕ 선택 취소" : "✉ 문자 보내기";
+  if (!smsMode) return;
+  const n = smsSel.size, sh = smsShown.filter(id => smsSel.has(id)).length;
+  $("smsCnt").textContent = n ? "선택 " + n + "건" + (n !== sh ? " (화면 " + sh + ")" : "") : "문자 보낼 카드를 누르세요";
+  $("smsAllBtn").textContent = smsShown.length && smsShown.every(id => smsSel.has(id)) ? "전체 해제" : "전체 선택";
+  $("smsGo").disabled = !n;
+}
+function smsDecorate(el, id){   // 선택 모드: 카드를 누르면 상세 화면 대신 선택·해제
+  el.classList.add("smsMode");
+  const cb = document.createElement("input"); cb.type = "checkbox"; cb.className = "smsCb"; cb.tabIndex = -1; cb.checked = smsSel.has(id); el.classList.toggle("smsOn", cb.checked); el.append(cb);
+  el.onclick = () => { if (smsSel.has(id)) smsSel.delete(id); else smsSel.add(id); cb.checked = smsSel.has(id); el.classList.toggle("smsOn", cb.checked); smsBarUpdate(); };
+}
+function smsExit(render){ smsMode = false; smsSel = new Set(); smsBarUpdate(); if (render) renderList(); }
+$("smsModeBtn").onclick = () => { if (smsMode) smsExit(true); else { smsMode = true; smsSel = new Set(); smsBarUpdate(); renderList(); } };
+$("smsAllBtn").onclick = () => { const all = smsShown.length && smsShown.every(id => smsSel.has(id)); smsShown.forEach(id => all ? smsSel.delete(id) : smsSel.add(id)); smsBarUpdate(); renderList(); };
+const smsNext = () => smsRcp.find(r => r.sel && !r.sent && r.opts.length);
+function smsStat(t, ok){ const e = $("smStatus"); e.className = "msg " + (ok ? "ok" : "err"); e.textContent = t; }
+function smsBtn(){
+  const ok = smsRcp.filter(r => r.sel && !r.sent && r.opts.length), sent = smsRcp.filter(r => r.sent).length, nx = smsNext(), b = $("smSend");
+  b.disabled = !nx;
+  b.textContent = nx ? "📨 " + nx.opts[nx.pick].who + "님께 문자 앱 열기" + (ok.length > 1 ? " (남은 " + ok.length + "명)" : "") : (sent ? "✔ 선택한 사람에게 모두 보냈습니다" : "받는 사람을 선택하세요");
+  $("smCnt").textContent = "· 선택 " + ok.length + "명 / 전체 " + smsRcp.length + "명" + (sent ? " · 보냄 " + sent + "명" : "");
+  const un = smsRcp.filter(r => !r.sent && r.opts.length && !r.off);   // 전체 선택에는 DM 수신 거부 고객을 넣지 않음
+  $("smAll").textContent = un.length && un.every(r => r.sel) ? "선택 해제" : "전체 선택";
+}
+function smsRender(){
+  const box = $("smPeople"); box.textContent = "";
+  smsRcp.forEach(r => {
+    const row = document.createElement("label"); row.className = "cspick" + (r.sent ? " done" : "");
+    const cb = document.createElement("input"); cb.type = "checkbox"; cb.checked = r.sel; cb.disabled = r.sent || !r.opts.length;
+    cb.onchange = () => { r.sel = cb.checked; smsBtn(); };
+    const nm = document.createElement("span"); nm.className = "cn"; nm.textContent = r.title;
+    if (r.kind) { const k = document.createElement("small"); k.textContent = " · " + r.kind; k.style.color = "var(--sub)"; nm.append(k); }
+    const o = r.opts[r.pick], note = t => { const w = document.createElement("span"); w.className = "warn"; w.textContent = t; nm.append(w); };
+    if (!r.opts.length) note("전화번호가 없어 보낼 수 없습니다");
+    else if (r.opts.length === 1) { const p = document.createElement("span"); p.className = "cp"; p.textContent = o.label + " " + o.num; nm.append(p); }
+    else {
+      const s = document.createElement("select"); r.opts.forEach((x, i) => { const op = document.createElement("option"); op.value = i; op.textContent = x.label + " " + x.num + (smsMobile(x.num) ? "" : " (유선)"); s.append(op); });
+      s.value = r.pick; s.disabled = r.sent;
+      s.onchange = () => { r.pick = Number(s.value); if (!r.off) r.sel = true; smsRender(); };   // 번호를 고르면 그 사람은 보낼 사람으로 체크
+      nm.append(s);
+    }
+    if (r.opts.length && !smsMobile(o.num)) note("유선 번호입니다 (문자를 받지 못할 수 있음)");
+    if (r.off) note("DM 수신 거부 고객입니다 (직접 체크할 때만 보냄)");
+    row.append(cb, nm);
+    if (r.sent) { const d = document.createElement("span"); d.className = "cd"; d.textContent = "✔ 보냄"; row.append(d); }
+    box.append(row);
+  });
+  smsBtn();
+}
+function smsOpen(){
+  const list = [...smsSel].map(id => customers.find(c => c.id === id)).filter(Boolean);
+  if (!list.length) return;
+  smsRcp = list.map(c => {
+    const i = smsInfo(c), k = i.opts.findIndex(o => smsMobile(o.num)), off = c.consent?.dm === false;   // 휴대폰 번호를 먼저 고름(회사는 대표전화가 휴대폰이면 그것, 아니면 첫 소속 개인)
+    return { id: c.id, title: i.title, kind: i.kind, opts: i.opts, pick: k >= 0 ? k : 0, off, sel: k >= 0 && !off, sent: false };
+  }).sort((a, b) => a.title.localeCompare(b.title, "ko"));
+  let last = ""; try { last = localStorage.getItem(SMS_MSG_KEY) || ""; } catch {}
+  $("smMsg").value = last; $("smStatus").textContent = ""; $("smStatus").className = "msg";
+  $("smsSheet").classList.remove("hide"); smsRender();
+}
+const smsClose = () => {   // 창을 닫으면 이미 보낸 카드는 선택에서 빼고, 모두 보냈으면 선택 모드를 끝냄
+  const rc = smsRcp; $("smsSheet").classList.add("hide"); smsRcp = null; if (!rc) return;
+  let n = 0; rc.forEach(r => { if (r.sent) { smsSel.delete(r.id); n++; } });
+  if (n && !smsSel.size) smsExit(true); else if (n) { smsBarUpdate(); renderList(); }
+};
+$("smsGo").onclick = smsOpen;
+$("smClose").onclick = smsClose;
+$("smsSheet").addEventListener("click", e => { if (e.target === $("smsSheet")) smsClose(); });
+$("smAll").onclick = () => {
+  if (!smsRcp) return;
+  const un = smsRcp.filter(r => !r.sent && r.opts.length && !r.off), all = un.every(r => r.sel);
+  un.forEach(r => { r.sel = !all; }); smsRender();
+};
+$("smSend").onclick = () => {   // 다음 사람 한 명: 기록 저장을 먼저 시작하고 → 받는 사람·문구가 입력된 문자 앱을 바로 엶
+  if (!smsRcp) return;
+  const r = smsNext(); if (!r) return;
+  const text = $("smMsg").value.trim(); if (!text) { smsStat("보낼 문구를 먼저 적어 주세요.", false); $("smMsg").focus(); return; }
+  const o = r.opts[r.pick], num = String(o.num).replace(/[^\d+]/g, ""), body = text.replace(/\{고객\}/g, o.who);
+  if (!num) { smsStat(r.title + "님은 전화번호가 올바르지 않아 보낼 수 없습니다.", false); return; }
+  try { localStorage.setItem(SMS_MSG_KEY, text); } catch {}
+  const lp = smsLogSave({ cid: r.id, pid: o.pid, pname: o.pname }, body);
+  const a = document.createElement("a"); a.href = smsHref(num, body); document.body.append(a); a.click(); a.remove();   // 문자 앱 열기(받는 사람·문구 입력됨)
+  r.sent = true; smsRender();
+  const left = smsRcp.filter(x => x.sel && !x.sent && x.opts.length).length;
+  smsStat(r.title + "님께 문자 앱을 열었습니다. 전송한 뒤 이 화면으로 돌아와 " + (left ? "'다음 사람' 버튼을 누르세요. (남은 " + left + "명)" : "닫기를 누르세요. 모두 보냈습니다."), true);
+  lp.then(() => { const e = $("smStatus"); if (smsRcp) e.textContent += "\n✔ " + r.title + " 기록에 남겼습니다. (상담 · 문자전달)"; })
+    .catch(() => { const e = $("smStatus"); if (smsRcp) e.textContent += "\n⚠ " + r.title + " 기록 저장에 실패했습니다. 내용은 이 기기에 임시 보관했으니 앱을 새로고침하면 자동으로 저장됩니다."; });
+};
 function renderList(){
   $("listTitle").textContent = "목록";
   document.querySelectorAll("#glegend .gbox").forEach(x => x.classList.toggle("on", x.dataset.g === curGrade()));   // 분류 박스 표시를 지금 적용되는 분류(날짜 목록이면 전체)에 맞춤
@@ -1868,7 +2013,7 @@ function renderList(){
     rows = rows.filter(directR).concat(rows.filter(r => !directR(r)));   // 이름·연락처로 찾은 것을 먼저, 메모 내용으로만 찾은 것은 뒤에
     re = new RegExp(words.map(w => w.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|"), "gi");
   }
-  srchRows = rows.length; renderCount();
+  srchRows = rows.length; smsShown = rows.map(x => x.c.id); smsBarUpdate(); renderCount();
   rows.forEach(r => {
       const c = r.c, el = document.createElement("div"); el.className = "item hasBars";
       const b = document.createElement("b"); b.textContent = (r.own ? rowName(r) : c.name) || "(이름 없음)";
@@ -1883,7 +2028,7 @@ function renderList(){
         its.slice(0, 2).forEach(it => { const p = document.createElement("span"); p.style.fontSize = "12px"; p.append(`[${it.label}] `, srchSnippet(it.text, re)); el.append(p); });
         if (its.length > 2) { const p = document.createElement("span"); p.style.fontSize = "12px"; p.textContent = `외 ${its.length - 2}건`; el.append(p); }
       }
-      el.onclick = () => openDetail(c, rows.map(x => x.c.id + "|" + x.pid), r.pid); box.append(el);   // textContent 사용: 입력값이 코드로 실행되지 않게
+      if (smsMode) smsDecorate(el, c.id); else el.onclick = () => openDetail(c, rows.map(x => x.c.id + "|" + x.pid), r.pid); box.append(el);   // textContent 사용: 입력값이 코드로 실행되지 않게
     });
   if (!rows.length && customers.length) { const e = document.createElement("div"); e.style.cssText = "font-size:14px;color:var(--sub);padding:12px 4px"; e.textContent = "조건에 맞는 항목이 없습니다."; box.append(e); }
   if (!rows.length && !customers.length) { /* 불러오는 중 안내는 listMsg 가 표시 */ }
@@ -2024,6 +2169,12 @@ function holidaysOfYear(y){   // {"YYYY-MM-DD": {name, short}}
   return (_hdCache[y] = out);
 }
 const holidayOn = k => holidaysOfYear(+k.slice(0, 4))[k] || null;   // k = "YYYY-MM-DD"
+function calNamesShow(items, names, ctx){   // 달력 칸에 따로 보일 파란 이름: 그날 일정 줄로 이미 보이는 고객(일정에 연결된 기록·일정 글에 이름이 있는 고객)은 뺌 → 같은 일정이 두 번 보이지 않게. 일정과 연결되지 않은 기록이 있는 고객만 이름으로 보임
+  const sl = schedList || [], schIds = new Set(sl.map(x => x.id)), linked = new Set(), cov = new Set();
+  sl.forEach(x => { if (x.logId) linked.add(x.logId); (x.links || []).forEach(l => { if (l.lid) linked.add(l.lid); if (l.elid) linked.add(l.elid); }); });
+  (items || []).forEach(x => { [...(x.links || []).map(l => l.cid), ...(x.custId ? [x.custId] : []), ...schedMatches(x.content, ctx).map(h => h.c.id)].forEach(id => cov.add(id)); });
+  return (names || []).filter(p => (p.lg && p.lg.length) ? p.lg.some(l => !(linked.has(l[0]) || (l[2] && schIds.has(l[2])))) : !cov.has(p.id));   // 기록 정보가 없는 옛 색인은 일정에 나온 고객이면 뺌
+}
 function calDoneIds(items, ctx, names){   // 그날 '그 고객의 일정과 상담 기록이 모두 완료된' 고객 id 모음 (일정에 연결된 기록은 그 일정의 완료를 따름 · 일정 없이 기록된 상담은 기록의 완료를 따름)
   const t = new Map();
   (items || []).forEach(x => {
@@ -2140,7 +2291,7 @@ function renderCal(){
       const sSt = x => x.done ? "dn" : todoOver(x, nowD) ? "ov" : "", seenS = new Set();
       const schShow = sch.filter(x => { const s = sSt(x) + "|" + sLine(x).replace(/\s+/g, ""); if (seenS.has(s)) return false; seenS.add(s); return true; });
       const schTxt = schShow.map(x => sLine(x).replace(/\s+/g, "")).join("|"), seenN = new Set();
-      const namesShow = names.filter(p => { const n = String(p.name || "").replace(/\s+/g, ""); if (seenN.has(n)) return false; seenN.add(n); return !(n && schTxt.includes(n)); });
+      const namesShow = calNamesShow(sch, names, nctx).filter(p => { const n = String(p.name || "").replace(/\s+/g, ""); if (seenN.has(n)) return false; seenN.add(n); return !(n && schTxt.includes(n)); });
       schShow.slice(0, 4).forEach(x => { const st = sSt(x), e = mk("span", "sc2" + (st ? " " + st : ""), (st === "dn" ? "✓ " : st === "ov" ? "⚠ " : "") + sLine(x)); e.title = (x.time ? x.time + " " : "") + String(x.content || ""); b.append(e); });
       if (schShow.length > 4) b.append(mk("span", "more", "일정 +" + (schShow.length - 4)));
       const dnIds = names.length ? calDoneIds(sch, nctx, names) : new Set();
@@ -2182,8 +2333,9 @@ function renderCal(){
         if (shM.length > 2) b.append(mk("span", "more", "일정 +" + (shM.length - 2)));
       }
       const dnIds = names.length ? calDoneIds(schByK[key] || [], dctx, names) : new Set();
-      names.slice(0, 2).forEach(p => b.append(mk("span", "nm" + (dnIds.has(p.id) ? " dn" : ""), (dnIds.has(p.id) ? "✔ " : "") + p.name)));
-      if (names.length > 2) b.append(mk("span", "more", "+" + (names.length - 2)));
+      const namesM = calNamesShow(schByK[key] || [], names, dctx);   // 일정 줄로 이미 보이는 고객은 파란 이름에서 뺌 (같은 일정이 두 번 보이지 않게)
+      namesM.slice(0, 2).forEach(p => b.append(mk("span", "nm" + (dnIds.has(p.id) ? " dn" : ""), (dnIds.has(p.id) ? "✔ " : "") + p.name)));
+      if (namesM.length > 2) b.append(mk("span", "more", "+" + (namesM.length - 2)));
       drawLines(b, key, i % 7 > 0, i % 7 < 6, 3);
       b.onclick = () => {   // 날짜를 누르면 그날 일정 칸이 열림 (그날 상담한 고객은 일정 칸의 카드에 함께 보이고, 고객 이름 칩을 누르면 그 고객 카드로 이동)
         calSel = key; if (schEditId) resetSchedForm();
@@ -2338,7 +2490,7 @@ async function repSetEnd(x, v){   // '반복 종료' 체크: 체크하면 이 �
 }
 function repFormReset(){ $("dsRepeat").value = ""; $("dsRepBox").classList.remove("hide"); }
 function resetSchedForm(){ repFormReset();
-  schEditId = null; schEditDate = ""; $("dsEndDate").value = ""; $("dsTime").value = ""; $("dsEndTime").value = ""; $("dsContent").value = "";
+  schEditId = null; schEditDate = ""; $("dsDate").value = ""; $("dsDate").dataset.prev = ""; $("dsDateBox").classList.add("hide"); $("dsEndDate").value = ""; $("dsTime").value = ""; $("dsEndTime").value = ""; $("dsContent").value = "";
   $("dsFormTitle").textContent = "일정 추가"; $("dsSaveBtn").textContent = "일정 저장";
   $("dsCancelBtn").classList.add("hide"); $("dsMsg").textContent = ""; setSchLinks([]);
 }
@@ -2390,10 +2542,10 @@ function renderDaySched(){
       ck2.onchange = () => repSetEnd(x, ck2.checked);
       lb2.append(ck2, tx2); h.append(lb2);
     }
-    const p = document.createElement("p"); p.textContent = x.content; if (isAutoSched(x)) p.classList.add("auto");   // textContent: 입력값이 코드로 실행되지 않게
+    const p = document.createElement("p"); p.textContent = x.content; if (isAutoSched(x)) p.classList.add("auto"); p.classList.add(stSched(x));   // textContent: 입력값이 코드로 실행되지 않게
     const eb = document.createElement("button"); eb.className = "mini gray"; eb.textContent = "수정";
     eb.onclick = () => {
-      schEditId = x.id; schEditDate = x.date; $("dsRepBox").classList.add("hide"); $("dsEndDate").value = x.endDate || ""; $("dsTime").value = x.time || ""; $("dsEndTime").value = x.endTime || ""; $("dsContent").value = x.content; setSchLinks((x.links || []).filter(l => l.manual).map(m => ({ cid: m.cid, pid: m.pid || "", pname: m.pname || "", label: linkLabelOf(m) })));
+      schEditId = x.id; schEditDate = x.date; $("dsDate").value = x.date; $("dsDate").dataset.prev = x.date; $("dsDateBox").classList.remove("hide"); $("dsRepBox").classList.add("hide"); $("dsEndDate").value = x.endDate || ""; $("dsTime").value = x.time || ""; $("dsEndTime").value = x.endTime || ""; $("dsContent").value = x.content; setSchLinks((x.links || []).filter(l => l.manual).map(m => ({ cid: m.cid, pid: m.pid || "", pname: m.pname || "", label: linkLabelOf(m) })));
       $("dsFormTitle").textContent = "일정 수정"; $("dsSaveBtn").textContent = "수정 저장";
       $("dsCancelBtn").classList.remove("hide"); $("dsMsg").textContent = "";
       $("dsForm").scrollIntoView({ behavior: "smooth", block: "nearest" });
@@ -2430,7 +2582,7 @@ function renderDaySched(){
       ck.onchange = () => logSetDone(e.id, lg, ck.checked);
       cl.append(ck, tx); hh.append(cl);
     }
-    const p = document.createElement("p"); p.textContent = String(lg.content || "").trim() || "(내용 없음)"; if (isAutoLog(lg)) p.classList.add("auto");
+    const p = document.createElement("p"); p.textContent = String(lg.content || "").trim() || "(내용 없음)"; if (isAutoLog(lg)) p.classList.add("auto"); p.classList.add(stLog(lg));
     const w = document.createElement("div"); w.style.cssText = "display:flex;flex-wrap:wrap;justify-content:flex-end";
     w.append(mkChip(e, e.name + (lg.pname ? " · " + lg.pname : ""), lg.pid || (e.pids && e.pids.length === 1 ? e.pids[0] : ""))); el.append(hh, p, w); return el;
   };
@@ -2630,6 +2782,11 @@ async function syncSchedLogs(schedId, date, content, prev, endDate){   // 일정
   return res;
 }
 $("dsEndDateClr").onclick = () => { $("dsEndDate").value = ""; };
+$("dsDate").onchange = () => {   // 수정할 때 날짜를 바꾸면, 기간 일정은 끝나는 날짜도 같은 간격만큼 함께 옮김
+  const el = $("dsDate"), nv = el.value, pv = el.dataset.prev || "", ed = $("dsEndDate").value;
+  if (nv && pv && ed && nv !== pv) { const n = Math.round((keyDate(ed) - keyDate(pv)) / 86400000), d = keyDate(nv); $("dsEndDate").value = dkey(new Date(d.getFullYear(), d.getMonth(), d.getDate() + n)); }
+  if (nv) el.dataset.prev = nv;
+};
 $("dsForm").onsubmit = async e => {
   e.preventDefault();
   const btn = $("dsSaveBtn"), msg = $("dsMsg"), content = $("dsContent").value.trim();
@@ -2638,7 +2795,7 @@ $("dsForm").onsubmit = async e => {
   if (en && !st) { msg.className = "msg err"; msg.textContent = "끝나는 시간을 넣으려면 시작 시간도 입력하세요."; return; }
   if (en && en <= st) { msg.className = "msg err"; msg.textContent = "끝나는 시간은 시작 시간보다 늦어야 합니다."; return; }
   btn.disabled = true; msg.className = "msg"; msg.textContent = "저장 중...";
-  const sdate = (schEditId && schEditDate) || calSel, endDate = $("dsEndDate").value || "";   // 수정할 때는 일정의 원래 시작 날짜를 그대로 씀 (기간 중간 날짜에서 눌러도 시작일이 바뀌지 않게)
+  const sdate = (schEditId && ($("dsDate").value || schEditDate)) || calSel, endDate = $("dsEndDate").value || "", oldDate = schEditDate, dateMoved = !!(schEditId && schEditDate && sdate !== schEditDate);   // 수정할 때는 날짜 칸의 값이 시작 날짜 (날짜를 안 바꾸면 원래 날짜 그대로, 기간 중간 날짜에서 눌러도 시작일이 바뀌지 않게)
   if (endDate && endDate <= sdate) { msg.className = "msg err"; msg.textContent = "끝나는 날짜는 시작 날짜(" + mdK(sdate) + ")보다 늦어야 합니다."; btn.disabled = false; return; }
   const repKind = schEditId ? "" : $("dsRepeat").value, span = endDate ? Math.round((keyDate(endDate) - keyDate(sdate)) / 86400000) : 0;   // 반복(새 일정만)
   let repN = 0, repLast = "";
@@ -2662,8 +2819,10 @@ const data = { date: sdate, endDate, time: st, endTime: en, content }, crt = [];
     const r = await syncSchedLogs(sid, sdate, content, prev, endDate);
     if (r.links.length || prev.length) { try { await updateDoc(schedDoc(sid), { links: r.links, updatedAt: serverTimestamp() }); } catch (e) { r.err += (r.err ? " / " : "") + "연결 정보 저장 실패: " + (e.message || e); } }
     const i2 = schedList.findIndex(x => x.id === sid); if (i2 >= 0) schedList[i2] = { ...schedList[i2], links: r.links };
-    schSort(); resetSchedForm(); renderCal(); renderDaySched();
+    schSort(); if (dateMoved) { try { todoNext.delete(sid); } catch {} }
+    resetSchedForm(); renderCal(); renderDaySched(); if (dateMoved) gotoCalDate(sdate);   // 날짜를 옮겼으면 달력도 그 날짜로 이동
     const kind = isFutureDay(sdate) ? "예정 기록" : "상담 기록", parts = ["저장되었습니다."];
+    if (dateMoved) parts.push("📅 일정 날짜를 " + mdK(oldDate) + " → " + mdK(sdate) + "로 옮겼습니다.");
     if (r.added.length) parts.push("✔ 고객 파일에 " + kind + "을 남겼습니다: " + r.added.join(", "));
     if (r.updated.length) parts.push("✔ 연결된 고객 파일의 기록도 함께 고쳤습니다: " + r.updated.join(", "));
     if (r.removed.length) parts.push("연결이 빠진 고객 파일의 기록은 삭제했습니다: " + r.removed.join(", "));
@@ -2862,7 +3021,7 @@ async function tsCollect(from, to, prog){   // 고른 기간(from~to)의 일정 
     const nm = schedNamesOf(x, ctx).slice(0, 3).join(", "), raw = String(x.content || "").trim();
     let tx = raw; if (x.custId && nm) tx = raw.replace(/^\[상담\]\s+.+?(?:\s+-\s+|$)/, "").trim() || raw;   // 상담 기록에서 자동으로 생긴 일정은 '[상담] 이름 - ' 앞부분을 빼고 보여 줌
     const per = !!x.endDate && x.endDate > x.date;
-    schEnds(x, k => { if (!inR(k)) return; rows.push({ date: k, kind: "일정", who: nm, text: tx, sub: [per ? "📅 " + mdK(x.date) + " ~ " + mdK(x.endDate) + (k === x.date ? " (첫날)" : " (마지막 날)") : "", x.repeat ? "🔁 " + (REP_LABEL[x.repeat] || "반복") : ""].filter(Boolean).join(" · "), time: timeRange(x), sort: x.time || "99:99", auto: isAutoSched(x), rid: x.repeatId || "", rep: x.repeat || "", isDone: () => !!x.done, setDone: v => schedSetDone(x, v) }); });
+    schEnds(x, k => { if (!inR(k)) return; rows.push({ date: k, kind: "일정", who: nm, text: tx, sub: [per ? "📅 " + mdK(x.date) + " ~ " + mdK(x.endDate) + (k === x.date ? " (첫날)" : " (마지막 날)") : "", x.repeat ? "🔁 " + (REP_LABEL[x.repeat] || "반복") : ""].filter(Boolean).join(" · "), time: timeRange(x), sort: x.time || "99:99", auto: isAutoSched(x), red: () => !x.done && todoOver(x), rid: x.repeatId || "", rep: x.repeat || "", isDone: () => !!x.done, setDone: v => schedSetDone(x, v) }); });
   });
   if (tsRange === "after") {   // 이후 보기: 반복 일정은 가장 가까운 한 건만 보이고 '🔁 반복 (계속)'(종료한 반복은 '이후 N회, 종료')로 표시
     const first = new Map(), cnt = new Map(), endedIds = new Set(sl.filter(y => y.repeatId && y.repEnd).map(y => y.repeatId));
@@ -2954,7 +3113,7 @@ function tsDraw(){
     }
     const dn = r.isDone(), tr = mk("tr", dn ? "ts-dn" : "");
     const tn = mk("td", "ts-n"); tn.append(mk("b", "", r.who || "-"), mk("small", "", r.kind));
-    const tc = mk("td", "ts-c"); tc.append(document.createTextNode(r.text)); if (r.auto) tc.classList.add("auto"); if (r.sub) tc.append(mk("small", "", r.sub));
+    const tc = mk("td", "ts-c"); tc.append(document.createTextNode(r.text)); if (r.auto) tc.classList.add("auto"); tc.classList.add(r.red && r.red() ? "st-r" : "st-b"); if (r.sub) tc.append(mk("small", "", r.sub));
     const tk = mk("td", "ts-k"), ck = mk("input"); ck.type = "checkbox"; ck.checked = dn; ck.setAttribute("aria-label", "완료"); ck.onchange = () => r.setDone(ck.checked); tk.append(ck);
     tr.append(tn, tc, tk); tbody.append(tr);
   });
@@ -4320,14 +4479,16 @@ function mkLogChk(cid, l, el){   // 에이닷 기록의 '완료' 체크란 (누�
   };
   lb.append(ck, tx); return lb;
 }
+function stSched(x){ return x && !x.done && todoOver(x) ? "st-r" : "st-b"; }   // 일정 글자 색: 완료하지 않은(경고 시각이 지난) 일정 = 빨강, 그 외 = 파랑
+function stLog(){ return "st-b"; }   // 상담 기록 글자 색: 파랑
 function isAutoSched(x){   // 자동으로 생긴 일정: 상담 기록·문자/명함 기록에서 만들어진 일정(custId·logId) · 에이닷 가져오기(aidaId). 달력에서 직접 적은 일정은 해당 없음
   return !!(x && (x.custId || x.logId || x.aidaId));
 }
-function addLegend(box){   // 목록 맨 위에 색 설명 한 줄 (적색 글자가 하나라도 있을 때만)
+function addLegend(box){   // 목록 맨 위에 색 설명 한 줄 (빨간 글자가 하나라도 있을 때만)
   const old = box.querySelector(":scope > .autoLegend"); if (old) old.remove();
-  if (!box.querySelector(".auto")) return;
+  if (!box.querySelector(".st-r")) return;
   const lg = document.createElement("div"); lg.className = "autoLegend"; lg.style.cssText = "font-size:12px;color:var(--sub,#667);margin:0 0 6px";
-  const r = document.createElement("span"); r.className = "auto"; r.textContent = "빨간 글자"; lg.append(r, " = 자동으로 기록된 것 · 그 외 = 직접 기록한 것"); box.prepend(lg);
+  const r = document.createElement("span"); r.className = "st-r"; r.textContent = "빨간 글자"; lg.append(r, " = 완료하지 않은 일정 · 파란 글자 = 그 외"); box.prepend(lg);
 }
 const isPlanned = l => !!l.date && !l.dateApprox && l.date > today();   // 오늘보다 뒤 날짜의 기록 = 예정
 const CONSULT_KINDS = ["방문상담", "전화상담", "화상상담", "메일상담", "문자전달", "카카오톡전달", "우편발송", "기타"];   // 상담 기록의 구분 (기록의 method 칸에 저장)
@@ -4387,7 +4548,7 @@ function renderLogSummary(box){   // 고객 정보 아래 '상담 요약': 상�
     const k = document.createElement("span"); k.className = "k"; k.textContent = l.method || "";
     const pre = (!curPid && l.pname) ? `[${l.pname}] ` : "";   // 회사 화면에서는 어느 개인의 기록인지 표시
     const first = pre + (String(l.content || "").split(/\r?\n/).map(x => x.trim()).find(Boolean) || "");
-    const t = document.createElement("span"); t.className = "tx"; t.textContent = first; if (isAutoLog(l)) t.classList.add("auto"); if (l.done) { t.style.textDecoration = "line-through"; el.style.opacity = ".6"; }   // textContent: 입력값이 코드로 실행되지 않게
+    const t = document.createElement("span"); t.className = "tx"; t.textContent = first; if (isAutoLog(l)) t.classList.add("auto"); t.classList.add(stLog(l)); if (l.done) { t.style.textDecoration = "line-through"; el.style.opacity = ".6"; }   // textContent: 입력값이 코드로 실행되지 않게
     el.append(d); if (l.method) el.append(k); el.append(t);
     el.onclick = () => {   // 누르면 이 기록의 전체 내용을 펼치고, 다시 누르면 접음
       const open = el.classList.toggle("open"); t.textContent = open ? pre + String(l.content || "") : first;
@@ -4413,7 +4574,7 @@ function mkSchEntry(x){   // 일정을 상담 기록과 같은 목록에 보여 
   const d = document.createElement("b"); d.textContent = x.date + (x.endDate && x.endDate > x.date ? " ~ " + x.endDate : "");
   const tg = document.createElement("span"); tg.className = "tag"; tg.textContent = "일정" + (timeRange(x) ? " · " + timeRange(x) : "") + (x.date > today() ? " · 예정" : ""); tg.style.cssText = "background:#dbeafe;color:#1e40af";
   h.append(d, tg);
-  const p = document.createElement("p"); p.textContent = x.content; if (isAutoSched(x)) p.classList.add("auto");
+  const p = document.createElement("p"); p.textContent = x.content; if (isAutoSched(x)) p.classList.add("auto"); p.classList.add(stSched(x));
   const go = document.createElement("button"); go.className = "mini gray"; go.textContent = "달력에서 보기"; go.onclick = () => gotoCalDate(x.date);
   el.append(h, p, go); return el;
 }
@@ -4434,7 +4595,7 @@ function renderLogs(){
     h.append(d, t);
     if (!curPid && l.pname) { const pt = document.createElement("span"); pt.className = "tag"; pt.textContent = "개인 · " + l.pname; h.append(pt); }
     if (isAidaLog(l)) h.append(mkLogChk(cur.id, l, el));
-    const p = document.createElement("p"); p.textContent = l.content; if (isAutoLog(l)) p.classList.add("auto");   // textContent: 입력값이 코드로 실행되지 않게
+    const p = document.createElement("p"); p.textContent = l.content; if (isAutoLog(l)) p.classList.add("auto"); p.classList.add(stLog(l));   // textContent: 입력값이 코드로 실행되지 않게
     const eb = document.createElement("button"); eb.className = "mini gray"; eb.textContent = "수정";
     eb.onclick = () => {
       editingLogId = l.id; $("logDate").value = l.date; $("logType").value = l.type; syncType();
@@ -4557,7 +4718,7 @@ $("custForm").onsubmit = async e => {
 };
 
 // ===== 설정 확장: 로그인 · 프린터 · 라벨 리스트 · 백업 · 버전 · 초기화 =====
-const APP_VERSION = "v12.274 (2026-11-05)";   // ← 파일을 수정할 때마다 이 숫자를 올립니다 (자동 업데이트가 이 값을 비교)
+const APP_VERSION = "v12.279 (2026-11-09)";   // ← 파일을 수정할 때마다 이 숫자를 올립니다 (자동 업데이트가 이 값을 비교)
 function lsGet(k, d){ try { return JSON.parse(localStorage.getItem(k)) ?? d; } catch { return d; } }
 function lsSet(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch {} }
 // 원격 전송 상태 · 기기 복사 · 외부 알림 · 로그인 화면 동작은 파일 맨 위 [원격 구간]에 있습니다 (로컬일 때는 [로컬 구간]의 기본 동작)
