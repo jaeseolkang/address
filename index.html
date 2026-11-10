@@ -1084,16 +1084,16 @@ window.REMOTE_READY = (async () => {
       </div>
     </div>
 
-    <!-- 이미지 보내기 창 (명함·사업자등록증·통장 중 여러 개 선택) -->
-    <div id="cardSheet" class="hide" role="dialog" aria-modal="true" aria-label="이미지 보내기">
+    <!-- 문자·이미지 보내기 창 -->
+    <div id="cardSheet" class="hide" role="dialog" aria-modal="true" aria-label="문자·이미지 보내기">
       <div class="csbox">
-        <div class="cshead"><b id="csTitle">이미지 보내기</b><button id="csClose" type="button" class="csx" aria-label="닫기">✕</button></div>
+        <div class="cshead"><b id="csTitle">문자·이미지 보내기</b><button id="csClose" type="button" class="csx" aria-label="닫기">✕</button></div>
         <div id="csNone" class="hide">
-          <div class="sub" style="margin:12px 0">등록된 이미지가 없습니다. 설정 &gt; 내 정보에서 명함·사업자등록증·통장 이미지를 먼저 등록하세요.</div>
+          <div class="sub" style="margin:12px 0">등록된 이미지가 없어도 문자를 보낼 수 있습니다. 이미지는 설정 &gt; 내 정보에서 등록하세요.</div>
           <button id="csGoSet" type="button">설정 &gt; 내 정보로 이동</button>
         </div>
         <div id="csBody">
-          <label style="margin:12px 0 4px">보낼 이미지 (여러 개 선택 가능)</label>
+          <label style="margin:12px 0 4px">보낼 이미지 (선택 사항 · 여러 개 선택 가능)</label>
           <div id="csImgs"></div>
           <div style="display:flex;justify-content:space-between;align-items:center;gap:8px"><label style="margin:12px 0 4px">보낼 사람 (여러 명 선택 가능)</label>
             <button id="csAll" type="button" class="gray slim" style="width:auto;padding:4px 12px;margin:8px 0 0">전체 선택</button></div>
@@ -1123,7 +1123,7 @@ window.REMOTE_READY = (async () => {
       <h2 id="peopleTitle" style="margin:16px 0 6px">소속 개인</h2>
       <div id="dPeople"></div>
       <div class="btnrow" id="actRow">
-        <button id="cardSendBtn" type="button" class="slim">🖼️ 이미지전송</button>
+        <button id="cardSendBtn" type="button" class="slim">✉ 문자·이미지 전송</button>
         <button id="editInfoBtn" type="button" class="gray slim">✏️ 정보수정</button>
         <button id="copyCardBtn" type="button" class="gray slim">📋 복사등록</button>
       </div>
@@ -3900,9 +3900,14 @@ const csCtx = i => {   // 명함을 보내는 사람 → 기록을 남길 곳 (�
   if (Array.isArray(c.people) && !isPersonDoc(c)) { const n = c.people.indexOf(p); if (n >= 0) { pid = pidOf(p, n); pname = personNm(p); } }
   return { cid: c.id, pid, pname };
 };
-const csLogNote = lp => lp.then(() => { const e = $("csStatus"); if (e) e.textContent += "\n✔ 고객 기록에 남겼습니다. (상담 · 명함 전송)"; })
+const csLogNote = lp => lp.then(() => { const e = $("csStatus"); if (e) e.textContent += "\n✔ 고객 기록에 남겼습니다."; })
   .catch(() => { const e = $("csStatus"); if (e) e.textContent += "\n⚠ 기록 저장에 실패했습니다. 내용은 이 기기에 임시 보관했으니 앱을 새로고침하면 자동으로 저장됩니다."; });
-const csTpl = () => DEFAULT_SETTINGS.card.msg.replace(/\{내이름\}/g, [curSettings().sender.company, curSettings().sender.name].filter(Boolean).join(" ")).replace(/\{이미지\}/g, IMG_KINDS.filter(x => _cs && _cs.imgSel.has(x.k)).map(x => x.msg).join(", ") || "명함");   // 문구의 보내는 사람 = 회사명 + 이름, {이미지} = 고른 이미지 이름들. {고객}은 보낼 때 받는 사람 이름으로 바꿈
+const csTpl = () => {
+  const sender = [curSettings().sender.company, curSettings().sender.name].filter(Boolean).join(" ");
+  const images = IMG_KINDS.filter(x => _cs && _cs.imgSel.has(x.k)).map(x => x.msg).join(", ");
+  return images ? DEFAULT_SETTINGS.card.msg.replace(/\{내이름\}/g, sender).replace(/\{이미지\}/g, images)
+    : "{고객}님, 안녕하세요." + (sender ? " " + sender + "입니다." : "") + " 궁금하신 점은 언제든 편하게 연락 주세요.";
+};
 function csMsgSync(){ if (_cs && !_cs.msgEdited) $("csMsg").value = csTpl(); }   // 이미지를 고르거나 풀면 문구도 맞춤 (직접 고친 문구는 그대로 둠)
 $("csMsg").addEventListener("input", () => { if (_cs) _cs.msgEdited = true; });
 const csWho = (p, c) => p.name ? p.name + (p.rank ? " " + p.rank : "") : (p.rank || p.dept || (c && c.name) || "고객");
@@ -3911,11 +3916,11 @@ function csStat(text, ok){ const e = $("csStatus"); e.className = "msg " + (ok ?
 const csNext = () => [..._cs.sel].sort((x, y) => x - y).find(i => !_cs.sent.has(i));
 function csBtn(){
   const rem = [..._cs.sel].filter(i => !_cs.sent.has(i)).length, nx = csNext(), b = $("csShare"), s = $("csSms"), ni = _cs.imgSel.size;
-  b.disabled = nx === undefined || !ni; s.disabled = nx === undefined || ni !== 1;   // 문자 앱에는 이미지를 한 장씩만 붙여넣을 수 있어 한 장 고른 때만, 여러 장은 공유 창으로
+  b.disabled = nx === undefined || !ni; s.disabled = nx === undefined || ni > 1;
   const nm = nx === undefined ? "" : csWho(_cs.list[nx], _cs.c) + "님께", more = rem > 1 ? ` (남은 ${rem}명)` : "";
-  s.textContent = nx === undefined ? (_cs.sent.size ? "✔ 선택한 사람에게 모두 보냈습니다" : "보낼 사람을 선택하세요") : !ni ? "보낼 이미지를 선택하세요" : ni > 1 ? "📨 문자로 바로 보내기 (이미지 1장일 때만)" : `📨 ${nm} 문자로 바로 보내기` + more;
+  s.textContent = nx === undefined ? (_cs.sent.size ? "✔ 선택한 사람에게 모두 보냈습니다" : "보낼 사람을 선택하세요") : ni > 1 ? "📨 문자로 바로 보내기 (이미지 1장일 때만)" : `📨 ${nm} 문자로 바로 보내기` + more;
   b.textContent = nx === undefined ? "📤 공유 창으로 보내기 (카카오톡 등)" : !ni ? "보낼 이미지를 선택하세요" : `📤 ${nm} 공유 창으로 (카카오톡 등)` + (ni > 1 ? ` · 이미지 ${ni}장` : "");
-  $("csHint").textContent = ni > 1 ? "이미지를 여러 장 보낼 때는 아래 '공유 창으로 보내기'(카카오톡 등)를 쓰세요. 문자 앱에는 이미지를 한 장씩만 붙여넣을 수 있어 '문자로 바로 보내기'는 한 장만 고른 때 쓸 수 있습니다." : "누르면 문자 앱이 받는 사람·문구가 입력된 채로 열리고, 이미지는 복사됩니다. 문자 입력칸을 길게 눌러 '붙여넣기' → 전송";
+  $("csHint").textContent = ni > 1 ? "이미지를 여러 장 보낼 때는 아래 '공유 창으로 보내기'(카카오톡 등)를 쓰세요. 문자 앱에는 이미지를 한 장씩만 붙여넣을 수 있어 '문자로 바로 보내기'는 한 장만 고른 때 쓸 수 있습니다." : ni === 1 ? "누르면 문자 앱이 받는 사람·문구가 입력된 채로 열리고, 이미지는 복사됩니다. 문자 입력칸을 길게 눌러 '붙여넣기' → 전송" : "누르면 받는 사람과 문구가 입력된 문자 앱이 열립니다. 내용을 확인한 뒤 전송하세요.";
   const un = _cs.list.map((p, i) => i).filter(i => !_cs.sent.has(i));
   $("csAll").textContent = un.length && un.every(i => _cs.sel.has(i)) ? "선택 해제" : "전체 선택";
 }
@@ -3954,9 +3959,9 @@ function openCardSheet(c, pid){
   const one = pid && Array.isArray(c.people) ? c.people.find((p, n) => pidOf(p, n) === pid) : null, list = one ? [one] : list0;   // 개인 화면에서 열면 그 개인에게만
   _cs = { c, files: {}, pngs: {}, imgSel: new Set(have.slice(0, 1).map(x => x.k)), msgEdited: false, list, sel: new Set(list.length === 1 ? [0] : []), sent: new Set() };   // 처음에는 등록된 이미지 중 첫 번째(명함 우선)만 체크
   have.forEach(x => { _cs.files[x.k] = cardFileOf(st[x.k], x.name); _cs.pngs[x.k] = cardPngOf(st[x.k]); _cs.pngs[x.k].catch(() => {}); });
-  $("csTitle").textContent = `${c.name || "고객"} 이미지 보내기`;
-  $("csNone").classList.toggle("hide", !!have.length); $("csBody").classList.toggle("hide", !have.length);
-  if (have.length) { csImgRefresh(); $("csMsg").value = csTpl(); csRefresh(); }
+  $("csTitle").textContent = `${c.name || "고객"} 문자·이미지 보내기`;
+  $("csNone").classList.toggle("hide", !!have.length);
+  csImgRefresh(); $("csMsg").value = csTpl(); csRefresh();
   $("csStatus").textContent = ""; $("cardSheet").classList.remove("hide");
 }
 const closeCardSheet = () => { $("cardSheet").classList.add("hide"); _cs = null; };
@@ -3970,22 +3975,23 @@ $("csAll").onclick = () => {
   un.forEach(i => { if (all) _cs.sel.delete(i); else _cs.sel.add(i); }); csRefresh();
 };
 $("csSms").onclick = async () => {   // 선택한 사람을 한 명씩: 이미지(한 장일 때만)를 클립보드에 복사하고, 받는 사람·문구가 입력된 문자 앱을 바로 엶 (웹앱은 문자에 이미지를 직접 붙일 수 없어 붙여넣기 1번이 남음)
-  if (!_cs || _cs.imgSel.size !== 1) return;
+  if (!_cs || _cs.imgSel.size > 1) return;
   const i = csNext(); if (i === undefined) return;
   const k = [..._cs.imgSel][0], kd = IMG_KINDS.find(x => x.k === k), p = _cs.list[i], who = csWho(p, _cs.c), num = String(p.phone || "").replace(/[^\d+]/g, "");
-  if (!num) { csStat(`${who}님은 전화번호가 없어 문자로 바로 보낼 수 없습니다. 아래 '공유 창으로 보내기'를 쓰거나 전화번호를 먼저 등록하세요.`, false); return; }
+  if (!num) { csStat(`${who}님은 전화번호가 없어 문자로 바로 보낼 수 없습니다. 전화번호를 먼저 등록하세요.` + (kd ? " 또는 아래 '공유 창으로 보내기'를 쓰세요." : ""), false); return; }
   const text = $("csMsg").value.trim().replace(/\{고객\}/g, who), cs = _cs, ctx = csCtx(i);
-  const lp = smsLogSave(ctx, "[이미지 전송 · " + kd.name + "] " + text, "문자전달", true);   // 기록 저장을 먼저 시작(문자 앱으로 넘어가도 이어서 저장됨)
+  if (!kd && !text) { csStat("보낼 문구를 입력하세요.", false); return; }
+  const lp = smsLogSave(ctx, kd ? "[이미지 전송 · " + kd.name + "] " + text : text, "문자전달", true);
   let copied = false;
   try {
-    if (navigator.clipboard && window.ClipboardItem && cs.pngs[k]) {
+    if (kd && navigator.clipboard && window.ClipboardItem && cs.pngs[k]) {
       const w = navigator.clipboard.write([new ClipboardItem({ "image/png": cs.pngs[k] })]);
       copied = await Promise.race([w.then(() => true), new Promise(r => setTimeout(() => r(false), 800))]);
     }
   } catch { copied = false; }
   const a = document.createElement("a"); a.href = smsHref(num, text); document.body.append(a); a.click(); a.remove();   // 문자 앱 열기(받는 사람·문구 입력됨)
   cs.sent.add(i); if (_cs === cs) csRefresh();
-  csStat(`${who}님께 문자 앱을 열었습니다. 받는 사람과 문구는 입력되어 있습니다.` + (copied ? " " + kd.name + " 이미지는 복사해 두었으니 문자 입력칸을 길게 눌러 '붙여넣기'(또는 키보드 위 붙여넣기)한 뒤 전송하세요." : " ⚠ " + kd.name + " 이미지를 자동으로 복사하지 못했습니다. '공유 창으로 보내기'를 이용하세요.") + (_cs === cs && csNext() !== undefined ? "\n다음 사람은 이 화면으로 돌아와 버튼을 다시 누르세요." : ""), copied);
+  csStat(`${who}님께 문자 앱을 열었습니다. 받는 사람과 문구는 입력되어 있습니다.` + (!kd ? " 내용을 확인한 뒤 전송하세요." : copied ? " " + kd.name + " 이미지는 복사해 두었으니 문자 입력칸을 길게 눌러 '붙여넣기'(또는 키보드 위 붙여넣기)한 뒤 전송하세요." : " ⚠ " + kd.name + " 이미지를 자동으로 복사하지 못했습니다. '공유 창으로 보내기'를 이용하세요.") + (_cs === cs && csNext() !== undefined ? "\n다음 사람은 이 화면으로 돌아와 버튼을 다시 누르세요." : ""), !kd || copied);
   csLogNote(lp);
 };
 $("csShare").onclick = async () => {   // 선택한 사람을 한 명씩: 공유 창(카카오톡·문자 등)에 고른 이미지(여러 장 가능)와 그 사람 이름이 들어간 문구를 넘김
