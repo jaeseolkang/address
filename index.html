@@ -1,4 +1,4 @@
-<!-- 2026-11-10 16:37 | 앱 버전 v12.281 (2026-11-10) -->
+<!-- 2026-11-10 16:37 | 수정: 앱 버전 v12.281 (2026-11-10), AD·FP 공통 버전 업데이트 -->
 <!-- const APP_VERSION = "v12.281 (2026-11-10)"; -->
 <!DOCTYPE html>
 <html lang="ko">
@@ -259,7 +259,7 @@ window.REMOTE_READY = (async () => {
   .srow .r{font-size:14px;color:var(--sub);white-space:nowrap;max-width:60%;overflow:hidden;text-overflow:ellipsis}.srow.red .t{color:#d92d20}
   #pInfo input[readonly],#pLabelSet input[readonly],#pLabelSet select:disabled{opacity:.7}
   .btnrow{display:flex;gap:8px}.btnrow button{flex:1;width:auto}
-  #actRow{margin-top:12px}#actRow button{margin:0;padding:10px 4px;white-space:normal;overflow-wrap:anywhere;min-width:0}
+  #actRow{margin-top:12px}#actRow button{margin:0;padding:10px 4px;white-space:normal;overflow-wrap:anywhere;min-width:0}   /* 상세 화면 버튼 3개(이미지전송·정보수정·복사등록)를 한 줄로 */
   .spanel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-top:6px}
   #toTopBtn{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:50;width:auto;margin:0;padding:10px 16px;border-radius:999px;font-size:14px;background:var(--sub);box-shadow:0 2px 8px rgba(0,0,0,.3);opacity:0;pointer-events:none;transition:opacity .2s}
   #toTopBtn.show{opacity:.92;pointer-events:auto}
@@ -364,16 +364,18 @@ window.REMOTE_READY = (async () => {
   #dmChk .dk-tb td.dk-n{font-size:calc(var(--fs,16px) - 3px);color:var(--sub)}
   #dmChk .dk-tb td.dk-m{font-size:calc(var(--fs,16px)*.8)}
   #dmChk .dk-tb td.dk-s{font-size:calc(var(--fs,16px)*.65)}
-  #dmChk .dk-b{display:inline-flex;align-items:center;justify-content:center;width:calc(var(--rh,34px)*.6);height:calc(var(--rh,34px)*.6);max-width:26px;max-height:26px;box-sizing:border-box;border:2px solid var(--sub);border-radius:5px;font-size:calc(var(--rh,34px)*.4);font-weight:700;line-height:1;color:#fff}
+  #dmChk .dk-tb td.dk-k{white-space:nowrap}
+  #dmChk .dk-b{display:inline-flex;align-items:center;justify-content:center;width:calc(var(--rh,34px)*.45);height:calc(var(--rh,34px)*.45);min-width:12px;min-height:12px;max-width:18px;max-height:18px;box-sizing:border-box;border:2px solid var(--sub);border-radius:5px;padding:0;background:transparent;appearance:none;-webkit-appearance:none;font-size:calc(var(--rh,34px)*.3);font-weight:700;line-height:1;color:#fff;cursor:pointer;vertical-align:middle}
+  #dmChk .dk-b+.dk-b{margin-left:3px}
+  #dmChk .dk-b.on{background:#2e9e4f;border-color:#2e9e4f}
   #dmChk .dk-tb td.dn{background:rgba(46,158,79,.16)}
-  #dmChk .dk-tb td.dn .dk-b{background:#2e9e4f;border-color:#2e9e4f}
   #dmChk .dk-tb td.dn.dk-nm{color:var(--sub);text-decoration:line-through}
   /* 1명씩 보기: 한 줄을 크게(손가락으로 누르기 좋게) - 한 화면에 다 안 들어가면 스크롤. 번호·확인 칸 폭을 줄여 이름·체크 칸이 화면 가득 보이게 */
   #dmChk.g1 .dk-tb th{font-size:12px;padding:4px 0}
   #dmChk.g1 .dk-tb td{padding:0 4px}
   #dmChk.g1 .dk-tb td.dk-n{font-size:15px}
   #dmChk.g1 .dk-tb td.dk-nm{font-weight:600}
-  #dmChk.g1 .dk-b{width:calc(var(--rh,48px)*.7);height:calc(var(--rh,48px)*.7);max-width:42px;max-height:42px;border-width:3px;border-radius:8px;font-size:calc(var(--rh,48px)*.5)}
+  #dmChk.g1 .dk-b{width:calc(var(--rh,48px)*.52);height:calc(var(--rh,48px)*.52);max-width:26px;max-height:26px;border-width:3px;border-radius:8px;font-size:calc(var(--rh,48px)*.35)}
   #todaySheet{position:fixed;inset:0;z-index:9300;background:rgba(0,0,0,.5);display:flex;align-items:flex-start;justify-content:center;padding:12px;overflow:auto}
   #todaySheet .ts-box{width:100%;max-width:680px;margin:auto;background:var(--card);color:var(--text);border:1px solid var(--line);border-radius:14px;padding:14px;box-shadow:0 6px 24px rgba(0,0,0,.35)}
   #todaySheet .ts-hd{display:flex;align-items:center;gap:8px;margin:0 0 10px}#todaySheet .ts-hd b{flex:1;min-width:0;font-size:17px}
@@ -4263,10 +4265,14 @@ function dmCheckOpen(names, year, month){
   let sig = 0; const sj = names.join("|"); for (let i = 0; i < sj.length; i++) sig = (sig * 31 + sj.charCodeAt(i)) >>> 0;
   const SK = PR_KEY + "Chk", ck = year + "-" + month + ":" + N + ":" + sig.toString(36);
   const ent = lsGet(SK, {})[ck] || {};
-  const on = new Set((Array.isArray(ent.c) ? ent.c : []).filter(i => i >= 0 && i < N));
+  const on = new Set();
+  if (Array.isArray(ent.c)) {
+    if (ent.v === 2) ent.c.filter(i => i >= 0 && i < N * 2).forEach(i => on.add(i));
+    else ent.c.filter(i => i >= 0 && i < N).forEach(i => { on.add(i * 2); on.add(i * 2 + 1); });
+  }
   let g = ent.g === 1 ? 1 : 2;
   const save = () => {
-    const a = lsGet(SK, {}); a[ck] = { c: [...on], g, t: Date.now() };
+    const a = lsGet(SK, {}); a[ck] = { c: [...on], g, v: 2, t: Date.now() };
     Object.keys(a).sort((x, y) => (a[y].t || 0) - (a[x].t || 0)).slice(12).forEach(k => delete a[k]);
     lsSet(SK, a);
   };
@@ -4282,11 +4288,12 @@ function dmCheckOpen(names, year, month){
   const close = () => { document.removeEventListener("keydown", onKey); window.removeEventListener("resize", fit); document.body.style.overflow = prevOv; ov.remove(); };
   document.addEventListener("keydown", onKey); window.addEventListener("resize", fit);
   cl.onclick = close;
-  rs.onclick = () => { if (!on.size || !confirm("체크한 " + on.size + "명을 모두 해제할까요?")) return; on.clear(); save(); draw(); };
+  rs.onclick = () => { if (!on.size || !confirm("체크한 " + on.size + "개를 모두 해제할까요?")) return; on.clear(); save(); draw(); };
   let cells = [];
-  function count(){ cnt.textContent = on.size === N ? "✔ 모두 확인 · 총 " + N + "명" : "확인 " + on.size + " / 총 " + N + "명"; rs.disabled = !on.size; rs.style.opacity = on.size ? "1" : ".5"; }
-  function mark(i){ const d = on.has(i); cells[i].forEach(td => td.classList.toggle("dn", d)); cells[i][2].firstChild.textContent = d ? "✓" : ""; }
-  function toggle(i){ if (on.has(i)) on.delete(i); else on.add(i); mark(i); count(); save(); }
+  function count(){ cnt.textContent = on.size === N * 2 ? "✔ 모두 확인 · 총 " + N + "명" : "체크 " + on.size + " / " + (N * 2); rs.disabled = !on.size; rs.style.opacity = on.size ? "1" : ".5"; }
+  function mark(i){ const d = on.has(i * 2) && on.has(i * 2 + 1); cells[i].slice(0, 3).forEach(td => td.classList.toggle("dn", d)); cells[i][3].forEach((b, j) => { const checked = on.has(i * 2 + j); b.classList.toggle("on", checked); b.textContent = checked ? "✓" : ""; b.setAttribute("aria-checked", String(checked)); }); }
+  function toggle(i, j){ const k = i * 2 + j; if (on.has(k)) on.delete(k); else on.add(k); mark(i); count(); save(); }
+  function togglePerson(i){ const a = i * 2, b = a + 1; if (on.has(a) && on.has(b)) { on.delete(a); on.delete(b); } else { on.add(a); on.add(b); } mark(i); count(); save(); }
   function fit(){   // 줄 높이를 화면 높이에 맞춤 (한 화면에 들어오게, 최소 20px)
     const th = body.querySelector("thead"), rows = Math.ceil(N / g), avail = body.clientHeight - (th ? th.offsetHeight : 0) - 3;
     const rh = g === 1 ? Math.max(48, Math.min(60, Math.floor(avail / rows) - 1)) : Math.max(20, Math.min(52, Math.floor(avail / rows) - 1));   // 칸 경계선 1px 포함. 1명씩은 48px 밑으로 줄이지 않고(넘치면 스크롤), 2명씩은 한 화면에 맞춤
@@ -4296,7 +4303,7 @@ function dmCheckOpen(names, year, month){
     [...seg.children].forEach(b => b.classList.toggle("on", Number(b.dataset.v) === g)); ov.classList.toggle("g1", g === 1);
     body.textContent = ""; cells = new Array(N);
     const tb = el("table", "dk-tb"), cg = el("colgroup");
-    for (let k = 0; k < g; k++) [g === 1 ? "11%" : "8%", "", g === 1 ? "20%" : "13%"].forEach(w => { const c = el("col"); if (w) c.style.width = w; cg.append(c); });
+    for (let k = 0; k < g; k++) [g === 1 ? "11%" : "8%", "", g === 1 ? "20%" : "16%"].forEach(w => { const c = el("col"); if (w) c.style.width = w; cg.append(c); });
     tb.append(cg);
     const thead = el("thead"), tr0 = el("tr");
     for (let k = 0; k < g; k++) ["번호", "이름", "확인"].forEach(t => tr0.append(el("th", "", t)));
@@ -4309,8 +4316,8 @@ function dmCheckOpen(names, year, month){
         if (i >= N) { for (let j = 0; j < 3; j++) tr.append(el("td", "dk-e")); continue; }
         const nm = String(names[i] || ""), len = nm.length;
         const t1 = el("td", "dk-n", String(i + 1)), t2 = el("td", "dk-nm" + (g === 1 ? (len > 12 ? " dk-s" : len > 9 ? " dk-m" : "") : (len > 8 ? " dk-s" : len > 5 ? " dk-m" : "")), nm), t3 = el("td", "dk-k");
-        t3.append(el("span", "dk-b"));
-        [t1, t2, t3].forEach(td => { td.onclick = () => toggle(i); }); cells[i] = [t1, t2, t3];
+        const checks = [0, 1].map(j => { const b = el("button", "dk-b"); b.type = "button"; b.setAttribute("role", "checkbox"); b.setAttribute("aria-label", nm + " 확인 " + (j + 1)); b.setAttribute("aria-checked", "false"); b.onclick = e => { e.stopPropagation(); toggle(i, j); }; t3.append(b); return b; });
+        [t1, t2].forEach(td => { td.onclick = () => togglePerson(i); }); cells[i] = [t1, t2, t3, checks];
         tr.append(t1, t2, t3);
       }
       tbody.append(tr);
