@@ -1,5 +1,5 @@
-<!-- 2026-11-17 12:53 | 수정: 앱 버전 v12.289 (2026-11-17), FP 기록 카드를 AD와 같게 - 오른쪽 아래 고객 칩, 미완료 빨간 글자, 시간 없으면 표시 안 함 -->
-<!-- const APP_VERSION = "v12.289 (2026-11-17)"; -->
+<!-- 2026-11-17 13:11 | 수정: 앱 버전 v12.290 (2026-11-17), 기록 입력창의 완료 체크 삭제, 달력 아래 '미완료 기록' 목록 삭제 (AD·FP 공통) -->
+<!-- const APP_VERSION = "v12.290 (2026-11-17)"; -->
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -312,18 +312,6 @@ window.REMOTE_READY = (async () => {
   .log .h .twTag{font-size:12px;font-weight:700;color:#d92d20}
   .log.warn{border:2px solid #d92d20}.log.done{opacity:.6}.log.done p{text-decoration:line-through}
   .cal .d:not(.today) .sc.ov{color:#d92d20}   /* 달력 칸: 완료하지 않은 일정이 있는 날 */
-  #undoneSched{margin-top:16px;padding-top:14px;border-top:1px solid var(--line)}   /* 달력 바로 아래: 완료하지 않은 일정 */
-  #usList{max-height:300px;overflow-y:auto;-webkit-overflow-scrolling:touch}
-  #usList .us-it{display:flex;align-items:flex-start;gap:10px;padding:9px 4px;border-bottom:1px solid var(--line);cursor:pointer}
-  #usList .us-it:last-child{border-bottom:0}
-  #usList .us-ck{flex:none;display:flex;align-items:center;padding:2px 0;cursor:pointer}
-  #usList .us-ck input{width:22px;height:22px;padding:0;margin:0;accent-color:#12a150;cursor:pointer}
-  #usList .us-bd{flex:1;min-width:0}
-  #usList .us-dt{font-size:13px;font-weight:700;color:var(--sub)}
-  #usList .us-dt.od{color:#d92d20}
-  #usList .us-tx{margin:2px 0 0;font-size:15px;line-height:1.4;white-space:pre-wrap;overflow-wrap:anywhere;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-  #usList .us-no{font-size:14px;color:var(--sub);padding:4px 0}
-  #usList .us-act{flex:none;width:auto;margin:0;padding:6px 10px;font-size:13px;white-space:nowrap}
   .cal .cg.wk .d:not(.today) .sc2.ov{color:#d92d20}.cal .cg.wk .d .sc2.dn{opacity:.55;text-decoration:line-through}.cal .cg.wk .d.wsum .wov{color:#d92d20;font-weight:700}
   #todoWarn{border:2px solid #d92d20;background:rgba(217,45,32,.08);border-radius:12px;padding:10px 12px;margin:12px 0}
   #todoWarn .tw-h{font-size:15px;font-weight:700;color:#d92d20;margin:0 0 4px}
@@ -718,10 +706,6 @@ window.REMOTE_READY = (async () => {
       <div id="todoWarn" class="hide"></div>
       <input id="calImpFile" type="file" multiple style="display:none">
       <div class="msg" id="calImpMsg" style="white-space:pre-wrap"></div>
-      <div id="undoneSched" class="hide">
-        <div style="display:flex;align-items:center;gap:8px;margin:0 0 8px"><h2 style="margin:0;flex:1;min-width:0">미완료 기록</h2><span id="usCnt" style="font-size:14px;font-weight:700;color:var(--sub)"></span></div>
-        <div id="usList"></div>
-      </div>
       <div id="daySched" class="hide">
         <div style="display:flex;align-items:center;gap:8px;margin:0 0 10px"><h2 id="dsTitle" style="margin:0;flex:1;min-width:0"></h2><button type="button" id="dsTableBtn" class="mini" style="margin:0;white-space:nowrap">표로 보기</button></div>
         <div class="msg err" id="dsErr" style="margin:0 0 8px"></div>
@@ -742,7 +726,6 @@ window.REMOTE_READY = (async () => {
           </div>
           <label>기록 내용 *</label>
           <textarea id="dsContent" rows="3" required></textarea>
-          <label style="display:flex;align-items:center;gap:8px;margin-top:12px;font-weight:700"><input id="dsDone" type="checkbox" style="width:22px;height:22px;margin:0;flex:none"> 완료</label>
           <label style="margin-top:12px">고객 연결 (선택, 여러 명 가능) - 고르면 각 회사·개인 파일에 기록이 남습니다</label>
           <div id="dsLinkChip" class="hide" style="margin-bottom:8px;font-size:15px;word-break:break-all"></div>
           <div id="dsLinkWrap" style="position:relative">
@@ -1168,7 +1151,6 @@ window.REMOTE_READY = (async () => {
         <div style="display:flex;gap:8px;align-items:center"><input id="logEndDate" type="date" style="flex:1"><button id="logTimeClr" type="button" class="mini gray" style="margin:0">시간·기간 지우기</button></div>
         <label id="logContentLabel">내용 *</label>
         <textarea id="logContent" rows="3" required></textarea>
-        <label style="display:flex;align-items:center;gap:8px;margin-top:12px;font-weight:700"><input id="logDone" type="checkbox" style="width:22px;height:22px;margin:0;flex:none"> 완료</label>
         <button id="logSaveBtn" class="slim" type="submit" style="margin-top:12px">기록 저장</button>
         <button id="logCancelBtn" type="button" class="gray slim hide" style="margin-top:8px">수정 취소</button>
         <div class="msg" id="logMsg"></div>
@@ -2463,7 +2445,6 @@ function recLogEdit(c, l){   // 고객 파일 기록 수정: 달력에서 쓴 �
   editingLogId = l.id; $("logDate").value = l.date; $("logType").value = l.type; syncType();
   $("logMethod").value = l.type === "DM 발송" ? (l.method || "문자") : "문자"; $("logContent").value = l.content; autoGrow();
   $("logTime").value = l.time || ""; $("logEndTime").value = l.endTime || ""; $("logEndDate").value = l.endDate || "";
-  $("logDone").checked = x ? !!x.done : !!l.done; $("logDone").dataset.touched = "1";
   $("logFormTitle").textContent = "기록 수정"; $("logSaveBtn").textContent = "수정 저장";
   $("logCancelBtn").classList.remove("hide"); $("logForm").scrollIntoView({ behavior:"smooth" });
 }
@@ -2473,8 +2454,11 @@ function recLogCheck(d){   // 기록 입력 확인 (문제 없으면 빈 문자�
   if (d.endDate && d.endDate <= d.date) return "끝나는 날짜는 시작 날짜보다 늦어야 합니다.";
   return "";
 }
-function recLogDoneDefault(){ const el = $("logDone"); if (el && !el.dataset.touched) el.checked = !!$("logDate").value && $("logDate").value < today(); }
-function recDsDoneDefault(){ const el = $("dsDone"); if (el && !el.dataset.touched && !schEditId) el.checked = !!calSel && calSel < today(); }
+function recDoneFor(kind, date){   // 입력창에 완료 체크가 없으므로: 고칠 때는 지금의 완료 값을 그대로, 새 기록은 날짜가 오늘보다 앞이면 완료(지난 일을 적은 것)·오늘·이후면 미완료
+  if (kind === "sched" && schEditId) { const x = (schedList || []).find(y => y.id === schEditId); if (x) return !!x.done; }
+  if (kind === "log" && editingLogId) { const l = (logs || []).find(y => y.id === editingLogId); if (l) { const x = recSchedOf(l); return x ? !!x.done : !!l.done; } }
+  return !!date && date < today();
+}
 function recChk(cid, l, el){   // 고객 파일 기록 카드의 '완료' 체크 (달력 기록과 이어져 있으면 그 완료 값을 보여 주고 함께 바꿈)
   const x = recSchedOf(l), v0 = x ? !!x.done : !!l.done;
   const lb = document.createElement("label"), ck = document.createElement("input"), tx = document.createElement("span");
@@ -2494,7 +2478,7 @@ function recDayBtns(cid, lg){   // 날짜별 목록의 고객 파일 기록 카�
   return row;
 }
 function recEditPrep(x){   // 달력 수정창을 열 때: 완료 체크 · 고객 파일에서 쓴 기록이면 그 전체 내용을 불러와 함께 고침
-  $("dsDone").checked = !!x.done; $("dsDone").dataset.touched = "1"; schEditLog = null;
+  schEditLog = null;
   if (!(x.custId && x.logId)) return;
   const want = x.id, c = customers.find(cc => cc.id === x.custId);
   $("dsMsg").className = "msg"; $("dsMsg").textContent = "고객 파일 기록 불러오는 중...";
@@ -2520,9 +2504,6 @@ async function recSaveOwnEdit(data, o){   // 고객 파일에서 쓴 기록을 �
     msg.className = "msg ok"; msg.style.whiteSpace = "pre-wrap"; msg.textContent = "저장되었습니다. 고객 파일 기록도 함께 고쳤습니다." + (o.dateMoved ? "\n📅 기록 날짜를 " + mdK(o.oldDate) + " → " + mdK(data.date) + "로 옮겼습니다." : "");
   } catch (err) { msg.className = "msg err"; msg.textContent = "저장 실패: " + (err.message || err); }
 }
-$("dsDone").onchange = () => { $("dsDone").dataset.touched = "1"; };
-$("logDone").onchange = () => { $("logDone").dataset.touched = "1"; };
-$("logDate").addEventListener("change", recLogDoneDefault);
 $("logTimeClr").onclick = () => { $("logTime").value = ""; $("logEndTime").value = ""; $("logEndDate").value = ""; };
 // ===== 기록 통일 끝 =====
 calSel = dkey(calNow);   // 앱을 열면 오늘 날짜가 선택되어 있음
@@ -2654,7 +2635,7 @@ async function repSetEnd(x, v){   // '반복 종료' 체크: 체크하면 이 �
 function repFormReset(){ $("dsRepeat").value = ""; $("dsRepBox").classList.remove("hide"); }
 function resetSchedForm(){ repFormReset();
   schEditId = null; schEditDate = ""; $("dsDate").value = ""; $("dsDate").dataset.prev = ""; $("dsDateBox").classList.add("hide"); $("dsEndDate").value = ""; $("dsTime").value = ""; $("dsEndTime").value = ""; $("dsContent").value = "";
-  $("dsFormTitle").textContent = "기록 추가"; $("dsSaveBtn").textContent = "기록 저장"; schEditLog = null; delete $("dsDone").dataset.touched; $("dsDone").checked = false; recDsDoneDefault();
+  $("dsFormTitle").textContent = "기록 추가"; $("dsSaveBtn").textContent = "기록 저장"; schEditLog = null;
   $("dsCancelBtn").classList.add("hide"); $("dsMsg").textContent = ""; setSchLinks([]);
 }
 const timeRange = x => x.time ? (x.endTime ? x.time + " ~ " + x.endTime : x.time) : "";   // "09:00 ~ 10:30" (끝나는 시간이 없으면 시작 시간만)
@@ -2665,39 +2646,7 @@ function schEditStart(x){   // 기록 수정창 열기 (달력 카드의 '수정
       $("dsForm").scrollIntoView({ behavior: "smooth", block: "nearest" });
   recEditPrep(x);
 }
-function renderUndone(){   // 달력 바로 아래: 완료하지 않은 일정 목록 (날짜순, 지난 일정은 붉게, 누르면 그 날짜로 이동, 체크하면 완료 처리)
-  const box = $("undoneSched"); if (!box) return;
-  if (!auth.currentUser || schedList === null || calSel !== dkey(new Date())) { box.classList.add("hide"); return; }   // 달력에서 오늘이 아닌 다른 날을 보고 있으면 숨김
-  box.classList.remove("hide");
-  const todayK0 = dkey(new Date()), items = schedList.filter(x => !x.done && (!x.logId || x.date >= REC_WARN_FROM) && x.date <= todayK0), list = $("usList"); list.textContent = "";   // 아직 시작 전인 미래 일정(시작 날짜가 오늘 이후)은 제외
-  $("usCnt").textContent = items.length ? items.length + "건" : "";
-  if (!items.length) { const e = document.createElement("div"); e.className = "us-no"; e.textContent = "완료하지 않은 기록이 없습니다."; list.append(e); return; }
-  const todayK = dkey(new Date());
-  items.forEach(x => {
-    const multi = x.endDate && x.endDate > x.date, last = multi ? x.endDate : x.date;
-    const row = document.createElement("div"); row.className = "us-it";
-    const lb = document.createElement("label"), ck = document.createElement("input"); lb.className = "us-ck"; ck.type = "checkbox"; ck.setAttribute("aria-label", "완료");
-    lb.onclick = e => e.stopPropagation(); ck.onchange = () => schedSetDone(x, ck.checked); lb.append(ck);
-    const bd = document.createElement("div"); bd.className = "us-bd";
-    const dt = document.createElement("div"); dt.className = "us-dt" + (last < todayK ? " od" : "");
-    const [yy, mm, dd] = x.date.split("-").map(Number);
-    dt.textContent = (multi ? mdK(x.date) + " ~ " + mdK(x.endDate) : mdK(x.date) + "(" + KDOW[new Date(yy, mm - 1, dd).getDay()] + ")") + (timeRange(x) ? " · " + timeRange(x) : "") + (last < todayK ? " · 지남" : "");
-    const tx = document.createElement("p"); tx.className = "us-tx"; tx.textContent = x.content || "";
-    bd.append(dt, tx);
-    const ab = document.createElement("button"); ab.type = "button"; ab.className = "mini gray us-act"; ab.textContent = "연기·취소";
-    ab.onclick = e => { e.stopPropagation(); postponeSheet(x); };
-    row.append(lb, bd, ab);
-    row.onclick = () => {   // 그 일정의 날짜로 이동
-      const d = keyDate(x.date); calSel = x.date; calY = d.getFullYear(); calM = d.getMonth(); calWeek = sundayOf(d); calPick = false;
-      if (schEditId) resetSchedForm();
-      renderCal(); renderDaySched(); $("daySched").scrollIntoView({ behavior: "smooth", block: "nearest" });
-    };
-    list.append(row);
-  });
-}
 function renderDaySched(){
-  recDsDoneDefault();
-  renderUndone();
   const box = $("daySched");
   if (!calSel) { box.classList.add("hide"); return; }
   box.classList.remove("hide");
@@ -2995,7 +2944,7 @@ $("dsForm").onsubmit = async e => {
   if (endDate && endDate <= sdate) { msg.className = "msg err"; msg.textContent = "끝나는 날짜는 시작 날짜(" + mdK(sdate) + ")보다 늦어야 합니다."; btn.disabled = false; return; }
   const repKind = schEditId ? "" : $("dsRepeat").value, span = endDate ? Math.round((keyDate(endDate) - keyDate(sdate)) / 86400000) : 0;   // 반복(새 일정만)
   let repN = 0, repLast = "";
-const data = { date: sdate, endDate, time: st, endTime: en, content, done: $("dsDone").checked }, crt = [];
+const data = { date: sdate, endDate, time: st, endTime: en, content, done: recDoneFor("sched", sdate) }, crt = [];
   if (schEditId && schEditLog) { await recSaveOwnEdit(data, { msg, oldDate, dateMoved }); btn.disabled = false; return; }
   if (repKind) { data.repeatId = "r" + Date.now().toString(36) + Math.random().toString(36).slice(2, 6); data.repeat = repKind; data.repStart = sdate; }
   try {
@@ -4763,7 +4712,6 @@ function autoGrow(){
 $("logContent").addEventListener("input", autoGrow);
 function resetLogForm(){
   editingLogId = null; $("logForm").reset(); $("logDate").value = today(); $("logType").value = "상담"; syncType();
-  delete $("logDone").dataset.touched; recLogDoneDefault();
   $("logFormTitle").textContent = "기록 추가"; $("logSaveBtn").textContent = "기록 저장";
   $("logCancelBtn").classList.add("hide"); $("logMsg").textContent = ""; autoGrow();
 }
@@ -4870,7 +4818,7 @@ $("logForm").onsubmit = async e => {
   const btn = $("logSaveBtn"), msg = $("logMsg");
   btn.disabled = true; msg.className = "msg"; msg.textContent = "저장 중...";
   const type = $("logType").value;
-  const data = { date: $("logDate").value, type, content: $("logContent").value.trim(), time: $("logTime").value || "", endTime: $("logEndTime").value || "", endDate: $("logEndDate").value || "", done: $("logDone").checked };
+  const data = { date: $("logDate").value, type, content: $("logContent").value.trim(), time: $("logTime").value || "", endTime: $("logEndTime").value || "", endDate: $("logEndDate").value || "", done: recDoneFor("log", $("logDate").value) };
   { const er = recLogCheck(data); if (er) { msg.className = "msg err"; msg.textContent = er; btn.disabled = false; return; } }
   const P = curPerson(); if (P && !editingLogId) { data.pid = curPid; data.pname = personNm(P); }   // 소속 개인 기록: 회사 문서의 기록에 개인 표시와 함께 저장 → 회사 기록에도 자동으로 함께 보임
   if (type === "DM 발송") data.method = $("logMethod").value; else if (!editingLogId) data.method = "";   // 상담 구분은 없앰: 예전 기록을 고칠 때는 저장된 값을 그대로 둠
@@ -4972,7 +4920,7 @@ $("custForm").onsubmit = async e => {
 };
 
 // ===== 설정 확장: 로그인 · 프린터 · 라벨 리스트 · 백업 · 버전 · 초기화 =====
-const APP_VERSION = "v12.289 (2026-11-17)";   // ← 파일을 수정할 때마다 이 숫자를 올립니다 (자동 업데이트가 이 값을 비교)
+const APP_VERSION = "v12.290 (2026-11-17)";   // ← 파일을 수정할 때마다 이 숫자를 올립니다 (자동 업데이트가 이 값을 비교)
 function lsGet(k, d){ try { return JSON.parse(localStorage.getItem(k)) ?? d; } catch { return d; } }
 function lsSet(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch {} }
 // 원격 전송 상태 · 기기 복사 · 외부 알림 · 로그인 화면 동작은 파일 맨 위 [원격 구간]에 있습니다 (로컬일 때는 [로컬 구간]의 기본 동작)
