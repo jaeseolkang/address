@@ -1,5 +1,5 @@
-<!-- 2026-11-17 11:26 | 수정: 앱 버전 v12.288 (2026-11-17), AD에도 달력 아래 '미완료 기록' 목록 상자 추가 - 오늘까지 완료하지 않은 기록 전체 (FP와 동일) -->
-<!-- const APP_VERSION = "v12.288 (2026-11-17)"; -->
+<!-- 2026-11-17 12:53 | 수정: 앱 버전 v12.289 (2026-11-17), FP 기록 카드를 AD와 같게 - 오른쪽 아래 고객 칩, 미완료 빨간 글자, 시간 없으면 표시 안 함 -->
+<!-- const APP_VERSION = "v12.289 (2026-11-17)"; -->
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -4972,7 +4972,7 @@ $("custForm").onsubmit = async e => {
 };
 
 // ===== 설정 확장: 로그인 · 프린터 · 라벨 리스트 · 백업 · 버전 · 초기화 =====
-const APP_VERSION = "v12.288 (2026-11-17)";   // ← 파일을 수정할 때마다 이 숫자를 올립니다 (자동 업데이트가 이 값을 비교)
+const APP_VERSION = "v12.289 (2026-11-17)";   // ← 파일을 수정할 때마다 이 숫자를 올립니다 (자동 업데이트가 이 값을 비교)
 function lsGet(k, d){ try { return JSON.parse(localStorage.getItem(k)) ?? d; } catch { return d; } }
 function lsSet(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch {} }
 // 원격 전송 상태 · 기기 복사 · 외부 알림 · 로그인 화면 동작은 파일 맨 위 [원격 구간]에 있습니다 (로컬일 때는 [로컬 구간]의 기본 동작)
